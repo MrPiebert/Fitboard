@@ -1,82 +1,171 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 
  /*Sets page format*/
-html, body {			
+* {			
 	margin: 0;
-    height:100%;
-    width:100%;
     padding:0;
+	box-sizing: border-box;
+	font-family: 'Montserrat', sans-serif;
 	scroll-behavior: smooth;
 }	
 
- /*navigation bar code*/
-nav {
-	position: fixed;
-	z-index: 10;
-	left: 0;
-	right: 0;
+.User_Image {					/*css for profile picture*/
+	width: 50px;
+	height: 50px;
+	border-radius: 100%;
+	border: 1px solid #eee;
+}
+
+.sidebar {
+	position: absolute;
 	top: 0;
-	font-family: 'Montserrat', sans-serif;
-	padding: 0 5%;
-	height: 100px;
+	left: 0;
+	height: 100vh;
+	width: 80px;
 	background-color: #202229;
+	transition: all 0.5s ease;
+	padding: 0.4rem 0.8rem;									/*rem refers to the font-size of the root element. So padding: 0.2rem on the p tag will be interpreted as 0.2 times 18px which is 3.6px.*/
 }
-nav .logo {
-	float: left;
-	width: 40%;
-	height: 100%;
+
+.sidebar.active{
+	width: 250px;
+}
+
+.sidebar.active ~ .main_content {
+	left:250px;
+	width: calc(100% - 25px);	
+}
+
+.sidebar #btn {
+	position: absolute;
+	color: #fff;
+	top: 0.4rem;
+	left: 50%;
+	font-size: 1.2rem;
+	line-height: 50px;
+	transform: translateX(-50%);
+	cursor: pointer;
+}
+
+.sidebar.active #btn {
+	left: 90%;
+}
+
+.sidebar .top .logo {
+	color: #fff;
+	display: flex;
+	height: 50px;
+	width: 50px;
+	align-items: center;
+	pointer-events: none;
+	opacity: 0;
+}
+
+.sidebar.active .top .logo {
+	opacity: 1;
+}
+
+.top .logo i {
+	font-size: 2rem;
+	margin-right: 5px;
+}
+
+.user{
 	display: flex;
 	align-items: center;
-	font-size: 24px;
-	color: #fff;
+	margin: 1rem 0;
 }
-nav .links {
-	float: right;
-	padding: 0;
-	margin: 0;
-	width: 60%;
-	height: 100%;
+
+.user p{
+	color: #fff;
+	opacity: 1;
+	margin-left: 1rem;
+}
+
+.bold {
+	font-weight: 600;
+}
+
+.sidebar p{
+	opacity: 0;
+}
+
+.sidebar.active p{
+	opacity: 1;
+}
+
+.sidebar ul li {
+	position: relative;
+	list-style-type: none;
+	height: 50px;
+	width: 90%;
+	margin: 0.8rem auto;
+	line-height: 50px;
+}
+
+.sidebar ul li a{
+	color: #fff;
 	display: flex;
-	justify-content: right;
 	align-items: center;
-}
-nav .links li {
-	list-style: none;
-}
-nav .links a {
-	display: block;
-	padding: 1em;
-	font-size: 16px;
-	font-weight: bold;
-	color: #fff;
 	text-decoration: none;
+	border-radius: 0.8rem;
 }
 
- /*Change button colour when hovering*/
-nav .links a:hover {
-	background-color: rgb(255, 255, 255);
-	border-radius: 100px;
-	color: #020202;
-	}
-
-#nav-toggle {
-	position: absolute;
-	top: -100px;
-}
-
- /*Menu for phone users*/
-nav .icon-burger {
-	display: none;
-	position: absolute;
-	right: 5%;
-	top: 50%;
-	transform: translateY(-50%);
-}
-nav .icon-burger .line {
-	width: 30px;
-	height: 5px;
+.sidebar ul li a:hover{
 	background-color: #fff;
-	margin: 5px;
-	border-radius: 3px;
-	transition: all .3s ease-in-out;
+	color: #202229;
+}
+
+.sidebar ul li a i {
+	min-width: 50px;
+	text-align: center;
+	height: 50px;
+	border-radius: 12px;
+	line-height: 50px;
+}
+
+.sidebar .Nav_Item {
+	display: none;
+}
+
+.sidebar.active .Nav_Item {
+	display: initial;
+}
+
+.sidebar ul li .tooltip {
+	position: absolute;
+	left: 125px;
+	top: 50%;
+	transform: translateX(-50%, -50%);
+	box-shadow: 0 0.5rem 0.8rem rgba(0, 0, 0, 0.2);
+	border-radius: 0.6rem;
+	padding: 0.4rem 1.2rem;
+	line-height: 1.8rem;
+	z-index: 20;
+	opacity: 0;
+}
+
+.sidebar ul li:hover .tooltip {
+	opacity: 1;
+}
+
+.sidebar.active ul li .tooltip{
+	display: none;
+}
+
+.main_content {
+	position: relative;
+	background-color: #eee;
+	min-height: 100vh;
+	top: 0;
+	left: 80px;
+	transition: all 0.5s ease;
+	width: calc(100%-80px);
+	padding: 1rem;
+
+}
+
+.container {
+	display: flex;
+	justify-content: space-between;
 }

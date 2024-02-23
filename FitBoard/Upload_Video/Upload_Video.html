@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">    
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+    <title>Upload Video here</title>
+    <style>
+        html, body {
+            margin: 0;
+            height: 100%;
+            width: 100%;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        #button1 {
+            background-color: white;
+            border: none;
+            border-radius: 15px;
+            color: black;
+            padding: 16px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 20px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+            border: 2px solid #04AA6D;
+        }
+
+        #button1:hover {
+            background-color: #04AA6D;
+            color: white;
+        }
+
+        /* Hide the file input element */
+        #fileInput {
+            display: none;
+        }
+
+        #fileInfo {
+            margin-top: 20px;
+        }
+
+        #displayVideoButton {
+            display: none;
+            margin-top: 10px;
+        }
+
+        nav {
+            position: fixed;
+            z-index: 10;
+            left: 0;
+            right: 0;
+            top: 0;
+            font-family: 'Montserrat', sans-serif;
+            padding: 0 5%;
+            height: 100px;
+            background-color: #202229;
+        }
+
+        nav .logo {
+            float: left;
+            width: 40%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            color: #fff;
+        }
+
+        nav .links {
+            float: right;
+            padding: 0;
+            margin: 0;
+            width: 60%;
+            height: 100%;
+            display: flex;
+            justify-content: right;
+            align-items: center;
+        }
+
+        nav .links li {
+            list-style: none;
+        }
+
+        nav .links a {
+            display: block;
+            padding: 1em;
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        nav .links a:hover {
+            background-color: rgb(255, 255, 255);
+            border-radius: 100px;
+            color: #020202;
+        }
+
+        #nav-toggle {
+            position: absolute;
+            top: -100px;
+        }
+
+        nav .icon-burger {
+            display: none;
+            position: absolute;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        nav .icon-burger .line {
+            width: 30px;
+            height: 5px;
+            background-color: #fff;
+            margin: 5px;
+            border-radius: 3px;
+            transition: all .3s ease-in-out;
+        }
+
+        section {
+            display: block;
+            background-image: linear-gradient(rgba(73, 72, 72, 0.911), rgba(0, 0, 0, 0.788)), url("../Images/Gym.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+            height: 100%;
+            width: 100%;
+        }
+
+        .info {
+            background-color: white;
+            max-width: 400px;
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        #videoContainer {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <input id="nav-toggle" type="checkbox">
+        <div class="logo"><img src="../Images/logo.png" alt="logo" width="50px" height="50px">FIT<strong>BOARD</strong></div>
+        <ul class="links">
+            <li><a href="W:\Student Work\Industrial Arts\2023 Submissions\Year 11\11SDD\SAINI Siddhant-441828918\maior\Fitboard-Main\FitBoard\Landing_page\LandingPage.html">Home</a></li>
+            <li><a href="#down">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#login">Login</a></li>
+            <li><a href="W:\Student Work\Industrial Arts\2023 Submissions\Year 11\11SDD\SAINI Siddhant-441828918\maior\Fitboard-Main\FitBoard\uploadvideo.html" style="background-color: rgb(255, 255, 255); color: #020202; border-radius: 100px;">Upload Video</a></li>
+        </ul>
+        <label for="nav-toggle" class="icon-burger">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </label>
+    </nav>
+
+    <section>
+        <div class="container">
+            <button id="button1" onclick="openFileExplorer()" style="font-family: 'Montserrat', sans-serif; font-size: 24px; font-weight: bold;">Upload Video</button>
+            <div class="info" id="info">
+                <!-- Hidden file input element -->
+                <input type="file" id="fileInput" accept=".mp4">
+
+                <!-- Display selected file information -->
+                <div id="fileInfo"></div>
+
+                <!-- Button to display video -->
+                <button id="displayVideoButton" onclick="displayVideo()" style="display:none;">Display Video</button>
+                <div id="videoContainer"></div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function openFileExplorer() {
+            const fileInput = document.getElementById('fileInput');
+            fileInput.click();
+        }
+
+        document.getElementById('fileInput').addEventListener('change', function () {
+            const fileInfo = document.getElementById('fileInfo');
+            const selectedFile = this.files[0];
+            if (selectedFile) {
+                const fileName = selectedFile.name;
+                fileInfo.innerText = 'Selected File: ' + fileName;
+                if (fileName.endsWith('.mp4')) {
+                    button1.innerText = 'Uploaded';
+                    button1.style.color = 'white';
+                    button1.style.background = '#04AA6D';
+                    fileInfo.style.color = 'green';
+                    fileInfo.innerText += ' (Accepted)';
+                    document.getElementById('displayVideoButton').style.display = 'inline-block';
+                } else {
+                    fileInfo.style.color = 'red';
+                    fileInfo.innerText += ' (Error: Only .mp4 files are accepted)';
+                    document.getElementById('displayVideoButton').style.display = 'none';
+                }
+            } else {
+                fileInfo.innerText = '';
+                document.getElementById('displayVideoButton').style.display = 'none';
+            }
+        });
+
+        function displayVideo() {
+            const selectedFile = document.getElementById('fileInput').files[0];
+            const fileName = selectedFile.name;
+            const filePath = URL.createObjectURL(selectedFile);
+            const videoContainer = document.getElementById('videoContainer');
+            const video = `
+                <video controls style="max-width: 100%;">
+                    <source src="${filePath}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            `;
+            videoContainer.innerHTML = video;
+        }
+    </script>
+</body>
+</html>

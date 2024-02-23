@@ -2,53 +2,58 @@ import hashlib
 
 
 def signup():
-    email = input("Enter username: ")
-    password = input("Enter password: ")
-    confirm_password = input("Confirm password: ")
+   email = input("Enter username: ")
+   password = input("Enter password: ")
+   confirm_password = input("Confirm password: ")
 
 
-    if confirm_password == password:
-        enc = confirm_password.encode()
-        hash1 = hashlib.sha256(enc).hexdigest()  # Using SHA-256
-        with open("credentials.txt", "a") as f:
-            f.write(email + ":" + hash1 + "\n")
-        print("You have registered successfully!")
-    else:
-        print("Password is not same as above! \n")
+   if confirm_password == password:
+       enc = confirm_password.encode()
+       hash1 = hashlib.sha256(enc).hexdigest()  # Using SHA-256
+       with open("credentials.txt", "a") as f:
+           f.write(email + ":" + hash1 + "\n")
+       print("You have registered successfully!")
+   else:
+       print("Password is not same as above! \n")
 
 
 def login():
-    email = input("Enter username: ")
-    password = input("Enter password: ")
-    auth = password.encode()
-    auth_hash = hashlib.sha256(auth).hexdigest()  # Using SHA-256
-    with open("credentials.txt", "r") as f:
-        for line in f:
-            stored_email, stored_password = line.strip().split(":")
-            if email == stored_email and auth_hash == stored_password:
-                print("Login successful!")
-                return
-    print("Login failed! \n")
+   email = input("Enter username: ")
+   password = input("Enter password: ")
+   auth = password.encode()
+   auth_hash = hashlib.sha256(auth).hexdigest()  # Using SHA-256
+   with open("credentials.txt", "r") as f:
+       for line in f:
+           parts = line.strip().split(":")
+           if len(parts) == 2:
+               stored_email, stored_password = parts
+               if email == stored_email and auth_hash == stored_password:
+                   print("Login successful!")
+                   return
+   print("Login failed! \n")
+
+
+
+
 
 
 while True:
-    print("Login System")
-    print("1. Signup")
-    print("2. Login")
-    print("3. Exit")
-    choice = input("Enter your choice: ")
+   print("Login System")
+   print("1. Signup")
+   print("2. Login")
+   print("3. Exit")
+   choice = input("Enter your choice: ")
 
 
-    if choice == "1":
-        signup()
-    elif choice == "2":
-        login()
-    elif choice == "3":
-        break
-    else:
-        print("Invalid choice! Please enter a valid option.\n")
 
-
+   if choice == "1":
+       signup()
+   elif choice == "2":
+       login()
+   elif choice == "3":
+       break
+   else:
+       print("Invalid choice! Please enter a valid option.\n")
 
 
 
