@@ -17,7 +17,7 @@ function Edit_Row(button) {
     Row.querySelector('button[onclick="Delete_Row(this)"]').style.display = 'inline-block';
 }
 
-function Add_Above(button){
+function Add_Above(button,pos){
     const Row = button.parentNode.parentNode;
     const New_Row = document.createElement('tr');
     
