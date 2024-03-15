@@ -1,0 +1,22 @@
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 2px solid #dadada;
+    text-align: left;
+    padding: 4px;
+}
+
+th {
+    background-color: f0f0f0;
+}
+
+input {
+    width: 100%;
+}
+
+.edit-mode input {
+    border: 1px solid #000000;
+}
