@@ -23,11 +23,11 @@
           <td><span class="editable" contenteditable="false">642</span></td>
           <td><span class="editable" contenteditable="false">742</span></td>
           <td>
-            <button onclick="Edit_Row(this)">Edit</button>
-            <button onclick="Add_Above(this)">Add Exercise Above</button>
-            <button onclick="Add_Below(this)">Add Exercise Below</button>
-            <button onclick="Save_Row(this)" style="display: none;">Save</button>
-            <button onclick="Delete_Row(this)" style="display: none;">Delete</button>
+            <button class="edit" onclick="Edit_Row(this)">Edit</button>
+            <button class="newabove" onclick="Add_New(this, 'above')">Add Exercise Above</button>
+            <button class="newbelow" onclick="Add_New(this, 'below')">Add Exercise Below</button>
+            <button class="save" onclick="Save_Row(this)" style="display: none;">Save</button>
+            <button class="delete" onclick="Delete_Row(this)" style="display: none;">Delete</button>
           </td>
         </tr>
       </tbody>

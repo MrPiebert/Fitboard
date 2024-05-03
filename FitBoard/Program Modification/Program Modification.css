@@ -20,3 +20,86 @@ input {
 .edit-mode input {
     border: 1px solid #000000;
 }
+
+.newabove{  
+    outline: none;  
+    background: none;  
+    border: none;  
+}
+.newbelow{
+outline: none;  
+background: none;  
+border: none; 
+}  
+.edit {  
+outline: none;  
+background: none;  
+border: none;  
+}  
+.save {  
+outline: none;  
+background: none;  
+border: none;  
+}  
+.delete {  
+outline: none;  
+background: none;  
+border: none;  
+}  
+.newabove{
+padding: 5px 10px;  
+cursor: pointer;  
+}
+.newbelow{
+padding: 5px 10px;  
+cursor: pointer;  
+}
+.edit {  
+padding: 5px 10px;  
+cursor: pointer;  
+}  
+.save {  
+padding: 5px 10px;  
+cursor: pointer;  
+}  
+.delete {  
+padding: 5px 10px;  
+cursor: pointer;  
+}  
+.newabove{
+background: #2cdd85;  
+color: #ffffff;  
+&:hover {  
+    background: darken(#2cdd85, 10%);  
+}  
+}
+.newbelow{
+background: #eeb600;  
+color: #ffffff;  
+&:hover {  
+    background: darken(#eeb600, 10%);  
+}  
+}
+.edit {  
+background: #2199e8;  
+color: #ffffff;  
+&:hover {  
+    background: darken(#2199e8, 10%);  
+}  
+}  
+.save {  
+display: none;  
+background: #32AD60;  
+color: #ffffff;  
+&:hover {  
+    background: darken(#32AD60, 10%);  
+}  
+}  
+.delete {    
+display: none;  
+background: #EC5840;  
+color: #ffffff;  
+    &:hover {  
+    background: darken(#EC5840, 10%);  
+}  
+}  
