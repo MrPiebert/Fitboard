@@ -9,6 +9,10 @@ th, td {
     padding: 4px;
 }
 
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
 th {
     background-color: f0f0f0;
 }
@@ -74,10 +78,10 @@ color: #ffffff;
 }  
 }
 .newbelow{
-background: #eeb600;  
+background: #2cdd85;  
 color: #ffffff;  
 &:hover {  
-    background: darken(#eeb600, 10%);  
+    background: darken(#2cdd85, 10%);  
 }  
 }
 .edit {  
