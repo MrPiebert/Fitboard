@@ -1,4 +1,8 @@
+<!--#region HTML-->
+
+
 <!DOCTYPE html>
+
 <html lang="en">
   <head>
     <meta charset="UTF-8">
@@ -8,129 +12,94 @@
   </head>
 
   <body>
-    <table id="Program_Table">
+    <span class="program specification" contenteditable="true">Program Name</span>
+    <span class="program specification" contenteditable="true">Program Sessions</span>
+    <span class="program specification" contenteditable="true">Program Tier</span>
+    <table>
+
       <thead>
         <tr draggable="true">
-          <th>Day 1</th>
-          <th>Sets</th>
-          <th>Reps</th>
-          <th></th>
+          <th class="col1">Day 1</th>
+          <th class="col2">Sets</th>
+          <th class="col3">Reps</th>
+          <th class="col4"></th>
         </tr>
-      </thead>   
+      </thead>
+
       <tbody>
 
-        <span class="editable" contenteditable="True">Value</span>
-
-        <span class="editable" contenteditable="True">Value</span>
-
-        <span class="editable" contenteditable="True">Value</span>
-
         <tr>
+
           <td>Yoga</td>
           <td></td>
           <td></td>
-          <td>
-            <button class="newbelow" onclick="Add_New(this, 'below')">Add Exercise Below</button>
-          </td>
+          <td></td>
+
         </tr>
 
         <tr>
+
           <td>Pre-Hab</td>
           <td></td>
           <td></td>
+
           <td>
-            <button class="newabove" onclick="Add_New(this, 'above')">Add Exercise Above</button>
-            <button class="newbelow" onclick="Add_New(this, 'below')">Add Exercise Below</button>
+            <button class="newexercise" onclick="Add_New(this, 'below')">Add Exercise Below</button>
           </td>
+
         </tr>
 
         <tr>
+
           <td>Main Workout</td>
           <td></td>
           <td></td>
+
           <td>
-            <button class="newabove" onclick="Add_New(this, 'above')">Add Exercise Above</button>
-            <button class="newbelow" onclick="Add_New(this, 'below')">Add Exercise Below</button>
+            <button class="newexercise" onclick="Add_New(this, 'above')">Add Exercise Above</button>
+            <button class="newexercise" onclick="Add_New(this, 'below')">Add Exercise Below</button>
           </td>
+
+        
         </tr>
 
         <tr>
+
           <td>Stretches</td>
           <td></td>
           <td></td>
+
           <td>
-            <button class="newabove" onclick="Add_New(this, 'above')">Add Exercise Above</button>
+            <button class="newexercise" onclick="Add_New(this, 'above')">Add Exercise Above</button>
           </td>
+
+        </tr>
+
+        <tr>
+
+          <td></td>
+          <td></td>
+          <td></td>
+
+          <td>
+                 <button class="newday" onclick="Add_Day(this, 'above')">Add Day Above</button>
+                 <button class="newday" onclick="Add_Day(this, 'below')">Add Day Below</button>
+                 <button class="deleteday" onclick="Delete_Day(this)" disabled>Delete Day</button>
+          </td>
+          
         </tr>
 
       </tbody>
-    </table>
-    <script src="Program Modification.js"></script>
 
-    <script>
-      let dragSrcEl = null;
-  
-      function handleDragStart(e) {
-          this.classList.add('dragging');
-          dragSrcEl = this;
-  
-          e.dataTransfer.effectAllowed = 'move';
-          e.dataTransfer.setData('text/html', this.innerHTML);
-      }
-  
-      function handleDragOver(e) {
-          if (e.preventDefault) {
-              e.preventDefault();
-          }
-  
-          e.dataTransfer.dropEffect = 'move';
-  
-          return false;
-      }
-  
-      function handleDragEnter(e) {
-          this.classList.add('dragover');
-      }
-  
-      function handleDragLeave(e) {
-          this.classList.remove('dragover');
-      }
-  
-      function handleDrop(e) {
-          if (e.stopPropagation) {
-              e.stopPropagation(); 
-          }
-  
-          if (dragSrcEl != this) {
-              const hoveredRect = this.getBoundingClientRect();
-              const dragRect = dragSrcEl.getBoundingClientRect();
-              if (e.clientY > (hoveredRect.top + hoveredRect.height / 2)) {
-                  this.parentNode.insertBefore(dragSrcEl, this.nextSibling);
-              } else {
-                  this.parentNode.insertBefore(dragSrcEl, this);
-              }
-          }
-  
-          return false;
-      }
-  
-      function handleDragEnd(e) {
-          this.classList.remove('dragging');
-  
-          const rows = document.querySelectorAll('tr');
-          rows.forEach(row => row.classList.remove('dragover'));
-      }
-  
-      const rows = document.querySelectorAll('tr');
-      rows.forEach(row => {
-          row.addEventListener('dragstart', handleDragStart);
-          row.addEventListener('dragenter', handleDragEnter);
-          row.addEventListener('dragover', handleDragOver);
-          row.addEventListener('dragleave', handleDragLeave);
-          row.addEventListener('drop', handleDrop);
-          row.addEventListener('dragend', handleDragEnd);
-      });
-  </script>
+    </table>
+    
+    <button class="saveprogram" onclick="Save_Program(this)">Save Program</button>
+    <button class="cancelprogram" onclick="Discard_Changes(this)">Discard All Changes</button>
+
+    <script src="Program Modification.js"></script>
 
   </body>
 </html>
+
+
+<!--#endregion-->

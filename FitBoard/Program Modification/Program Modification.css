@@ -4,9 +4,26 @@ table {
 }
 
 th, td {
-    border: 2px solid #dadada;
-    text-align: left;
+    border: 3px solid #dadada;
+    text-align: justify;
     padding: 4px;
+}
+
+th.col1{
+    width: 20%;
+}
+
+th.col2{
+    width: 35%;
+}
+
+th.col3{
+    width: 35%;
+}
+
+th.col4{
+    width: 10%;
+    text-align: center;
 }
 
 tr:nth-child(even) {
@@ -25,85 +42,66 @@ input {
     border: 1px solid #000000;
 }
 
-.newabove{  
+.newexercise{  
     outline: none;  
     background: none;  
     border: none;  
-}
-.newbelow{
-outline: none;  
-background: none;  
-border: none; 
-}  
-.edit {  
-outline: none;  
-background: none;  
-border: none;  
-}  
-.save {  
-outline: none;  
-background: none;  
-border: none;  
-}  
-.delete {  
-outline: none;  
-background: none;  
-border: none;  
-}  
-.newabove{
-padding: 5px 10px;  
-cursor: pointer;  
-}
-.newbelow{
-padding: 5px 10px;  
-cursor: pointer;  
-}
-.edit {  
-padding: 5px 10px;  
-cursor: pointer;  
-}  
-.save {  
-padding: 5px 10px;  
-cursor: pointer;  
-}  
-.delete {  
-padding: 5px 10px;  
-cursor: pointer;  
-}  
-.newabove{
-background: #2cdd85;  
-color: #ffffff;  
-&:hover {  
-    background: darken(#2cdd85, 10%);  
-}  
-}
-.newbelow{
-background: #2cdd85;  
-color: #ffffff;  
-&:hover {  
-    background: darken(#2cdd85, 10%);  
-}  
-}
-.edit {  
-background: #2199e8;  
-color: #ffffff;  
-&:hover {  
-    background: darken(#2199e8, 10%);  
-}  
-}  
-.save {  
-display: none;  
-background: #32AD60;  
-color: #ffffff;  
-&:hover {  
-    background: darken(#32AD60, 10%);  
-}  
-}  
-.delete {    
-display: none;  
-background: #EC5840;  
-color: #ffffff;  
+    padding: 5px 10px;  
+    cursor: pointer;  
+    background: #2cdd85;  
+    color: #ffffff;  
+    width: 140px;
+    height: 25px;
     &:hover {  
-    background: darken(#EC5840, 10%);  
+        background: darken(#2cdd85, 10%);  
+    }  
+
+}
+
+.edit {  
+    outline: none;  
+    background: none;  
+    border: none;  
+    padding: 5px 10px;  
+    cursor: pointer;  
+    background: #2199e8;  
+    color: #ffffff;  
+    width: 60px;
+    height: 25px;
+    &:hover {  
+        background: darken(#2199e8, 10%);  
+    }  
 }  
+
+.save {  
+    outline: none;  
+    background: none;  
+    border: none;  
+    padding: 5px 10px;  
+    cursor: pointer;  
+    display: none;  
+    background: #32AD60;  
+    color: #ffffff;  
+    width: 60px;
+    height: 25px;
+    &:hover {  
+        background: darken(#32AD60, 10%);  
+    }  
+    
+}  
+
+.delete {  
+    outline: none;  
+    background: none;  
+    border: none;  
+    padding: 5px 10px;  
+    cursor: pointer;  
+    display: none;  
+    background: #EC5840;
+    width: 60px;
+    height: 25px;  
+    color: #ffffff;  
+        &:hover {  
+        background: darken(#EC5840, 10%);  
+    }  
 }  
