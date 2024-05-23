@@ -365,6 +365,9 @@ textarea {
     margin-bottom: 20px;
 }
 
+.help-section {
+    margin-left: 50px;
+}
 
 #selectedImage {
     width: 60%;
