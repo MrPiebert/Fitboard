@@ -210,22 +210,24 @@
 
 .colour_slider {
 	-webkit-appearance: none;	/*overrides default look*/
-	width: 100%;
-	height: 15px;
-	border-radius: 5px;  
+	width: 50%;
+	height: 30px;
+	border-radius: 20px;  
 	background: #d3d3d3;
 	outline: none;
 	opacity: 0.7;
 	-webkit-transition: .2s;
 	transition: opacity .2s;
 	box-shadow: inset 1px 1px 1px;
+	margin-top: 10vh;
+	margin-left: 20vw
   }
   
 .colour_slider::-webkit-slider-thumb {
 	-webkit-appearance: none;
 	appearance: none;
-	width: 30px;
-	height: 30px;
+	width: 40px;
+	height: 40px;
 	border-radius: 50%; 
 	background: #04AA6D;
 	box-shadow: 1px 1px;
@@ -268,7 +270,6 @@
 	justify-content: center;
 	align-items: center;
 	height: 100vh;
-  
 	-webkit-transition: .4s;
 	transition: .4s;
   }

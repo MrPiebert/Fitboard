@@ -223,6 +223,7 @@
 	--gray: #202229;
 }
 
+/* Notification Contianer CSS */
 .main_content .notif_container{
     background-color: bisque;
     width: 85vw;
