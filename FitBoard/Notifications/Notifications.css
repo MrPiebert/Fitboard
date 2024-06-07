@@ -222,3 +222,14 @@
 	--dark: #111111;
 	--gray: #202229;
 }
+
+.main_content .notif_container{
+    background-color: bisque;
+    width: 85vw;
+    height: 80vh;
+    position: absolute;
+    margin-top: 50px;
+    margin-left: 75px;
+    border-radius: 20px;
+    box-shadow: 1px 5px 10px 1px rgba(0, 0, 0, 0.5) inset;
+}
