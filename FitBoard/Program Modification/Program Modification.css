@@ -1,27 +1,45 @@
+
+.Program_Specification {
+  border: 2px solid #000000;
+  padding: 2px 5px;
+  margin: 10px;
+}
+
+#Table_Container{
+  border: 5px solid #000000;
+  padding: none;
+  margin-top: 10px;
+}
+
 table {
   border-collapse: collapse;
-  width: 100%;
+  width: 96%;
+  padding: 2px;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  margin-right: 2%;
+  margin-left: 2%;
 }
 
 th, td {
-  border: 3px solid #dadada;
+  border: 3px solid #Dadada;
   text-align: justify;
   padding: 4px;
 }
 
-th.col1{
+th.Col_1{
   width: 20%;
 }
 
-th.col2{
+th.Col_2{
   width: 35%;
 }
 
-th.col3{
+th.Col_3{
   width: 35%;
 }
 
-th.col4{
+th.Col_4{
   width: 10%;
   text-align: center;
 }
@@ -31,7 +49,7 @@ tr:nth-child(even) {
 }
 
 th {
-  background-color: f0f0f0;
+  background-color: #f2f2f2;
 }
 
 input {
@@ -39,14 +57,19 @@ input {
 }
 
 .edit-mode input {
+  display: block;
   border: 1px solid #000000;
+  margin: 0 auto;
+  width: 90%;
+  
 }
 
-.newexercise{  
+.New_Exercise{  
   outline: none;  
   background: none;  
   border: none;  
-  padding: 5px 10px;  
+  padding: 5px 10px;
+  margin: 2px;  
   cursor: pointer;  
   background: #2cdd85;  
   color: #ffffff;  
@@ -105,3 +128,27 @@ input {
       background: darken(#EC5840, 10%);  
   }  
 }  
+
+.New_Day {
+  outline: none;
+  border: none;
+  padding: 5px 10px;
+  margin: 2px;
+  cursor: pointer;
+  background: #2cdd85;
+  color: #ffffff;
+  width: 140px;
+  height: 25px;
+}
+
+.Delete_Day {
+  outline: none;
+  border: none;
+  padding: 5px 10px;
+  margin: 2px;
+  cursor: pointer;
+  background: #e62100;
+  color: #ffffff;
+  width: 140px;
+  height: 25px;
+}
