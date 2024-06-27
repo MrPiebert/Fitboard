@@ -236,19 +236,9 @@
             
                 </div>
                 
-                <button id="button1" onclick="openFileExplorer()" style="font-family: 'Montserrat', sans-serif; font-size: 24px; font-weight: bold;">Upload Video</button>
-
-                    <div class="info" id="info">
-                        <!-- Hidden file input element -->
-                        <input type="file" id="fileInput" accept=".mp4">
-        
-                        <!-- Display selected file information -->
-                        <div id="fileInfo"></div>
-        
-                        <!-- Button to display video -->
-                        <button id="displayVideoButton" onclick="displayVideo()" style="display:none;">Display Video</button>
-                        <div id="videoContainer"></div>
-                    </div>
+                <input type="file" id="videoInput" accept="video/*" style="display: none;" onchange="addVideo(event)">
+                <button id="button1" onclick="document.getElementById('videoInput').click()" style="font-family: 'Montserrat', sans-serif; font-size: 24px; font-weight: bold;">Upload Video</button>
+                
             </div>
         </div>
 
@@ -257,7 +247,7 @@
     <script src="../Home_Page/Activite_Sidebar.js"> </script>
     <script src="../Profile/Profile_Pic.js"></script>
     <script src="../Profile/Profile_Check.js"></script>
-    <script src="Videos.js">  </script>
+    <script src="Videos.js"></script>
     <script src="Upload_Video.js"></script>
 </body>
 </html>
