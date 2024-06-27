@@ -20,38 +20,7 @@
 
 
 <style>
-    #button1 {
-            background-color: white;
-            border: none;
-            border-radius: 15px;
-            color: black;
-            padding: 16px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 20px;
-            transition-duration: 0.4s;
-            cursor: pointer;
-            border: 2px solid #04AA6D;
-        }
-
-        #button1:hover {
-            background-color: #04AA6D;
-            color: white;
-        }
-
-        #fileInput {
-            display: none;
-        }
-
-        #fileInfo {
-            margin-top: 20px;
-        }
-
-        #displayVideoButton {
-            display: none;
-            margin-top: 10px;
-        }
+    
 </style>
 
 </head>
@@ -156,116 +125,119 @@
                 <h3 class="title">01. Robert</h3>
             </div>
 
-            <div class="video_list">
-                
+            <div class="black_background">
+
                 <div class="search-container" style="padding: 40px; width: 100%;">
                     <input type="text" id="searchInput" placeholder="Search videos..." style="border-radius:15px;">
-                    <button onclick="searchVideos()"><i class="fas fa-search"></i></button>
-                </div>
-
-                <div class="vid active">
-                    <video src="../Upload_Video/Videos/video1.mp4" muted></video>
-                    <h3 class="title">01. Robert</h3>
-                </div>
-
-                <div class="vid">
-                    <video src="../Upload_Video/Videos/video2.mp4" muted></video>
-                    <h3 class="title">02. MR BEAST</h3>
-                </div>
-
-                <div class="vid">
-                    <video src="../Upload_Video/Videos/video3.mp4" muted></video>
-                    <h3 class="title">03. angy cat</h3>
-                </div>
-
-                <div class="vid">
-                    <video src="../Upload_Video/Videos/video4.mp4" muted></video>
-                    <h3 class="title">04. cap</h3>
-                </div>
-
-                <div class="vid">
-                    <video src="../Upload_Video/Videos/video5.mp4" muted></video>
-                    <h3 class="title">05. China Uncensored</h3>
-                </div>
-
-                <div class="vid">
-                    <video src="../Upload_Video/Videos/video6.mp4" muted></video>
-                    <h3 class="title">06. Chippi Chappa</h3>
+                    <button onclick="searchVideos()" style="border-radius: 15px;"><i class="fas fa-search"></i></button>
                 </div>
                 
-                <div class="vid">
-                    <video src="../Upload_Video/Videos/video7.mp4" muted></video>
-                    <h3 class="title">07. Nokia</h3>
-                </div>
-                
-                <div class="vid">
-                    <video src="../Upload_Video/Videos/video8.mp4" muted></video>
-                    <h3 class="title">08. Mewing</h3>
-                </div>
-                
-                <div class="vid">
-                    <video src="../Upload_Video/Videos/video9.mp4" muted></video>
-                    <h3 class="title">09. Edging</h3>
-                </div>
-                
-                <div class="vid">
-                    <video src="../Upload_Video/Videos/video10.mp4" muted></video>
-                    <h3 class="title">10. House</h3>
-                </div>
-                
-                <div class="vid">
-                    <video src="../Upload_Video/Videos/video11.mp4" muted></video>
-                    <h3 class="title">11. SLASH SRS OR SLASH J??</h3>
-                </div>
-                
-                <div class="vid">
-                    <video src="../Upload_Video/Videos/video12.mp4" muted></video>
-                    <h3 class="title">12. Doxxed</h3>
-                </div>
-                
-                <div class="vid">
-                    <video src="../Upload_Video/Videos/video13.mp4" muted></video>
-                    <h3 class="title">13. The Croods</h3>
-                </div>
-                
-                <div class="vid">
-                    <video src="../Upload_Video/Videos/video14.mp4" muted></video>
-                    <h3 class="title">14. Oh Great Heavens</h3>
-                </div>
-                
-                <div class="vid">
-                    <video src="../Upload_Video/Videos/video15.mp4" muted></video>
-                    <h3 class="title">15. Popbob</h3>
-                </div>
+                <div class="video_list">
 
-                <div class="vid">
-                    <video src="../Upload_Video/Videos/video16.mp4" muted></video>
-                    <h3 class="title">16. Chinese Engineering</h3>
-                </div>
+                    <div class="vid active">
+                        <video src="../Upload_Video/Videos/video1.mp4" muted></video>
+                        <h3 class="title">01. Robert</h3>
+                    </div>
 
-                <div class="vid">
-                    <video src="../Upload_Video/Videos/video17.mp4" muted></video>
-                    <h3 class="title">17. OsAmA BiN LaDen</h3>
-                </div>
+                    <div class="vid">
+                        <video src="../Upload_Video/Videos/video2.mp4" muted></video>
+                        <h3 class="title">02. MR BEAST</h3>
+                    </div>
 
-                <div class="vid">
-                    <video src="../Upload_Video/Videos/video18.mp4" muted></video>
-                    <h3 class="title">18. OFF the menu</h3>
-                </div>
+                    <div class="vid">
+                        <video src="../Upload_Video/Videos/video3.mp4" muted></video>
+                        <h3 class="title">03. angy cat</h3>
+                    </div>
 
-                <div class="vid">
-                    <video src="../Upload_Video/Videos/video19.mp4" muted></video>
-                    <h3 class="title">19. 30 Dollar Haircut</h3>
-                </div>
+                    <div class="vid">
+                        <video src="../Upload_Video/Videos/video4.mp4" muted></video>
+                        <h3 class="title">04. cap</h3>
+                    </div>
 
-                <div class="vid">
-                    <video src="../Upload_Video/Videos/video20.mp4" muted></video>
-                    <h3 class="title">20. Violence</h3>
+                    <div class="vid">
+                        <video src="../Upload_Video/Videos/video5.mp4" muted></video>
+                        <h3 class="title">05. China Uncensored</h3>
+                    </div>
+
+                    <div class="vid">
+                        <video src="../Upload_Video/Videos/video6.mp4" muted></video>
+                        <h3 class="title">06. Chippi Chappa</h3>
+                    </div>
+                    
+                    <div class="vid">
+                        <video src="../Upload_Video/Videos/video7.mp4" muted></video>
+                        <h3 class="title">07. Nokia</h3>
+                    </div>
+                    
+                    <div class="vid">
+                        <video src="../Upload_Video/Videos/video8.mp4" muted></video>
+                        <h3 class="title">08. Mewing</h3>
+                    </div>
+                    
+                    <div class="vid">
+                        <video src="../Upload_Video/Videos/video9.mp4" muted></video>
+                        <h3 class="title">09. Edging</h3>
+                    </div>
+                    
+                    <div class="vid">
+                        <video src="../Upload_Video/Videos/video10.mp4" muted></video>
+                        <h3 class="title">10. House</h3>
+                    </div>
+                    
+                    <div class="vid">
+                        <video src="../Upload_Video/Videos/video11.mp4" muted></video>
+                        <h3 class="title">11. SLASH SRS OR SLASH J??</h3>
+                    </div>
+                    
+                    <div class="vid">
+                        <video src="../Upload_Video/Videos/video12.mp4" muted></video>
+                        <h3 class="title">12. Doxxed</h3>
+                    </div>
+                    
+                    <div class="vid">
+                        <video src="../Upload_Video/Videos/video13.mp4" muted></video>
+                        <h3 class="title">13. The Croods</h3>
+                    </div>
+                    
+                    <div class="vid">
+                        <video src="../Upload_Video/Videos/video14.mp4" muted></video>
+                        <h3 class="title">14. Oh Great Heavens</h3>
+                    </div>
+                    
+                    <div class="vid">
+                        <video src="../Upload_Video/Videos/video15.mp4" muted></video>
+                        <h3 class="title">15. Popbob</h3>
+                    </div>
+
+                    <div class="vid">
+                        <video src="../Upload_Video/Videos/video16.mp4" muted></video>
+                        <h3 class="title">16. Chinese Engineering</h3>
+                    </div>
+
+                    <div class="vid">
+                        <video src="../Upload_Video/Videos/video17.mp4" muted></video>
+                        <h3 class="title">17. OsAmA BiN LaDen</h3>
+                    </div>
+
+                    <div class="vid">
+                        <video src="../Upload_Video/Videos/video18.mp4" muted></video>
+                        <h3 class="title">18. OFF the menu</h3>
+                    </div>
+
+                    <div class="vid">
+                        <video src="../Upload_Video/Videos/video19.mp4" muted></video>
+                        <h3 class="title">19. 30 Dollar Haircut</h3>
+                    </div>
+
+                    <div class="vid">
+                        <video src="../Upload_Video/Videos/video20.mp4" muted></video>
+                        <h3 class="title">20. Violence</h3>
+                    </div>
+            
                 </div>
                 
-            </div>
+                <button id="button1" onclick="openFileExplorer()" style="font-family: 'Montserrat', sans-serif; font-size: 24px; font-weight: bold;">Upload Video</button>
 
-            <button id="button1" onclick="openFileExplorer()" style="font-family: 'Montserrat', sans-serif; font-size: 24px; font-weight: bold;">Upload Video</button>
                     <div class="info" id="info">
                         <!-- Hidden file input element -->
                         <input type="file" id="fileInput" accept=".mp4">
@@ -277,6 +249,8 @@
                         <button id="displayVideoButton" onclick="displayVideo()" style="display:none;">Display Video</button>
                         <div id="videoContainer"></div>
                     </div>
+            </div>
+        </div>
 
     <!-- External JavaScript -->
     <script src="../Settings/darklight_mode.js"></script>

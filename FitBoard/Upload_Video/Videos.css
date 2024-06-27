@@ -277,6 +277,11 @@ Icons */
     overflow-y: scroll;
 }
 
+.content .black_background{
+    background: black;
+    border-radius: 10px;
+}
+
 .content .video_list:not(.dark-mode) {
 	background: var(--gray);
 }
@@ -369,10 +374,39 @@ Icons */
 }
 
 #button1 {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
+    background-color: white;
+    border: none;
+    border-radius: 15px;
+    color: black;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    margin-left: 20%;
+    margin-top: 8%;
+    margin-bottom: 5%;
+    display: inline-block;
+    font-size: 20px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border: 2px solid #04AA6D;
+}
+
+#button1:hover {
+    background-color: #04AA6D;
+    color: white;
+}
+
+#fileInput {
+    display: none;
+}
+
+#fileInfo {
+    margin-top: 20px;
+}
+
+#displayVideoButton {
+    display: none;
+    margin-top: 10px;
 }
 
 
