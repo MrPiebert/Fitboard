@@ -207,6 +207,14 @@
 	background-color: var(--gray)
 }
 
+.help_container {
+	color: white
+}
+
+.help_container:not(.dark-mode) {
+	color: black
+}
+
 /* Container Styles */
 .container {
     display: flex;
