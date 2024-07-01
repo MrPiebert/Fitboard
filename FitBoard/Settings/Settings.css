@@ -208,6 +208,14 @@
 	border-radius: 10px;
 }
 
+.primary_container {
+	color: white
+}
+
+.primary_container:not(.dark-mode) {
+	color: black
+}
+
 .primary_colour_slider {
 	-webkit-appearance: none;	/*overrides default look*/
 	width: 50%;
@@ -242,7 +250,7 @@
 	cursor: pointer;
   }
 
-  .secondary_colour_slider {
+.secondary_colour_slider {
 	-webkit-appearance: none;	/*overrides default look*/
 	width: 50%;
 	height: 30px;
