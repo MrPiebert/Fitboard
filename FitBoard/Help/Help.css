@@ -1,6 +1,12 @@
 /* Importing Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 
+/* Global Variables */
+:root {
+    --dark: #111111;
+    --gray: #202229;
+}
+
 /* Global Styles */
 * {
     margin: 0;
@@ -10,7 +16,7 @@
     scroll-behavior: smooth;
 }
 
-/* CSS for profile picture */
+/* Profile Picture Styles */
 .User_Image {
     width: 50px;
     height: 50px;
@@ -27,42 +33,11 @@
     width: 80px;
     background-color: black;
     transition: all 0.5s ease;
-    padding: 0.4rem 0.8rem; /* Padding using rem */
-}
-
-#sub-heading {
-    position: absolute;
-    opacity: 0;
-    left: 100px;
-}
-
-#main-heading, h3 {
-    transition: opacity 0.5s ease-in;
+    padding: 0.4rem 0.8rem;
 }
 
 .sidebar.active {
     width: 250px;
-}
-
-.sidebar.active ~ .main_content {
-    left: 250px;
-    width: calc(100% - 25px);
-}
-
-.sidebar.active ~ .main_content #main-heading{
-    opacity: 0;
-    transition: opacity 0.5s ease-out;
-}
-
-.sidebar.active ~ .main_content h3{
-    opacity: 0;
-    transition: opacity 0.5s ease-out;
-}
-
-.sidebar.active ~ .main_content #sub-heading {
-    left: 30px;
-    opacity: 1;
-    transition: opacity 0.5s ease-in;
 }
 
 .sidebar #btn {
@@ -74,6 +49,7 @@
     line-height: 50px;
     transform: translateX(-50%);
     cursor: pointer;
+    transition: left 0.5s ease;
 }
 
 .sidebar.active #btn {
@@ -88,6 +64,7 @@
     align-items: center;
     pointer-events: none;
     opacity: 0;
+    transition: opacity 0.5s ease;
 }
 
 .sidebar.active .top .logo {
@@ -99,31 +76,12 @@
     margin-right: 5px;
 }
 
-/* User Section Styles */
-.user {
-    align-items: center;
-    margin: 1rem 0;
-    display: inline-flex;
-}
-
-.user p {
-    color: #fff;
-    opacity: 1;
-    margin-left: 1rem;
-}
-
-/* Styles for Navigation Icons */
-.sidebar p {
-    opacity: 0;
-}
-
-.sidebar.active p {
-    opacity: 1;
+.sidebar ul {
+    list-style-type: none;
 }
 
 .sidebar ul li {
     position: relative;
-    list-style-type: none;
     height: 50px;
     width: 90%;
     margin: 0.8rem auto;
@@ -136,9 +94,9 @@
     align-items: center;
     text-decoration: none;
     border-radius: 0.8rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Hover Mechanics */
 .sidebar ul li a:hover {
     background-color: #fff;
     color: #202229;
@@ -152,7 +110,6 @@
     line-height: 50px;
 }
 
-/* Navigation Item Label Styles */
 .sidebar .Nav_Item {
     display: none;
 }
@@ -161,13 +118,12 @@
     display: inline-block;
 }
 
-/* Tooltip Styles */
 .sidebar ul li .tooltip {
     position: absolute;
     left: 75px;
     top: 5%;
     background-color: white;
-    transform: translateX(-50%, -50%);
+    transform: translateX(-50%);
     box-shadow: 0 0.5rem 0.8rem rgba(0, 0, 0, 0.2);
     border-radius: 0.6rem;
     padding: 0.4rem 1.2rem;
@@ -182,6 +138,30 @@
 
 .sidebar.active ul li .tooltip {
     display: none;
+}
+
+/* Sidebar Content Styles */
+.sidebar p {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.sidebar.active p {
+    opacity: 1;
+}
+
+/* User Section Styles */
+.user {
+    align-items: center;
+    margin: 1rem 0;
+    display: inline-flex;
+}
+
+.user p {
+    color: #fff;
+    opacity: 1;
+    margin-left: 1rem;
+    transition: opacity 0.5s ease;
 }
 
 /* Main Content Styles */
@@ -200,19 +180,20 @@
 }
 
 .main_content:not(.dark-mode) {
-	background-color: white
+    background-color: white;
 }
 
 .sidebar:not(.dark-mode) {
-	background-color: var(--gray)
+    background-color: var(--gray);
 }
 
+/* Help Container Styles */
 .help_container {
-	color: white
+    color: white;
 }
 
 .help_container:not(.dark-mode) {
-	color: black
+    color: black;
 }
 
 /* Container Styles */
@@ -225,7 +206,26 @@
     border-radius: 10px;
 }
 
-:root {
-	--dark: #111111;
-	--gray: #202229;
+/* Headings */
+#main-heading, h3 {
+    transition: opacity 0.5s ease-in;
+}
+
+#sub-heading {
+    position: absolute;
+    opacity: 0;
+    left: 100px;
+    transition: opacity 0.5s ease-in, left 0.5s ease;
+}
+
+.sidebar.active ~ .main_content #main-heading,
+.sidebar.active ~ .main_content h3 {
+    opacity: 0;
+    transition: opacity 0.5s ease-out;
+}
+
+.sidebar.active ~ .main_content #sub-heading {
+    left: 30px;
+    opacity: 1;
+    transition: opacity 0.5s ease-in, left 0.5s ease;
 }
