@@ -1,5 +1,6 @@
 <!--#region HTML-->
 
+<!--'s Work-->
 
 <!DOCTYPE html>
 
@@ -7,84 +8,95 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editable Table</title>
+    <title>Customize Program</title>
     <link rel="stylesheet" href="Program Modification.css">
   </head>
 
   <body>
-    <span class="program specification" contenteditable="true">Program Name</span>
-    <span class="program specification" contenteditable="true">Program Sessions</span>
-    <span class="program specification" contenteditable="true">Program Tier</span>
+    <input type="text" class = "Program_Specification" ID = "Program_Name" placeholder="Program Name">
+    <input type="number" class = "Program_Specification" ID = "Program_Sessions" placeholder="Program Sessions">
+    <select name="Program Tier" class="Program_Specification" ID = "Program_Tier">
+      <option value="I_1">Induction 1</option>
+      <option value="I_2">Induction 2</option>
+      <option value="I_3">Induction 3</option>
+      <option value="P_1">Program 1</option>
+      <option value="P_2">Program 2</option>
+      <option value="P_3">Program 3</option>
+      <option value="ADV">Advanced</option>
+    </select>
+    
+    <div id ="Table_Container">
+    
     <table>
 
       <thead>
-        <tr draggable="true">
-          <th class="col1">Day 1</th>
-          <th class="col2">Sets</th>
-          <th class="col3">Reps</th>
-          <th class="col4"></th>
+        <tr>
+          <th class = "Col_1"><u>Day 1</u></th>
+          <th class = "Col_2"><u>Sets</u></th>
+          <th class = "Col_3"><u>Reps</u></th>
+          <th class = "Col_4"></th>
         </tr>
       </thead>
 
       <tbody>
 
-        <tr>
+        <tr class = "Yoga">
 
-          <td>Yoga</td>
+          <td><u>Yoga</u></td>
           <td></td>
           <td></td>
           <td></td>
 
         </tr>
 
-        <tr>
+        <tr class = "Pre_Hab">
 
-          <td>Pre-Hab</td>
+          <td><u>Pre-Hab</u></td>
           <td></td>
           <td></td>
 
           <td>
-            <button class="newexercise" onclick="Add_New(this, 'below')">Add Exercise Below</button>
+            <button class="New_Exercise" onclick="Add_New(this, 'below')">Add Exercise Below</button>
           </td>
 
         </tr>
 
-        <tr>
+        <tr class = "Main_Workout">
 
-          <td>Main Workout</td>
+          <td><u>Main Workout</u></td>
           <td></td>
           <td></td>
 
           <td>
-            <button class="newexercise" onclick="Add_New(this, 'above')">Add Exercise Above</button>
-            <button class="newexercise" onclick="Add_New(this, 'below')">Add Exercise Below</button>
+            <button class= "New_Exercise" onclick="Add_New(this, 'above')">Add Exercise Above</button>
+            <button class= "New_Exercise" onclick="Add_New(this, 'below')">Add Exercise Below</button>
           </td>
 
         
         </tr>
 
-        <tr>
+        <tr class = "Stretches">
 
-          <td>Stretches</td>
+          <td><u>Stretches</u></td>
           <td></td>
           <td></td>
-
+          
           <td>
-            <button class="newexercise" onclick="Add_New(this, 'above')">Add Exercise Above</button>
+            <button class = "New_Exercise" onclick="Add_New(this, 'above')">Add Exercise Above</button>
           </td>
 
         </tr>
 
-        <tr>
+        <tr class = "Bottom_Row">
 
           <td></td>
           <td></td>
           <td></td>
 
           <td>
-                 <button class="newday" onclick="Add_Day(this, 'above')">Add Day Above</button>
-                 <button class="newday" onclick="Add_Day(this, 'below')">Add Day Below</button>
-                 <button class="deleteday" onclick="Delete_Day(this)" disabled>Delete Day</button>
+                 <button class="New_Day" onclick="Add_Day(this, 'above')">Add Day Above</button>
+                 <button class="New_Day" onclick="Add_Day(this, 'below')">Add Day Below</button>
+                 <button class="Delete_Day" onclick="Delete_Day(this)" disabled>Delete Day</button>
           </td>
           
         </tr>
@@ -92,9 +104,11 @@
       </tbody>
 
     </table>
-    
-    <button class="saveprogram" onclick="Save_Program(this)">Save Program</button>
-    <button class="cancelprogram" onclick="Discard_Changes(this)">Discard All Changes</button>
+
+    </div>
+
+    <button class="Save_Program" onclick="Save_Program(this)">Save Program</button>
+    <button class="Discard_Changes" onclick="Discard_Changes(this)">Discard All Changes</button>
 
     <script src="Program Modification.js"></script>
 
