@@ -1,5 +1,6 @@
 <!--#region HTML-->
 
+<!--'s Work-->
 
 <!DOCTYPE html>
 
@@ -12,9 +13,17 @@
   </head>
 
   <body>
-    <span class = "Program_Specification" contenteditable="true">Program Name</span>
-    <span class = "Program_Specification" contenteditable="true">Program Sessions</span>
-    <span class = "Program_Specification" contenteditable="true">Program Tier</span>
+    <input type="text" class = "Program_Specification" ID = "Program_Name" placeholder="Program Name">
+    <input type="number" class = "Program_Specification" ID = "Program_Sessions" placeholder="Program Sessions">
+    <select name="Program Tier" class="Program_Specification" ID = "Program_Tier">
+      <option value="I_1">Induction 1</option>
+      <option value="I_2">Induction 2</option>
+      <option value="I_3">Induction 3</option>
+      <option value="P_1">Program 1</option>
+      <option value="P_2">Program 2</option>
+      <option value="P_3">Program 3</option>
+      <option value="ADV">Advanced</option>
+    </select>
     
     <div id ="Table_Container">
     
@@ -31,7 +40,7 @@
 
       <tbody>
 
-        <tr>
+        <tr class = "Yoga">
 
           <td><u>Yoga</u></td>
           <td></td>
@@ -40,7 +49,7 @@
 
         </tr>
 
-        <tr>
+        <tr class = "Pre_Hab">
 
           <td><u>Pre-Hab</u></td>
           <td></td>
@@ -52,33 +61,33 @@
 
         </tr>
 
-        <tr>
+        <tr class = "Main_Workout">
 
           <td><u>Main Workout</u></td>
           <td></td>
           <td></td>
 
           <td>
-            <button class="New_Exercise" onclick="Add_New(this, 'above')">Add Exercise Above</button>
-            <button class="New_Exercise" onclick="Add_New(this, 'below')">Add Exercise Below</button>
+            <button class= "New_Exercise" onclick="Add_New(this, 'above')">Add Exercise Above</button>
+            <button class= "New_Exercise" onclick="Add_New(this, 'below')">Add Exercise Below</button>
           </td>
 
         
         </tr>
 
-        <tr>
+        <tr class = "Stretches">
 
           <td><u>Stretches</u></td>
           <td></td>
           <td></td>
-
+          
           <td>
-            <button class="New_Exercise" onclick="Add_New(this, 'above')">Add Exercise Above</button>
+            <button class = "New_Exercise" onclick="Add_New(this, 'above')">Add Exercise Above</button>
           </td>
 
         </tr>
 
-        <tr>
+        <tr class = "Bottom_Row">
 
           <td></td>
           <td></td>
@@ -87,7 +96,7 @@
           <td>
                  <button class="New_Day" onclick="Add_Day(this, 'above')">Add Day Above</button>
                  <button class="New_Day" onclick="Add_Day(this, 'below')">Add Day Below</button>
-                 <button class="Delete_Day" onclick="Delete_Day(this)">Delete Day</button>
+                 <button class="Delete_Day" onclick="Delete_Day(this)" disabled>Delete Day</button>
           </td>
           
         </tr>
@@ -99,7 +108,7 @@
     </div>
 
     <button class="Save_Program" onclick="Save_Program(this)">Save Program</button>
-    <button class="Save_Program" onclick="Discard_Changes(this)">Discard All Changes</button>
+    <button class="Discard_Changes" onclick="Discard_Changes(this)">Discard All Changes</button>
 
     <script src="Program Modification.js"></script>
 

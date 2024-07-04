@@ -3,6 +3,9 @@
   border: 2px solid #000000;
   padding: 2px 5px;
   margin: 10px;
+  margin-top: 5px;
+  width: 150px;
+  height: 35px;
 }
 
 #Table_Container{
@@ -28,19 +31,19 @@ th, td {
 }
 
 th.Col_1{
-  width: 20%;
+  width: 60%;
 }
 
 th.Col_2{
-  width: 35%;
+  width: 20%;
 }
 
 th.Col_3{
-  width: 35%;
+  width: 20%;
 }
 
 th.Col_4{
-  width: 10%;
+  width: 180px;
   text-align: center;
 }
 
@@ -81,7 +84,7 @@ input {
 
 }
 
-.edit {  
+.Edit {  
   outline: none;  
   background: none;  
   border: none;  
@@ -96,7 +99,7 @@ input {
   }  
 }  
 
-.save {  
+.Save {  
   outline: none;  
   background: none;  
   border: none;  
@@ -113,7 +116,7 @@ input {
   
 }  
 
-.delete {  
+.Delete {  
   outline: none;  
   background: none;  
   border: none;  
@@ -151,4 +154,37 @@ input {
   color: #ffffff;
   width: 140px;
   height: 25px;
+}
+
+.Save_Program {
+  outline: none;
+  border: none;
+  padding: 5px 5px;
+  margin: 5px;
+  margin-top: 10px;
+  cursor: pointer;
+  background: #2cdd85;
+  color: #ffffff;
+  width: 140px;
+  height: 25px;
+}
+
+.Discard_Changes {
+  outline: none;
+  border: none;
+  padding: 5px 5px;
+  margin: 5px;
+  margin-top: 10px;
+  cursor: pointer;
+  background: #e62100;
+  color: #ffffff;
+  width: 140px;
+  height: 25px;
+}
+
+button:disabled {
+  background-color: #d3d3d3; /* Light grey background */
+  color: #808080; /* Grey text */
+  cursor: not-allowed; /* Change cursor to indicate it is not clickable */
+  opacity: 0.6; /* Make it look more greyed out */
 }
