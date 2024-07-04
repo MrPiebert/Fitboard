@@ -200,55 +200,87 @@
 }
 
 .container {
-	display: flex;
-	overflow: hidden;
-	max-width: 99.5vw;
-	background-color:bisque;
-	padding: 4px 15px;
-	border-radius: 10px;
+    display: flex;
+    overflow: hidden;
+    max-width: 99.5vw;
+    background-color: bisque; /* Initial color */
+    padding: 4px 15px;
+    border-radius: 10px;
 }
 
 .primary_container {
-	color: white
-}
-
-.primary_container:not(.dark-mode) {
-	color: black
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+	margin-top: 50px;
+    margin-bottom: 30px; /* Add some space between elements */
 }
 
 .primary_colour_slider {
-	-webkit-appearance: none;	/*overrides default look*/
-	width: 50%;
-	height: 30px;
-	border-radius: 20px;  
-	background: #d3d3d3;
-	outline: none;
-	opacity: 0.7;
-	-webkit-transition: .2s;
-	transition: opacity .2s;
-	box-shadow: inset 1px 1px 1px;
-	margin-top: 10vh;
-	margin-left: 20vw
-  }
-  
+    -webkit-appearance: none;
+    width: 50%;
+    height: 30px;
+    border-radius: 20px;  
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    box-shadow: inset 1px 1px 1px;
+    margin-top: 30px; /* Adjust spacing */
+}
+
 .primary_colour_slider::-webkit-slider-thumb {
-	-webkit-appearance: none;
-	appearance: none;
-	width: 40px;
-	height: 40px;
-	border-radius: 50%; 
-	background: #04AA6D;
-	box-shadow: 1px 1px;
-	cursor: pointer;
-  }
-  
+    -webkit-appearance: none;
+    appearance: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; 
+    background: #04AA6D;
+    box-shadow: 1px 1px;
+    cursor: pointer;
+}
+
 .primary_colour_slider::-moz-range-thumb {
-	width: 25px;
-	height: 25px;
-	border-radius: 50%;
-	background: #04AA6D;
-	cursor: pointer;
-  }
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #04AA6D;
+    cursor: pointer;
+}
+
+/* Style for "Change Header Colour" text */
+.primary_container > span {
+    font-size: 20px; /* Adjust the font size */
+    font-weight: bold; /* Make the text bold */
+    color: #333; /* Set the text color */
+    margin-bottom: 10px; /* Space below the text */
+    text-align: center; /* Center the text */
+    padding: 5px 10px; /* Padding around the text */
+    border-radius: 8px; /* Rounded corners */
+    background-color: #f0f0f0; /* Light background color */
+    box-shadow: 0 5px 7px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+
+/* Styles for the reset button */
+.reset_button {
+    background-color: #04AA6D;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 30px 0; /* Adjust spacing */
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.reset_button:hover {
+    background-color: #036d48;
+}
 
   *, *::before, *::after {
 	margin: 0;
@@ -284,12 +316,13 @@
   }
 
   .container1{
-	position: relative;
-	display: inline-block;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	width: 80px;
 	height: 34px;
-	margin-left: 46%;
-	margin-top: 30%;
+	margin-left: 48%;
+	margin-top: 17%;
 	-webkit-transform: scale(3);
 	transform: scale(3);
   }
