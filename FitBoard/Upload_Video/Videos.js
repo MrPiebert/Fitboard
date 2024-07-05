@@ -1,19 +1,22 @@
 let listVideo = document.querySelectorAll('.video_list .vid');
 let mainVideo = document.querySelector('.main_video video');
 let title = document.querySelector('.main_video .title');
+let description = document.querySelector('.main_video .description'); // Added this line
 
-listVideo.forEach(video =>{
-    video.onclick = () =>{
+listVideo.forEach(video => {
+    video.onclick = () => {
         listVideo.forEach(vid => vid.classList.remove('active'));
         video.classList.add('active');
-        if(video.classList.contains('active')){
+        if (video.classList.contains('active')) {
             let src = video.children[0].getAttribute('src');
             mainVideo.src = src;
-            let text = video.children[1].innerHTML
+            let text = video.children[1].innerHTML;
             title.innerHTML = text;
+            let desc = video.children[2].innerHTML; // Assuming the description is the third child
+            description.innerHTML = desc; // Set the main description
         }
     }
-})
+});
 
 document.getElementById('searchInput').addEventListener('input', searchVideos);
 

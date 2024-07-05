@@ -335,6 +335,12 @@ Icons */
     font-size: 17px;
 }
 
+.content .main_video .description {
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    padding-top: 5px;
+}
+
 @media (max-width:991px){
     .container{
         grid-template-columns: 1.5fr 1fr;

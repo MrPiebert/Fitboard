@@ -1,5 +1,3 @@
-// Existing JavaScript content
-
 function addVideo(event) {
     const file = event.target.files[0];
     if (!file) return;
@@ -8,6 +6,7 @@ function addVideo(event) {
     const videoList = document.querySelector('.video_list');
     const videoCount = videoList.children.length + 1;
     const videoTitle = prompt("Enter video title:");
+    const videoDescription = prompt("Enter video description:");
 
     // Create new video element
     const newVideoDiv = document.createElement('div');
@@ -21,8 +20,14 @@ function addVideo(event) {
     newTitle.classList.add('title');
     newTitle.textContent = `${videoCount < 10 ? '0' + videoCount : videoCount}. ${videoTitle || 'Untitled'}`;
 
+    const newDescription = document.createElement('div');
+    newDescription.classList.add('desc');
+    newDescription.style.display = 'none';
+    newDescription.textContent = videoDescription || 'No description provided';
+
     newVideoDiv.appendChild(newVideo);
     newVideoDiv.appendChild(newTitle);
+    newVideoDiv.appendChild(newDescription);
 
     // Add event listener to switch main video
     newVideoDiv.onclick = () => {
@@ -30,6 +35,7 @@ function addVideo(event) {
         newVideoDiv.classList.add('active');
         document.querySelector('.main_video video').src = videoURL;
         document.querySelector('.main_video .title').innerHTML = newTitle.innerHTML;
+        document.querySelector('.main_video .description').innerHTML = newDescription.innerHTML;
     };
 
     // Append the new video to the list
@@ -38,5 +44,3 @@ function addVideo(event) {
     // Reset the input value to allow uploading the same file again if needed
     event.target.value = '';
 }
-
-// Existing JavaScript content
