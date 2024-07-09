@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>FitBoard</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="Notifications.css">
+	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+	<link rel="icon" href="../Landing_Page/favicon.ico">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap" rel="stylesheet">
+	<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+	<style>
+		.notification-list {
+			margin-top: 70px;
+			max-height: calc(100vh - 120px);
+            transform: translateX(-70%); /* Move the notifications to the left */
+			/* Adjust as needed */
+			overflow-y: auto;
+		}
+
+		.notification-item {
+			background-color: #f9f9f9;
+			border: 1px solid #ddd;
+			border-radius: 5px;
+			padding: 15px;
+			margin-bottom: 10px;
+		}
+
+		.notification-header {
+			font-weight: bold;
+			margin-bottom: 5px;
+		}
+
+		.notification-date {
+			color: #888;
+			font-size: 0.9em;
+			margin-bottom: 10px;
+		}
+
+		.notification-message {
+			font-size: 1em;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="sidebar">
+		<div class="top">
+			<div class="logo">
+				<img src="../Images/Logo.png" alt="logo" width="50px" height="50px">
+                <span>FITBOARD</span>
+            </div>
+            <i class='bx bx-menu' id="btn"></i>
+        </div>
+        <div class="user">
+            <img src="../Images/User_Image.jpg" alt="profile picture" class="User_Image" id="userImage">
+            <div>
+                <p class="bold" id="userName">Default&#160User</p>
+                <p id="userRole">Admin</p>
+            </div>
+        </div>
+        <ul>
+            <li><a href="../Home_Page/Home_Page.html"><i class="bx bxs-grid-alt"></i><span class="Nav_Item">Dashboard</span></a><span class="tooltip">Dashboard</span></li>
+            <li><a href="../Profile/Profile.html"><i class="bx bxs-user-circle"></i><span class="Nav_Item">Profile</span></a><span class="tooltip">Profile</span></li>
+            <li><a href="../Program Modification/Program Modification.html"><i class="bx bxs-duplicate"></i><span class="Nav_Item">Modify Programs</span></a><span class="tooltip">Modify Programs </span></li>
+            <li><a href="Notifications.html"><i class="bx bxs-bell-ring"></i><span class="Nav_Item">Notifications</span></a><span class="tooltip">Notifications</span></li>
+            <li><a href="../Upload_Video/Videos.html"><i class="bx bxs-video"></i><span class="Nav_Item">Video&#160Tutorials</span></a><span class="tooltip">Video&#160Tutorials</span></li>
+            <li><a href="../Settings/Settings.html"><i class="bx bxs-cog"></i><span class="Nav_Item">Settings</span></a><span class="tooltip">Settings</span></li>
+            <li><a href="../Help/Help.html"><i class="bx bxs-help-circle"></i><span class="Nav_Item">Help</span></a><span class="tooltip">Help</span></li>
+            <li><a href="../Landing_Page/LandingPage.html"><i class="bx bxs-log-out"></i><span class="Nav_Item">Logout</span></a><span class="tooltip">Logout</span></li>
+        </ul>
+    </div>
+	<div class="main_content">
+		<div class="container">
+			<h1>FitBoard</h1>
+			<h2>Student Notices</h2>
+			<div id="notifications" class="notification-list">
+				<!-- Notifications will be added dynamically here -->
+			</div>
+		</div>
+	</div>
+	<script>
+		window.onload = function() {
+    // Fetch notifications
+    fetch("notifications.php")
+        .then(response => response.json())
+        .then(data => {
+            const notificationsDiv = document.getElementById("notifications");
+            const maxNotifications = 10; // Adjust the maximum number of notifications to display
+
+            // Display up to maxNotifications notifications or all if fewer
+            data.notifications.slice(0, maxNotifications).forEach(notification => {
+                const notificationElement = document.createElement("div");
+                notificationElement.className = "notification-item";
+                
+                const header = document.createElement("div");
+                header.className = "notification-header";
+                header.textContent = "From: Rurt Kich"; // Replace with actual sender
+                notificationElement.appendChild(header);
+                
+                const date = document.createElement("div");
+                date.className = "notification-date";
+                date.textContent = "Sent on: " + notification.created_at; // Adjust date format if needed
+                notificationElement.appendChild(date);
+                
+                const message = document.createElement("div");
+                message.className = "notification-message";
+                message.textContent = notification.message;
+                notificationElement.appendChild(message);
+                
+                notificationsDiv.appendChild(notificationElement);
+            });
+
+            // If more notifications exist than displayed, indicate to scroll
+            if (data.notifications.length > maxNotifications) {
+                const scrollMessage = document.createElement("div");
+                scrollMessage.textContent = "Scroll to view more notifications";
+                notificationsDiv.appendChild(scrollMessage);
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
+
+    // Set user details
+    var accessLevel = localStorage.getItem("accessLevel");
+    var userNameElement = document.getElementById("userName");
+    var userRoleElement = document.getElementById("userRole");
+
+    if (accessLevel === "1") {
+        userNameElement.textContent = "Rurt Kich";
+        userRoleElement.textContent = "Admin";
+    } else if (accessLevel === "0") {
+        var studentData = JSON.parse(localStorage.getItem("studentData"));
+        if (studentData && studentData.givenName && studentData.surname) {
+            userNameElement.textContent = studentData.givenName + " " + studentData.surname;
+            userRoleElement.textContent = "Student";
+        }
+    }
+};
+	</script>
+	<script src="../Home_Page/Activite_Sidebar.js">
+	</script>
+	<script src="../Settings/darklight_mode.js">
+	</script>
+	<script src="../Profile/Profile_Pic.js">
+	</script>
+	<script src="../Profile/Profile_Check.js">
+	</script>
+</body>
+
+</html>
