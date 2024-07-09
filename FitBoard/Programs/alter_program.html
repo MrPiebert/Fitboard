@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alter Program</title>
+    <link rel="stylesheet" href="alter_program.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Alter Program</h1>
+
+        <!-- Program selection dropdown -->
+        <select id="programSelect" onchange="fetchProgramDetails()">
+            <option value="" disabled selected>Select a program</option>
+        </select>
+
+        <!-- Program details container -->
+        <div id="programDetails"></div>
+
+        <!-- Buttons for adding new exercises and saving changes -->
+        <div class="controls">
+            <button id="addExerciseButton">Add Exercise</button>
+            <button id="saveChangesButton">Save Changes</button>
+        </div>
+    </div>
+
+    <script src="alter_program.js"></script>
+</body>
+</html>
