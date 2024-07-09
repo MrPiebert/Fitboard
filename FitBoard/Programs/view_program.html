@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Program</title>
+    <link rel="stylesheet" href="view_program.css">
+</head>
+<body>
+    <div class="container">
+        <h1>View Program</h1>
+
+        <!-- Program selection dropdown -->
+        <select id="programSelect" onchange="fetchProgramDetails()">
+            <option value="" disabled selected>Select a program</option>
+        </select>
+
+        <!-- Program details container -->
+        <div id="programDetails"></div>
+
+        <!-- Print/Download button -->
+        <div class="print-download">
+            <label for="printDownloadSelect">Choose an option:</label>
+            <select id="printDownloadSelect">
+                <option value="print">Print</option>
+                <option value="download">Download as PDF</option>
+            </select>
+            <button id="printDownloadButton">Go</button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script src="view_program.js"></script>
+</body>
+</html>
