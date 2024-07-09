@@ -12,7 +12,7 @@
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
     </head>
-    <body onload="onload()">
+    <body>
 
         <div class="sidebar">
 
@@ -24,13 +24,13 @@
                 <i class='bx bx-menu' id="btn"></i>
             </div>
 
-            <div class="user">
-                <img src="../Images/User_Image.jpg" alt="profile picture" class="User_Image" id="userImage">
-                <div>
-                    <p class="bold">Default&#160User</p>
-                    <p>Admin</p>
-                </div>
+             <div class="user">
+            <img src="../Images/User_Image.jpg" alt="profile picture" class="User_Image" id="userImage">
+            <div>
+                <p class="bold" id="userName">Default&#160User</p>
+                <p id="userRole">Admin</p>
             </div>
+        </div>
 
             <ul>
                 <li>
@@ -83,7 +83,7 @@
                     <span class="tooltip">Help</span>
                 </li>
                 <li>
-                    <a href="../Landing_Page/LandingPage.html">
+                    <a href="../LandingPage.html">
                         <i class="bx bxs-log-out"></i>
                         <span class="Nav_Item">Logout</span>
                     </a>
@@ -104,13 +104,30 @@
                 </div>
             </div>
         </div>
-
+  <script>
+            window.onload = function() {
+                console.log('onload function executed');
+                var accessLevel = localStorage.getItem('accessLevel');
+                var userNameElement = document.getElementById('userName');
+                var userRoleElement = document.getElementById('userRole');
+                
+                if (accessLevel === '1') {
+                    userNameElement.textContent = 'Rurt Kich';
+                    userRoleElement.textContent = 'Admin';
+                } else if (accessLevel === '0') {
+                    var studentData = JSON.parse(localStorage.getItem('studentData'));
+                    if (studentData && studentData.givenName && studentData.surname) {
+                        userNameElement.textContent = studentData.givenName + ' ' + studentData.surname;
+                        userRoleElement.textContent = 'Student';
+                    }
+                }
+            };
+        </script>
         <script src="../Home_Page/Activite_Sidebar.js"> </script>
         <script src="../Settings/darklight_mode.js"></script>
         <script src="../Profile/Profile_Pic.js"></script>    
         <script src="../Profile/Profile_Check.js"></script>
         <script src="../Settings/colour_slider.js"></script>
-           
     </body>
 
 </html>
