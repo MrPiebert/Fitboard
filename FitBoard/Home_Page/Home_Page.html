@@ -22,122 +22,128 @@
         <!-- Font Awesome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
 
-    </head>
-
-    <!-- #endregion -->
+    </head>  <!-- #endregion -->
 
     <!-- #region main -->
 
     <body onload="onload()">
 
-        <!-- #region Sidebar Navigation -->
-
-        <div class="sidebar">
-
-            <div class="top">           <!--Top of Sidebar (Logo)-->
-                <div class="logo"> 
-                    <img src="../Images/Logo.png" alt="logo" width="50px" height="50px">
-                    <span>FITBOARD</span>
-                </div>
-                <i class='bx bx-menu' id="btn"></i>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Top Bar -->
+        <div class="top">   <!--Top of Sidebar (Logo)-->
+            <div class="logo"> 
+                <img src="../Images/Logo.png" alt="logo" width="50px" height="50px">
+                <span>FITBOARD</span>
             </div>
+            <i class='bx bx-menu' id="btn"></i> <!-- Sidebar toggle button -->
+        </div>
 
-            <div class="user">          <!--Username and Profile-->
-                <img src="../Images/User_Image.jpg" alt="profile picture" class="User_Image" id="userImage">
-                <div>
-                    <p class="bold">Default&#160User</p>
-                    <p>Admin</p>
-                </div>
+        <!-- User Profile Section -->
+        <div class="user">
+            <img src="../Images/User_Image.jpg" alt="profile picture" class="User_Image" id="userImage">
+            <div>
+                <p class="bold" id="userName">Default&#160User</p>
+                <p id="userRole">Admin</p>
             </div>
+        </div>
+        <!--unordered list of all of the sidebar icons-->
+        <!-- Navigation Links -->
+        <ul>
+            <li>
+                <a href="Home_Page.html">
+                    <i class="bx bxs-grid-alt"></i>
+                    <span class="Nav_Item">Dashboard</span>
+                </a>
+                <span class="tooltip">Dashboard</span>
+            </li>
+            <li>
+                <a href="../Profile/Profile.html">
+                    <i class="bx bxs-user-circle"></i>
+                    <span class="Nav_Item">Profile</span>
+                </a>
+                <span class="tooltip">Profile</span>
+            </li>
+            <li>
+                <a href="../Program Modification/Program Modification.html">
+                    <i class="bx bxs-duplicate"></i>
+                    <span class="Nav_Item">Modify&#160Programs</span>
+                </a>
+                <span class="tooltip">Modify&#160Programs</span>
+            </li>
+            <li>
+                <a href="../Notifications/Notifications.html">
+                    <i class="bx bxs-bell-ring"></i>
+                    <span class="Nav_Item">Notifications</span>
+                </a>
+                <span class="tooltip">Notifications</span>
+            </li>
+            <li>
+                <a href="../Upload_Video/Videos.html">
+                    <i class="bx bxs-video"></i>
+                    <span class="Nav_Item">Video&#160Tutorials</span>
+                </a>
+                <span class="tooltip">Video&#160Tutorials</span>
+            </li>
+            <li>
+                <a href="../Settings/Settings.html">
+                    <i class="bx bxs-cog"></i>
+                    <span class="Nav_Item">Settings</span>
+                </a>
+                <span class="tooltip">Settings</span>
+            </li>
+            <li>
+                <a href="../Help/Help.html">
+                    <i class="bx bxs-help-circle"></i>
+                    <span class="Nav_Item">Help</span>
+                </a>
+                <span class="tooltip">Help</span>
+            </li>
+            <li>
+                <a href="../LandingPage.html">
+                    <i class="bx bxs-log-out"></i>
+                    <span class="Nav_Item">Logout</span>
+                </a>
+                <span class="tooltip">Logout</span>
+            </li>
+        </ul>
+    </div>
+     <!-- #endregion -->
 
-            <!--unordered list of all of the sidebar icons-->
+    <!-- Main Content -->
+    <div class="main_content">
+        <div class="container">
+            <h1 id="sub-heading">Dashboard</h1>
+            <h1 id="main-heading">FitBoard</h1>
+            <h3>&#160&#160Dashboard</h3>      
+        </div>
+    </div>
+
+    <!-- External JavaScript -->
+    <script src="../Settings/darklight_mode.js"></script>
+    <script src="Activite_Sidebar.js"></script>
+    <script src="../Profile/Profile_Pic.js"></script>
+    <script src="../Profile/Profile_Check.js"></script>
+      <script src="../Settings/colour_slider.js"></script>
+
+    <script>
+        function onload() {
+           
+            var accessLevel = localStorage.getItem('accessLevel');
+            var userNameElement = document.getElementById('userName');
+            var userRoleElement = document.getElementById('userRole');
             
-            <ul>        
-                <li>
-                    <a href="../Home_Page/Home_Page.html">
-                        <i class="bx bxs-grid-alt"></i>
-                        <span class="Nav_Item">Dashboard</span>
-                    </a>
-                    <span class="tooltip">Dashboard</span>
-                </li>
-                <li>
-                    <a href="../Profile/Profile.html">
-                        <i class="bx bxs-user-circle"></i>
-                        <span class="Nav_Item">Profile</span>
-                    </a>
-                    <span class="tooltip">Profile</span>
-                </li>
-                <li>
-                    <a href="../Program Modification/Program Modification.html">
-                        <i class="bx bxs-duplicate"></i>
-                        <span class="Nav_Item">Modify&#160Programs</span>
-                    </a>
-                    <span class="tooltip">Modify&#160Programs </span>
-                </li>
-                <li>
-                    <a href="../Notifications/Notifications.html">
-                        <i class="bx bxs-bell-ring"></i>
-                        <span class="Nav_Item">Notifications</span>
-                    </a>
-                    <span class="tooltip">Notifications</span>
-                </li>
-                <li>
-                    <a href="../Upload_Video/Videos.html">
-                        <i class="bx bxs-video"></i>
-                        <span class="Nav_Item">Video&#160Tutorials</span>
-                    </a>
-                    <span class="tooltip">Video&#160Tutorials</span>
-                </li>
-                <li>
-                    <a href="../Settings/Settings.html">
-                        <i class="bx bxs-cog"></i>
-                        <span class="Nav_Item">Settings</span>
-                    </a>
-                    <span class="tooltip">Settings</span>
-                </li>
-                <li>
-                    <a href="../Help/Help.html">
-                        <i class="bx bxs-help-circle"></i>
-                        <span class="Nav_Item">Help</span>
-                    </a>
-                    <span class="tooltip">Help</span>
-                </li>
-                <li>
-                    <a href="../Landing_Page/LandingPage.html">
-                        <i class="bx bxs-log-out"></i>
-                        <span class="Nav_Item">Logout</span>
-                    </a>
-                    <span class="tooltip">Logout</span>
-                </li>
-            </ul>
-        </div>
-
-        <!-- #endregion -->
-
-        <!-- #region Page Content -->
-
-        <div class="main_content">
-            <div class="container" id="container">
-                <h1 id="sub-heading">Dashboard</h1>
-                <h1 id="main-heading">FitBoard</h1>
-                <h3>&#160&#160Dashboard</h3>      
-            </div>
-        </div>
-
-        <!-- #endregion -->
-
-        <!-- #region JavaScript calls -->
-
-        <script src="../Settings/darklight_mode.js"></script>
-        <script src="Activite_Sidebar.js"></script>
-        <script src="../Profile/Profile_Pic.js"></script>
-        <script src="../Profile/Profile_Check.js"></script>
-        <script src="../Settings/colour_slider.js"></script>
-
-        <!-- endregion -->
-
-    </body>
-
-    <!-- #endregion -->
-
+            if (accessLevel === '1') {
+                userNameElement.textContent = 'Rurt Kich';
+                userRoleElement.textContent = 'Admin';
+            } else if (accessLevel === '0') {
+                var studentData = JSON.parse(localStorage.getItem('studentData'));
+                if (studentData && studentData.givenName && studentData.surname) {
+                    userNameElement.textContent = studentData.givenName + ' ' + studentData.surname;
+                    userRoleElement.textContent = 'Student';
+                }
+            }
+        }
+    </script>
+</body>
 </html>
