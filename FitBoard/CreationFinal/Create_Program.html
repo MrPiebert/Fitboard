@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customize Program</title>
+    <link rel="stylesheet" href="Program Modification.css">
+</head>
+<body>
+    <h1>Create New Program</h1>
+    <form id="programForm">
+        <input type="text" class="Program_Specification" id="Program_Name" name="programName" placeholder="Program Name" required>
+        <input type="number" class="Program_Specification" id="Program_Sessions" name="programSessions" placeholder="Program Sessions" required>
+        <select name="programTier" class="Program_Specification" id="Program_Tier" required>
+            <option value="I_1">Induction 1</option>
+            <option value="I_2">Induction 2</option>
+            <option value="I_3">Induction 3</option>
+            <option value="P_1">Program 1</option>
+            <option value="P_2">Program 2</option>
+            <option value="P_3">Program 3</option>
+            <option value="ADV">Advanced</option>
+        </select>
+        
+        <div id="Table_Container">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="Col_1"><u>Day 1</u></th>
+                        <th class="Col_2"><u>Sets</u></th>
+                        <th class="Col_3"><u>Reps</u></th>
+                        <th class="Col_4"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="Yoga">
+                        <td><u>Yoga</u></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr class="Pre_Hab">
+                        <td><u>Pre-Hab</u></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <button class="New_Exercise" type="button" onclick="Add_New(this, 'below')">Add Exercise Below</button>
+                        </td>
+                    </tr>
+                    <tr class="Main_Workout">
+                        <td><u>Main Workout</u></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <button class="New_Exercise" type="button" onclick="Add_New(this, 'above')">Add Exercise Above</button>
+                            <button class="New_Exercise" type="button" onclick="Add_New(this, 'below')">Add Exercise Below</button>
+                        </td>
+                    </tr>
+                    <tr class="Stretches">
+                        <td><u>Stretches</u></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <button class="New_Exercise" type="button" onclick="Add_New(this, 'above')">Add Exercise Above</button>
+                        </td>
+                    </tr>
+                    <tr class="Bottom_Row">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <button class="New_Day" type="button" onclick="Add_Day(this, 'above')">Add Day Above</button>
+                            <button class="New_Day" type="button" onclick="Add_Day(this, 'below')">Add Day Below</button>
+                            <button class="Delete_Day" type="button" onclick="Delete_Day(this)" disabled>Delete Day</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>Exercises</h2>
+        <div id="exercisesContainer">
+            <div class="exercise">
+                <label>Day:</label>
+                <input type="number" name="day" required>
+                <label>Category:</label>
+                <input type="text" name="category" required>
+                <label>Name:</label>
+                <input type="text" name="name" required>
+                <label>Sets:</label>
+                <input type="number" name="sets" required>
+                <label>Reps:</label>
+                <input type="number" name="reps" required>
+                <button type="button" onclick="removeExercise(this)">Remove Exercise</button>
+                <br><br>
+            </div>
+        </div>
+        <button type="button" onclick="addExercise()">Add Exercise</button>
+        <br><br>
+        <button type="submit">Save Program</button>
+    </form>
+
+    <button class="Save_Program" onclick="Save_Program()">Save Program</button>
+    <button class="Discard_Changes" onclick="Discard_Changes()">Discard All Changes</button>
+
+    <script src="Program Modification.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
