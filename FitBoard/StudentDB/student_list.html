@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>FitBoard</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../Help/Help.css">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
+    <link rel="icon" href="../Landing_Page/favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+    <style>
+      /* Styling for the Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px; /* Added margin to create space above the table */
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    cursor: pointer;
+}
+
+/* Sorting Arrows */
+th.sort-asc::after {
+    content: " \25B2";
+}
+
+th.sort-desc::after {
+    content: " \25BC";
+}
+
+/* Search Container Styling */
+.search-container {
+    margin-bottom: 20px;
+}
+
+.search-container input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+/* Edit Mode Styling */
+.edit-mode {
+    display: none;
+}
+
+/* Help Icon Styling */
+.help-icon {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+/* Toggle Switch Container Styling */
+.toggle-container {
+    display: flex;
+    align-items: center;
+    margin-top: 20px; /* Added margin to move the toggle down */
+}
+
+/* Label Styling */
+.toggle-container label {
+    margin-right: 10px; /* Space between label and toggle */
+    font-size: 16px; /* Adjust font size if necessary */
+}
+
+/* Toggle Switch Styling */
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/* Save Changes Button Styling */
+.save-button {
+    margin-left: 10px; /* Added margin to space it from the toggle */
+    padding: 10px 20px;
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.save-button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+
+/* Styling for help button and popup */
+.help-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #5bc0de;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.help-button:hover {
+    background-color: #46b8da;
+}
+
+.help-popup {
+    display: none;
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+}
+
+.help-popup p {
+    margin: 0;
+}
+
+
+    </style>
+</head>
+<body onload="onload()">
+
+    <div class="sidebar">
+        <div class="top">
+            <div class="logo">
+                <img src="../Images/Logo.png" alt="logo" width="50px" height="50px">
+                <span>FITBOARD</span>
+            </div>
+            <i class='bx bx-menu' id="btn"></i>
+        </div>
+        <div class="user">
+            <img src="../Images/User_Image.jpg" alt="profile picture" class="User_Image" id="userImage">
+            <div>
+                <p class="bold" id="userName">Default User</p>
+                <p id="userRole">Admin</p>
+            </div>
+        </div>
+        <ul>
+            <li>
+                <a href="../Home_Page/Home_Page.html">
+                    <i class="bx bxs-grid-alt"></i>
+                    <span class="Nav_Item">Dashboard</span>
+                </a>
+                <span class="tooltip">Dashboard</span>
+            </li>
+            <li>
+                <a href="../Profile/Profile.html">
+                    <i class="bx bxs-user-circle"></i>
+                    <span class="Nav_Item">Profile</span>
+                </a>
+                <span class="tooltip">Profile</span>
+            </li>
+            <li>
+                <a href="../Program Modification/Program Modification.html">
+                    <i class="bx bxs-duplicate"></i>
+                    <span class="Nav_Item">Modify&#160Programs</span>
+                </a>
+                <span class="tooltip">Modify&#160Programs </span>
+            </li>
+            <li>
+                <a href="../Notifications/Notifications.html">
+                    <i class="bx bxs-bell-ring"></i>
+                    <span class="Nav_Item">Notifications</span>
+                </a>
+                <span class="tooltip">Notifications</span>
+            </li>
+            <li>
+                <a href="../Upload_Video/Videos.html">
+                    <i class="bx bxs-video"></i>
+                    <span class="Nav_Item">Video&#160Tutorials</span>
+                </a>
+                <span class="tooltip">Video&#160Tutorials</span>
+            </li>
+            <li>
+                <a href="../Settings/Settings.html">
+                    <i class="bx bxs-cog"></i>
+                    <span class="Nav_Item">Settings</span>
+                </a>
+                <span class="tooltip">Settings</span>
+            </li>
+            <li>
+                <a href="../Help/Help.html">
+                    <i class="bx bxs-help-circle"></i>
+                    <span class="Nav_Item">Help</span>
+                </a>
+                <span class="tooltip">Help</span>
+            </li>
+            <li>
+                <a href="../LandingPage.html">
+                    <i class="bx bxs-log-out"></i>
+                    <span class="Nav_Item">Logout</span>
+                </a>
+                <span class="tooltip">Logout</span>
+            </li>
+        </ul>
+    </div>
+
+   <div class="main_content">
+    <div class="container" id="container">
+        <h1 id="main-heading">FitBoard</h1>
+        <h1 id="sub-heading">Student List</h1>
+    </div>
+
+    <!-- Toggle Container with Label and Switch -->
+    <div class="toggle-container">
+        <label for="editToggle">Modify Mode</label>
+        <label class="toggle-switch">
+            <input type="checkbox" id="editToggle" onchange="toggleEditMode()">
+            <span class="slider round"></span>
+        </label>
+        <!-- Save Changes Button Positioned to the Right -->
+        <button onclick="saveChanges()" class="edit-mode save-button">Save Changes</button>
+    </div>
+
+    <!-- Search Input Field -->
+    <div class="search-container">
+        <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Search for students..">
+    </div>
+
+    <!-- Student Table -->
+    <table id="studentTable">
+        <thead>
+            <tr>
+                <th onclick="sortTable(0)">First Name</th>
+                <th onclick="sortTable(1)">Last Name</th>
+                <th onclick="sortTable(2)">Year</th>
+                <th onclick="sortTable(3)">Tier</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+<button class="help-button" onclick="toggleHelpPopup()">?</button>
+<div class="help-popup" id="helpPopup">
+    <p>Use this page to view and edit student information. Click "Toggle Modify Mode" to enable editing, and then click "Save Changes" to save your edits to the database.</p>
+</div>
+
+   
+<script>
+    // Function to toggle the help popup
+function toggleHelpPopup() {
+    var helpPopup = document.getElementById('helpPopup');
+    helpPopup.style.display = helpPopup.style.display === 'none' ? 'block' : 'none';
+}
+</script>
+
+        <script src="student_list.js"></script>
+        <script src="../Home_Page/Activite_Sidebar.js"> </script>
+        <!-- <script src="../Settings/darklight_mode.js"></script> -->
+        <script src="../Profile/Profile_Pic.js"></script>
+        <script src="../Profile/Profile_Check.js"></script>
+        <script src="../Settings/colour_slider.js"></script>
+</body>
+</html>
