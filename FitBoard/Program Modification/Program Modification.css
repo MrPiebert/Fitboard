@@ -188,3 +188,4 @@ button:disabled {
   cursor: not-allowed; /* Change cursor to indicate it is not clickable */
   opacity: 0.6; /* Make it look more greyed out */
 }
+

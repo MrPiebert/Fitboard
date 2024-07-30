@@ -51,9 +51,8 @@ function Save_Row(button){
     }
 
     button.style.display = 'none';
-    Row.querySelector('button[class="Delete"]').style.display = 'none';
     Row.querySelector('button[class="Edit"]').style.display = 'inline-block';
-
+    Row.querySelector('button[class="Delete"]').style.display = 'none';
 }
 
 function Delete_Row(button){
@@ -125,58 +124,84 @@ function Add_Day(button, position) {
 
 function Create_New_Day_Table() {
   let tableTemplate = `
-    <table>
+      <table>
+
       <thead>
-        <tr draggable="true">
-          <th class="Col_1"><u>Day 1</u></th>
-          <th class="Col_2"><u>Sets</u></th>
-          <th class="Col_3"><u>Reps</u></th>
-          <th class="Col_4"></th>
+        <tr>
+          <th class = "Col_1"><u>Day 1</u></th>
+          <th class = "Col_2"><u>Sets</u></th>
+          <th class = "Col_3"><u>Reps</u></th>
+          <th class = "Col_4"></th>
         </tr>
       </thead>
+
       <tbody>
+
         <tr class = "Yoga">
+
           <td><u>Yoga</u></td>
           <td></td>
           <td></td>
           <td></td>
+
         </tr>
+
         <tr class = "Pre_Hab">
+
           <td><u>Pre-Hab</u></td>
           <td></td>
           <td></td>
+
           <td>
             <button class="New_Exercise" onclick="Add_New(this, 'below')">Add Exercise Below</button>
           </td>
+
         </tr>
+
         <tr class = "Main_Workout">
+
           <td><u>Main Workout</u></td>
           <td></td>
           <td></td>
+
           <td>
-            <button class="New_Exercise" onclick="Add_New(this, 'above')">Add Exercise Above</button>
-            <button class="New_Exercise" onclick="Add_New(this, 'below')">Add Exercise Below</button>
+            <button class= "New_Exercise" onclick="Add_New(this, 'above')">Add Exercise Above</button>
+            <button class= "New_Exercise" onclick="Add_New(this, 'below')">Add Exercise Below</button>
           </td>
+
+        
         </tr>
-        <tr class = "Stretches">
-          <td><u>Stretches</u></td>
-          <td></td>
-          <td></td>
+
+        <tr class = "Mobility">
+
+          <td><u><span class="Editable" contenteditable="false">Moblity</span></u></td>
+          <td><span class="Editable" contenteditable="false"></span></td>
+          <td><span class="Editable" contenteditable="false"></span></td>
+          
           <td>
-            <button class="New_Exercise" onclick="Add_New(this, 'above')">Add Exercise Above</button>
+            <button class = "New_Exercise" onclick="Add_New(this, 'above')">Add Exercise Above</button>
+            <button class="Edit" onclick="Edit_Row(this)">Edit</button>
+            <button class="Save" onclick="Save_Row(this)" style="display: none;">Save</button>
           </td>
+
         </tr>
+
         <tr class = "Bottom_Row">
+
           <td></td>
           <td></td>
           <td></td>
+
           <td>
-            <button class="New_Day" onclick="Add_Day(this, 'above')">Add Day Above</button>
-            <button class="New_Day" onclick="Add_Day(this, 'below')">Add Day Below</button>
-            <button class="Delete_Day" onclick="Delete_Day(this)">Delete Day</button>
+                 <button class="New_Day" onclick="Add_Day(this, 'above')">Add Day Above</button>
+                 <button class="New_Day" onclick="Add_Day(this, 'below')">Add Day Below</button>
+                 <button class="Delete_Day" onclick="Delete_Day(this)" disabled>Delete Day</button>
           </td>
+          
         </tr>
+
       </tbody>
+
     </table>
   `;
 
@@ -233,41 +258,139 @@ function Check_Delete_Buttons(){
 
 // #region Outer Button Logic
 
-    function Save_Program(button){
+  function Save_Program(button){
 
-      /* 
-      Save button should:
-      Check Program Name is Valid and Exclusive
-      Check no reserved terms are being used
-      Group info in the same table together
-      Group exercises within each table between pre-hab, main workout and stretches
-      Check no duplicate exercise names are used in the same day
-      Check validity of exercise names
-      Check all exercise info has been filled in for each exercise
-      */      
+    /* 
+    Save button should:
+    Check Program Name is Valid and Exclusive
+    Check no reserved terms are being used
+    Group info in the same table together
+    Group exercises within each table between pre-hab, main workout and mobility
+    Check no duplicate exercise names are used in the same day
+    Check validity of exercise names
+    Check all exercise info has been filled in for each exercise
+    */      
 
-      let Program_Name = document.getElementById("Program_Name");
-      let Program_Sessions = document.getElementById("Program_Sessions");
-      let Program_Tier = document.getElementById("Program_Tier");
-      let tables = document.querySelectorAll('table');
+    let Program_Name = document.getElementById("Program_Name");
+    let Program_Sessions = document.getElementById("Program_Sessions");
+    let Program_Tier = document.getElementById("Program_Tier");
+    let tables = document.querySelectorAll('table');
+    
+    console.log("BEGIN");
+
+    console.log(Program_Name.value);
+    console.log(Program_Sessions.value);
+    console.log(Program_Tier.value);
+
+    // Logs Table info
+    tables.forEach((table) => {
       
-      console.log("BEGIN");
+      Table_Num = table.querySelector('th.Col_1').innerText;
+      
+      console.log(Table_Num)
 
-      console.log(Program_Name.value);
-      console.log(Program_Sessions.value);
-      console.log(Program_Tier.value);
+      // Logs row info
+      for (var i = 1, row; row = table.rows[i]; i++) {
+        // Make sure the row has at least three cells
+        if (row.cells.length >= 3) {
+            // Get the data from the first three columns
+            var cell1 = row.cells[0].innerText;
+            var cell2 = row.cells[1].innerText;
+            var cell3 = row.cells[2].innerText;
+            
+            // Print the data
+            console.log(cell1, cell2, cell3);
+          }
+      }     
+    });
 
-      tables.forEach((table) => {
-        Table_Num = table.querySelector('th.Col_1').innerText;
-        console.log(Table_Num)
-      });
+// #region Database
 
-      console.log("END");
-    }
+    // Collect exercise data
 
-    function Discard_Changes(button){
+    const exercises = [];
 
-    }
+    document.querySelectorAll('tbody tr').forEach(row => {
+
+        const cells = row.querySelectorAll('td');
+
+        if (cells.length > 1) {
+
+            const day = row.closest('table').querySelector('th.Col_1').innerText.replace('Day ', '');
+
+            const category = cells[0].innerText.trim();
+
+            const sets = cells[1].innerText.trim();
+
+            const reps = cells[2].innerText.trim();
+
+            exercises.push({ day, category, sets, reps });
+
+        }
+
+    });
+
+
+    const data = {
+
+        programName: Program_Name.value,
+
+        programSessions: Program_Sessions.value,
+
+        programTier: Program_Tier.value,
+
+        exercises
+
+    };
+
+
+    // Replace with the actual endpoint
+
+    const url = 'save_program.php';
+
+    fetch(url, {
+
+        method: 'POST',
+
+        headers: {
+
+            'Content-Type': 'application/json'
+
+        },
+
+        body: JSON.stringify(data)
+
+    })
+
+    .then(response => response.json())
+
+    .then(data => {
+
+        if (data.success) {
+
+            alert('Program saved successfully!');
+
+        } else {
+
+            alert('Failed to save the program.');
+
+            console.error(data.error);
+
+        }
+
+    })
+
+    .catch(error => console.error('Error:', error));
+
+// #endregion
+    
+   console.log("END");
+
+  }
+
+  function Discard_Changes(button){
+
+  }
     
 // #endregion
 
