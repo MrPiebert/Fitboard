@@ -1,6 +1,6 @@
 <!--#region HTML-->
 
-<!--'s Work-->
+<!--Joseph's Work-->
 
 <!DOCTYPE html>
 
@@ -42,10 +42,14 @@
 
         <tr class = "Yoga">
 
-          <td><u>Yoga</u></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td><u><span class="Editable" contenteditable="false">Yoga Sequence</span></u></td>
+          <td><span class="Editable" contenteditable="false"></span></td>
+          <td><span class="Editable" contenteditable="false"></span></td>
+          
+          <td>
+            <button class="Edit" onclick="Edit_Row(this)">Edit</button>
+            <button class="Save" onclick="Save_Row(this)" style="display: none;">Save</button>
+          </td>
 
         </tr>
 
@@ -56,7 +60,7 @@
           <td></td>
 
           <td>
-            <button class="New_Exercise" onclick="Add_New(this, 'below')">Add Exercise Below</button>
+            <button class="New_Exercise" onclick="Create_Row(this, 'below')">Add Exercise Below</button>
           </td>
 
         </tr>
@@ -68,8 +72,8 @@
           <td></td>
 
           <td>
-            <button class= "New_Exercise" onclick="Add_New(this, 'above')">Add Exercise Above</button>
-            <button class= "New_Exercise" onclick="Add_New(this, 'below')">Add Exercise Below</button>
+            <button class= "New_Exercise" onclick="Create_Row(this, 'above')">Add Exercise Above</button>
+            <button class= "New_Exercise" onclick="Create_Row(this, 'below')">Add Exercise Below</button>
           </td>
 
         
@@ -77,12 +81,12 @@
 
         <tr class = "Mobility">
 
-          <td><u><span class="Editable" contenteditable="false">Moblity</span></u></td>
+          <td><u><span class="Editable" contenteditable="false">Moblity Exercise</span></u></td>
           <td><span class="Editable" contenteditable="false"></span></td>
           <td><span class="Editable" contenteditable="false"></span></td>
           
           <td>
-            <button class = "New_Exercise" onclick="Add_New(this, 'above')">Add Exercise Above</button>
+            <button class = "New_Exercise" onclick="Create_Row(this, 'above')">Add Exercise Above</button>
             <button class="Edit" onclick="Edit_Row(this)">Edit</button>
             <button class="Save" onclick="Save_Row(this)" style="display: none;">Save</button>
           </td>

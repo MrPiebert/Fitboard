@@ -1,6 +1,6 @@
 // #region JS
 
-// 's Work
+// Joseph's Work
 
 // #region Inner Button Logic
 
@@ -60,7 +60,7 @@ function Delete_Row(button){
     Row.parentNode.removeChild(Row);
 }
 
-function Add_New(button, position){
+function Create_Row(button, position){
     const Row = button.parentNode.parentNode;
     const New_Row = document.createElement('tr');
     let rowTemplate = `
@@ -139,10 +139,14 @@ function Create_New_Day_Table() {
 
         <tr class = "Yoga">
 
-          <td><u>Yoga</u></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td><u><span class="Editable" contenteditable="false">Yoga Sequence</span></u></td>
+          <td><span class="Editable" contenteditable="false"></span></td>
+          <td><span class="Editable" contenteditable="false"></span></td>
+          
+          <td>
+            <button class="Edit" onclick="Edit_Row(this)">Edit</button>
+            <button class="Save" onclick="Save_Row(this)" style="display: none;">Save</button>
+          </td>
 
         </tr>
 
@@ -153,7 +157,7 @@ function Create_New_Day_Table() {
           <td></td>
 
           <td>
-            <button class="New_Exercise" onclick="Add_New(this, 'below')">Add Exercise Below</button>
+            <button class="New_Exercise" onclick="Create_Row(this, 'below')">Add Exercise Below</button>
           </td>
 
         </tr>
@@ -165,8 +169,8 @@ function Create_New_Day_Table() {
           <td></td>
 
           <td>
-            <button class= "New_Exercise" onclick="Add_New(this, 'above')">Add Exercise Above</button>
-            <button class= "New_Exercise" onclick="Add_New(this, 'below')">Add Exercise Below</button>
+            <button class= "New_Exercise" onclick="Create_Row(this, 'above')">Add Exercise Above</button>
+            <button class= "New_Exercise" onclick="Create_Row(this, 'below')">Add Exercise Below</button>
           </td>
 
         
@@ -179,7 +183,7 @@ function Create_New_Day_Table() {
           <td><span class="Editable" contenteditable="false"></span></td>
           
           <td>
-            <button class = "New_Exercise" onclick="Add_New(this, 'above')">Add Exercise Above</button>
+            <button class = "New_Exercise" onclick="Create_Row(this, 'above')">Add Exercise Above</button>
             <button class="Edit" onclick="Edit_Row(this)">Edit</button>
             <button class="Save" onclick="Save_Row(this)" style="display: none;">Save</button>
           </td>
