@@ -65,13 +65,13 @@
                     <span class="tooltip">Modify&#160Programs </span>
                 </li>
                 <li>
-                    <a href="../Notifications/Notifications.html">
-                        <i class="bx bxs-bell-ring"></i>
-                        <span class="Nav_Item">Notifications</span>
-                    </a>
-                    <span class="tooltip">Notifications</span>
-                </li>
-                <li>
+        <a id="notificationsLink" href="#">
+            <i class="bx bxs-bell-ring"></i>
+            <span class="Nav_Item">Notifications</span>
+        </a>
+        <span class="tooltip">Notifications</span>
+    </li>
+    <li>
                     <a href="../Upload_Video/Videos.html">
                         <i class="bx bxs-video"></i>
                         <span class="Nav_Item">Video&#160Tutorials</span>
@@ -246,7 +246,25 @@ document.getElementById("logoutLink").addEventListener("click", function (event)
             }
         }
     </script>
-  
+  <script>
+    document.getElementById('notificationsLink').addEventListener('click', function(event) {
+        // Prevent default link behavior
+        event.preventDefault();
+        
+        // Check access level from local storage
+        const accessLevel = parseInt(localStorage.getItem('accessLevel'), 10);
+        
+        // Redirect based on access level
+        if (accessLevel === 0) {
+            window.location.href = '../Notifications/StudentNotifications.html';
+        } else if (accessLevel === 1) {
+            window.location.href = '../Notifications/TeacherNotifications.html';
+        } else {
+            // Handle case when access level is not set or invalid
+            alert('Invalid access level. Please contact support.');
+        }
+    });
+</script>
 
             <script src="../cropperjs/cropper.js"></script>
         <script src="../Home_Page/Activite_Sidebar.js"> </script>
