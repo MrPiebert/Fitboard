@@ -112,7 +112,7 @@
                 var userRoleElement = document.getElementById('userRole');
                 
                 if (accessLevel === '1') {
-                    userNameElement.textContent = 'Rurt Kich';
+                    userNameElement.textContent = 'Rurt&#160Kich';
                     userRoleElement.textContent = 'Admin';
                 } else if (accessLevel === '0') {
                     var studentData = JSON.parse(localStorage.getItem('studentData'));
