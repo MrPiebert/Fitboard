@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>FitBoard</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../Help/Help.css">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
+    <link rel="icon" href="../Landing_Page/favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+    <style>
+        /* Modern styling for the form */
+        .permission_container {
+            background-color: #f4f4f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: 100px auto; /* Positioned lower with margin */
+        }
+        
+        .permission_container form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .permission_container label {
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .permission_container input {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+        }
+
+        .permission_container button {
+            background-color: #5bc0de;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .permission_container button:hover {
+            background-color: #46b8da;
+        }
+
+        /* Styling for help button and popup */
+        .help-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: #5bc0de;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .help-button:hover {
+            background-color: #46b8da;
+        }
+
+        .help-popup {
+            display: none;
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 300px;
+        }
+
+        .help-popup p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body onload="onload()">
+    <div class="sidebar">
+        <div class="top">
+            <div class="logo">
+                <img src="../Images/Logo.png" alt="logo" width="50px" height="50px">
+                <span>FITBOARD</span>
+            </div>
+            <i class='bx bx-menu' id="btn"></i>
+        </div>
+        <div class="user">
+            <img src="../Images/User_Image.jpg" alt="profile picture" class="User_Image" id="userImage">
+            <div>
+                <p class="bold" id="userName">Default User</p>
+                <p id="userRole">Admin</p>
+            </div>
+        </div>
+        <ul>
+            <li>
+                <a href="../Home_Page/Home_Page.html">
+                    <i class="bx bxs-grid-alt"></i>
+                    <span class="Nav_Item">Dashboard</span>
+                </a>
+                <span class="tooltip">Dashboard</span>
+            </li>
+            <li>
+                <a href="../Profile/Profile.html">
+                    <i class="bx bxs-user-circle"></i>
+                    <span class="Nav_Item">Profile</span>
+                </a>
+                <span class="tooltip">Profile</span>
+            </li>
+            <li>
+                <a href="../Program Modification/Program Modification.html">
+                    <i class="bx bxs-duplicate"></i>
+                    <span class="Nav_Item">Modify&#160Programs</span>
+                </a>
+                <span class="tooltip">Modify&#160Programs </span>
+            </li>
+            <li>
+                <a href="../Notifications/Notifications.html">
+                    <i class="bx bxs-bell-ring"></i>
+                    <span class="Nav_Item">Notifications</span>
+                </a>
+                <span class="tooltip">Notifications</span>
+            </li>
+            <li>
+                <a href="../Upload_Video/Videos.html">
+                    <i class="bx bxs-video"></i>
+                    <span class="Nav_Item">Video&#160Tutorials</span>
+                </a>
+                <span class="tooltip">Video&#160Tutorials</span>
+            </li>
+            <li>
+                <a href="../Settings/Settings.html">
+                    <i class="bx bxs-cog"></i>
+                    <span class="Nav_Item">Settings</span>
+                </a>
+                <span class="tooltip">Settings</span>
+            </li>
+            <li>
+                <a href="../Help/Help.html">
+                    <i class="bx bxs-help-circle"></i>
+                    <span class="Nav_Item">Help</span>
+                </a>
+                <span class="tooltip">Help</span>
+            </li>
+            <li>
+                <a href="../LandingPage.html">
+                    <i class="bx bxs-log-out"></i>
+                    <span class="Nav_Item">Logout</span>
+                </a>
+                <span class="tooltip">Logout</span>
+            </li>
+            
+        </ul>
+    </div>
+
+  <div class="main_content">
+        <div class="container" id="container">
+            <h1 id="main-heading">FitBoard</h1>
+            <h2>Add Student</h2>
+        </div>
+        <div class="permission_container">
+            <form id="permissionForm">
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" name="firstName" pattern="[A-Za-zÀ-ÿ '-]+" title="Please enter only letters and special characters" required>
+                <br>
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" name="lastName" pattern="[A-Za-zÀ-ÿ '-]+" title="Please enter only letters and special characters" required>
+                <br>
+               <label for="studentYear">Student Year (7-12):</label>
+<input type="number" id="studentYear" name="studentYear" min="7" max="12" inputmode="numeric" title="Please enter a number between 7 and 12" required>
+
+                <br>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+
+    <button class="help-button" onclick="toggleHelpPopup()">?</button>
+    <div class="help-popup" id="helpPopup">
+        <p>Here you can add a student to the database by filling out their details and clicking submit. Ensure all fields are correctly filled.</p>
+    </div>
+
+    <script src="../Home_Page/Activite_Sidebar.js"></script>
+    <script src="../Settings/darklight_mode.js"></script>
+    <script src="../Profile/Profile_Pic.js"></script>
+    <script src="../Profile/Profile_Check.js"></script>
+    <script src="../Settings/colour_slider.js"></script>
+   <script>
+        // Function to handle page load actions
+        function onload() {
+            var accessLevel = localStorage.getItem('accessLevel');
+            var userNameElement = document.getElementById('userName');
+            var userRoleElement = document.getElementById('userRole');
+            
+            // Set user name and role based on access level
+            if (accessLevel === '1') {
+                userNameElement.textContent = 'Rurt Kich';
+                userRoleElement.textContent = 'Admin';
+            } else if (accessLevel === '0') {
+                userNameElement.textContent = 'Quince Smith';
+                userRoleElement.textContent = 'Student';
+            }
+        }
+
+        // Function to toggle the help popup
+        function toggleHelpPopup() {
+            var helpPopup = document.getElementById('helpPopup');
+            if (helpPopup.style.display === 'none' || helpPopup.style.display === '') {
+                helpPopup.style.display = 'block';
+            } else {
+                helpPopup.style.display = 'none';
+            }
+        }
+
+        // Function to handle form submission via AJAX (optional for seamless experience)
+        document.getElementById('permissionForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+            var formData = new FormData(this);
+            
+            fetch('save_student_data.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert('Student data saved successfully!');
+                // Optionally, you can redirect or clear the form here
+            })
+            .catch(error => {
+                alert('An error occurred while saving student data.');
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>
+
