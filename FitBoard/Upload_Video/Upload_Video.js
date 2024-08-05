@@ -1,3 +1,64 @@
+document.addEventListener("DOMContentLoaded", fetchVideos);
+
+function fetchVideos() {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "fetch_videos.php", true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            const videos = JSON.parse(xhr.responseText);
+            displayVideos(videos);
+        }
+    };
+    xhr.send();
+}
+
+function displayVideos(videos) {
+    const videoList = document.querySelector('.video_list');
+    videoList.innerHTML = ''; // Clear existing videos
+
+    videos.forEach((video, index) => {
+        const newVideoDiv = document.createElement('div');
+        newVideoDiv.classList.add('vid');
+
+        const newIframe = document.createElement('iframe');
+        newIframe.src = video.youtube_link;
+        newIframe.frameborder = "0";
+        newIframe.allowFullscreen = true;
+        newIframe.style.width = "100px";
+        newIframe.style.height = "56px";
+        newIframe.style.borderRadius = "5px";
+
+        const newTitle = document.createElement('h3');
+        newTitle.classList.add('title');
+        newTitle.textContent = `${index + 1 < 10 ? '0' + (index + 1) : index + 1}. ${video.title}`;
+
+        const newDescription = document.createElement('div');
+        newDescription.classList.add('desc');
+        newDescription.style.display = 'none';
+        newDescription.textContent = video.description || 'No description provided';
+
+        const editButton = document.createElement('button');
+        editButton.classList.add('edit-button');
+        editButton.textContent = 'Edit';
+        editButton.onclick = () => editVideo(editButton);
+
+        newVideoDiv.appendChild(newIframe);
+        newVideoDiv.appendChild(newTitle);
+        newVideoDiv.appendChild(newDescription);
+        newVideoDiv.appendChild(editButton);
+
+        newVideoDiv.onclick = () => {
+            document.querySelectorAll('.video_list .vid').forEach(vid => vid.classList.remove('active'));
+            newVideoDiv.classList.add('active');
+            document.querySelector('.main_video iframe').src = newIframe.src;
+            document.querySelector('.main_video .title').innerHTML = newTitle.innerHTML;
+            document.querySelector('.main_video .description').innerHTML = newDescription.innerHTML;
+        };
+
+        videoList.appendChild(newVideoDiv);
+    });
+}
+
 function promptYouTubeLink() {
     const youTubeLink = prompt("Please enter the YouTube link:");
     if (youTubeLink) {
