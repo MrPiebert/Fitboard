@@ -121,7 +121,7 @@
 <body>
     <div class="header">
         <h1>FITBOARD ADMIN</h1>
-         <a href="../Landing_Page/LandingPage.html" class="home-icon">🏠</a>
+         <a href="../LandingPage.html" class="home-icon">🏠</a>
     </div>
     <div class="background">
         <div class="login-box" id="loginBox">
@@ -135,23 +135,30 @@
             </form>
         </div>
     </div>
+<script>
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent form from submitting normally
+        
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
+        
+        var errorContainer = document.getElementById('errorContainer');
+        var loginBox = document.getElementById('loginBox');
 
-    <script>
-        document.getElementById('loginForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent form from submitting normally
-            
-            var email = document.getElementById('email').value;
-            var password = document.getElementById('password').value;
-            
-            if (email === 'admin@email.com' && password === 'fitboard123') {
+        if (email === 'admin@email.com') {
+            if (password === 'fitboard123') {
                 localStorage.setItem('accessLevel', '1');
                 window.location.href = '../Home_Page/Home_Page.html';
             } else {
-                var errorContainer = document.getElementById('errorContainer');
-                errorContainer.innerHTML = '<div class="error-message">Unable to log you in<br>The specified account does not exist.</div>';
-                document.getElementById('loginBox').style.height = '360px'; // Adjust height to accommodate error message
+                errorContainer.innerHTML = '<div class="error-message">Unable to log you in.<br>Unknown email or bad password.</div>';
+                loginBox.style.height = '360px'; // Adjust height to accommodate error message
             }
-        });
-    </script>
+        } else {
+            errorContainer.innerHTML = '<div class="error-message">Unable to log you in.<br>The specified account does not exist.</div>';
+            loginBox.style.height = '360px'; // Adjust height to accommodate error message
+        }
+    });
+</script>
+
 </body>
 </html>

@@ -1,0 +1,37 @@
+.horizontal-line {
+    display: flex;
+    gap: 10px;
+}
+
+.exercise-table {
+    margin-top: 20px;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.exercise-table th, .exercise-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.exercise-table th {
+    background-color: #f2f2f2;
+}
+
+.action-buttons button {
+    margin-top: 5px;
+}
+
+.day-buttons {
+    display: flex;
+    gap: 5px;
+}
+
+.day-buttons button {
+    width: 100%;
+}
+
+.delete-day-button {
+    background-color: grey;
+    cursor: not-allowed;
+}
