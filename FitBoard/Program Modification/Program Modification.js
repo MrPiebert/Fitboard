@@ -429,6 +429,42 @@ function Check_Delete_Buttons(){
 
   };
 
+  const Save_Url = 'Program Saving.php';
+
+  fetch(Save_Url, {
+
+      method: 'POST',
+
+      headers: {
+
+          'Content-Type': 'application/json'
+
+      },
+
+      body: JSON.stringify(Program_Data)
+
+  })
+
+  .then(response => response.json())
+
+  .then(data => {
+
+      if (data.success) {
+
+          alert('Program saved successfully!');
+
+      } else {
+
+          alert('Failed to save the program.');
+
+          console.error(data.error);
+
+      }
+
+  })
+
+  .catch(error => console.error('Error:', error));
+
 // #region Database
 
     // Collect exercise data
