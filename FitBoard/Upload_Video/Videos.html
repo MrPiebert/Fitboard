@@ -17,12 +17,6 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
-
-
-<style>
-    
-</style>
-
 </head>
 <body onload="onload()">
     <!-- Sidebar -->
@@ -104,8 +98,6 @@
         </ul>
     </div>
 
-  
-
     <!-- Main Content -->
     <div class="main_content">
         <div class="container" id="container">
@@ -120,10 +112,10 @@
             
             <div class="main_video">
                 <div style="position: relative; width: 100%; padding-bottom: 56.25%;">
-                    <video src="../Upload_Video/Videos/video1.mp4" controls muted autoplay style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;  border-radius: 10px;"></video>
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 10px;"></iframe>
                 </div>
-                <div class="title"><h3>01. Robert</h3></div>
-                <div class="description"><h4>This is the funny cat</h4></div>
+                <div class="title"><h3>01. Example Video</h3></div>
+                <div class="description"><h4>This is an example video</h4></div>
             </div>
 
             <div class="black_background">
@@ -136,137 +128,17 @@
                 <div class="video_list">
 
                     <div class="vid active">
-                        <video src="../Upload_Video/Videos/video1.mp4" muted></video>
-                        <h3 class="title">01. Robert</h3>
-                        <div class="desc" style="display:none;">This is the funny cat</div> 
-
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen style="width: 100px; height: 56px; border-radius: 5px;"></iframe>
+                        <h3 class="title">01. Example Video</h3>
+                        <div class="desc" style="display:none;">This is an example video</div>
+                        <button class="edit-button" onclick="editVideo(this)">Edit</button>
                     </div>
 
-                    <div class="vid">
-                        <video src="../Upload_Video/Videos/video2.mp4" muted></video>
-                        <h3 class="title">02. MR BEAST</h3>
-                        <div class="desc" style="display:none;">This is the funny man</div> 
+                    <!-- More video items go here, similar to the above -->
 
-                    </div>
-
-                    <div class="vid">
-                        <video src="../Upload_Video/Videos/video3.mp4" muted></video>
-                        <h3 class="title">03. angy cat</h3>
-                        <div class="desc" style="display:none;">This is the angry cat</div> 
-
-                    </div>
-
-                    <div class="vid">
-                        <video src="../Upload_Video/Videos/video4.mp4" muted></video>
-                        <h3 class="title">04. cap</h3>
-                        <div class="desc" style="display:none;">This is cap</div>
-
-                    </div>
-
-                    <div class="vid">
-                        <video src="../Upload_Video/Videos/video5.mp4" muted></video>
-                        <h3 class="title">05. China Uncensored</h3>
-                        <div class="desc" style="display:none;">This is the description for Video 5</div> 
-
-                    </div>
-
-                    <div class="vid">
-                        <video src="../Upload_Video/Videos/video6.mp4" muted></video>
-                        <h3 class="title">06. Chippi Chappa</h3>
-                        <div class="desc" style="display:none;">This is the dancing cat</div>
-
-                    </div>
-                    
-                    <div class="vid">
-                        <video src="../Upload_Video/Videos/video7.mp4" muted></video>
-                        <h3 class="title">07. Nokia</h3>
-                        <div class="desc" style="display:none;">This is the cellular cat</div>
-
-                    </div>
-                    
-                    <div class="vid">
-                        <video src="../Upload_Video/Videos/video8.mp4" muted></video>
-                        <h3 class="title">08. Mewing</h3>
-                        <div class="desc" style="display:none;">This is the simga cat</div>
-
-                    </div>
-                    
-                    <div class="vid">
-                        <video src="../Upload_Video/Videos/video9.mp4" muted></video>
-                        <h3 class="title">09. Edging</h3>
-                        <div class="desc" style="display:none;">This is the gooner cat </div>
-                    </div>
-                    
-                    <div class="vid">
-                        <video src="../Upload_Video/Videos/video10.mp4" muted></video>
-                        <h3 class="title">10. House</h3>
-                        <div class="desc" style="display:none;">This is the mouse bites </div>
-                    </div>
-                    
-                    <div class="vid">
-                        <video src="../Upload_Video/Videos/video11.mp4" muted></video>
-                        <h3 class="title">11. SLASH SRS OR SLASH J??</h3>
-                        <div class="desc" style="display:none;">This is the undecided Jon </div>
-                    </div>
-                    
-                    <div class="vid">
-                        <video src="../Upload_Video/Videos/video12.mp4" muted></video>
-                        <h3 class="title">12. Doxxed</h3>
-                        <div class="desc" style="display:none;">This is the based cat </div>
-                    </div>
-                    
-                    <div class="vid">
-                        <video src="../Upload_Video/Videos/video13.mp4" muted></video>
-                        <h3 class="title">13. The Croods</h3>
-                        <div class="desc" style="display:none;">This is the hungry croods</div>
-                    </div>
-                    
-                    <div class="vid">
-                        <video src="../Upload_Video/Videos/video14.mp4" muted></video>
-                        <h3 class="title">14. Oh Great Heavens</h3>
-                        <div class="desc" style="display:none;">This is the smashed car </div>
-                    </div>
-                    
-                    <div class="vid">
-                        <video src="../Upload_Video/Videos/video15.mp4" muted></video>
-                        <h3 class="title">15. Popbob</h3>
-                        <div class="desc" style="display:none;">This is the trolling man </div>
-                    </div>
-
-                    <div class="vid">
-                        <video src="../Upload_Video/Videos/video16.mp4" muted></video>
-                        <h3 class="title">16. Chinese Engineering</h3>
-                        <div class="desc" style="display:none;">This is the human design</div>
-                    </div>
-
-                    <div class="vid">
-                        <video src="../Upload_Video/Videos/video17.mp4" muted></video>
-                        <h3 class="title">17. OsAmA BiN LaDen</h3>
-                        <div class="desc" style="display:none;">This is the terror car</div>
-                    </div>
-
-                    <div class="vid">
-                        <video src="../Upload_Video/Videos/video18.mp4" muted></video>
-                        <h3 class="title">18. OFF the menu</h3>
-                        <div class="desc" style="display:none;">Dehydration gun</div>
-                    </div>
-
-                    <div class="vid">
-                        <video src="../Upload_Video/Videos/video19.mp4" muted></video>
-                        <h3 class="title">19. 30 Dollar Haircut</h3>
-                        <div class="desc" style="display:none;">This is the pushed child</div>
-                    </div>
-
-                    <div class="vid">
-                        <video src="../Upload_Video/Videos/video20.mp4" muted></video>
-                        <h3 class="title">20. Violence</h3>
-                        <div class="desc" style="display:none;">This is sparta</div>
-                    </div>
-            
                 </div>
                 
-                <input type="file" id="videoInput" accept="video/*" style="display: none;" onchange="addVideo(event)">
-                <button id="button1" onclick="document.getElementById('videoInput').click()" style="font-family: 'Montserrat', sans-serif; font-size: 24px; font-weight: bold;">Upload Video</button>
+                <button id="uploadButton" onclick="promptYouTubeLink()" style="font-family: 'Montserrat', sans-serif; font-size: 24px; font-weight: bold;">Upload Video</button>
                 
             </div>
         </div>
