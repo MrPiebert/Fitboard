@@ -1,3 +1,14 @@
+/* Importing Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    scroll-behavior: smooth;
+}
 
 .Program_Specification {
   border: 2px solid #000000;
@@ -189,3 +200,215 @@ button:disabled {
   opacity: 0.6; /* Make it look more greyed out */
 }
 
+/* CSS for profile picture */
+.User_Image{
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    border: 2px solid #eee;
+    object-fit: fill;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 80px;
+    background-color: black;
+    transition: all 0.5s ease;
+    padding: 0.4rem 0.8rem; /* Padding using rem */
+}
+
+#sub-heading {
+    position: absolute;
+    opacity: 0;
+    left: 100px;
+}
+
+#main-heading, h3 {
+    transition: opacity 0.5s ease-in;
+}
+
+.sidebar.active {
+    width: 250px;
+}
+
+.sidebar.active ~ .main_content {
+    left: 250px;
+    width: calc(100% - 25px);
+}
+
+.sidebar.active ~ .main_content #main-heading{
+    opacity: 0;
+    transition: opacity 0.5s ease-out;
+}
+
+.sidebar.active ~ .main_content h3{
+    opacity: 0;
+    transition: opacity 0.5s ease-out;
+}
+
+.sidebar.active ~ .main_content #sub-heading {
+    left: 30px;
+    opacity: 1;
+    transition: opacity 0.5s ease-in;
+}
+
+.sidebar #btn {
+    position: absolute;
+    color: #fff;
+    top: 0.4rem;
+    left: 50%;
+    font-size: 1.2rem;
+    line-height: 50px;
+    transform: translateX(-50%);
+    cursor: pointer;
+}
+
+.sidebar.active #btn {
+    left: 90%;
+}
+
+.sidebar .top .logo {
+    color: #fff;
+    display: flex;
+    height: 50px;
+    width: 50px;
+    align-items: center;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.sidebar.active .top .logo {
+    opacity: 1;
+}
+
+.top .logo i {
+    font-size: 2rem;
+    margin-right: 5px;
+}
+
+/* User Section Styles */
+.user {
+    align-items: center;
+    margin: 1rem 0;
+    display: inline-flex;
+}
+
+.user p {
+    color: #fff;
+    opacity: 1;
+    margin-left: 1rem;
+}
+
+/* Styles for Navigation Icons */
+.sidebar p {
+    opacity: 0;
+}
+
+.sidebar.active p {
+    opacity: 1;
+}
+
+.sidebar ul li {
+    position: relative;
+    list-style-type: none;
+    height: 50px;
+    width: 90%;
+    margin: 0.8rem auto;
+    line-height: 50px;
+}
+
+.sidebar ul li a {
+    color: #fff;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 0.8rem;
+}
+
+/* Hover Mechanics */
+.sidebar ul li a:hover {
+    background-color: #fff;
+    color: #202229;
+}
+
+.sidebar ul li a i {
+    min-width: 50px;
+    text-align: center;
+    height: 50px;
+    border-radius: 12px;
+    line-height: 50px;
+}
+
+/* Navigation Item Label Styles */
+.sidebar .Nav_Item {
+    display: none;
+}
+
+.sidebar.active .Nav_Item {
+    display: inline-block;
+}
+
+/* Tooltip Styles */
+.sidebar ul li .tooltip {
+    position: absolute;
+    left: 75px;
+    top: 5%;
+    background-color: white;
+    transform: translateX(-50%, -50%);
+    box-shadow: 0 0.5rem 0.8rem rgba(0, 0, 0, 0.2);
+    border-radius: 0.6rem;
+    padding: 0.4rem 1.2rem;
+    line-height: 1.8rem;
+    z-index: 20;
+    display: none;
+}
+
+.sidebar ul li:hover .tooltip {
+    display: inline-block;
+}
+
+.sidebar.active ul li .tooltip {
+    display: none;
+}
+
+/* Main Content Styles */
+.main_content {
+    position: relative;
+    background-color: var(--gray);
+    overflow: hidden;
+    min-height: 100vh;
+    top: 0;
+    left: 80px;
+    transition: all 0.5s ease;
+    width: 94.75vw;
+    max-width: 100%;
+    padding: 1rem;
+    opacity: 1;
+}
+
+.main_content:not(.dark-mode) {
+	background-color: white
+}
+
+.sidebar:not(.dark-mode) {
+	background-color: var(--gray)
+}
+
+/* Container Styles */
+.container {
+    display: flex;
+    overflow: hidden;
+    max-width: 99.5vw;
+    background-color: bisque;
+    padding: 4px 15px;
+    border-radius: 10px;
+}
+
+:root {
+	--dark: #111111;
+	--gray: #202229;
+}
