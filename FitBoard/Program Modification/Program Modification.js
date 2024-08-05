@@ -275,38 +275,159 @@ function Check_Delete_Buttons(){
     Check all exercise info has been filled in for each exercise
     */      
 
+    /*
+            Program Architecture:
+
+            -- Create table for exercise programs
+            CREATE TABLE exercise_programs (
+                program_id INT AUTO_INCREMENT PRIMARY KEY,
+                name VARCHAR(255) NOT NULL,
+                number_of_sessions INT NOT NULL,
+                tier VARCHAR(50) NOT NULL
+            );
+
+            -- Create table for tables within each exercise program
+            CREATE TABLE program_tables (
+                table_id INT AUTO_INCREMENT PRIMARY KEY,
+                program_id INT NOT NULL,
+                table_number INT NOT NULL,
+                FOREIGN KEY (program_id) REFERENCES exercise_programs(program_id)
+            );
+
+            -- Create table for exercises within each table
+            CREATE TABLE program_exercises (
+                exercise_id INT AUTO_INCREMENT PRIMARY KEY,
+                table_id INT NOT NULL,
+                name VARCHAR(255) NOT NULL,
+                sets VARCHAR(50) NOT NULL,
+                reps VARCHAR(50) NOT NULL,
+                type ENUM('yoga', 'pre_hab', 'main_workout', 'mobility') NOT NULL,
+                FOREIGN KEY (table_id) REFERENCES program_tables(table_id)
+            );
+        */
+
     let Program_Name = document.getElementById("Program_Name");
     let Program_Sessions = document.getElementById("Program_Sessions");
     let Program_Tier = document.getElementById("Program_Tier");
-    let tables = document.querySelectorAll('table');
-    
-    console.log("BEGIN");
-
+    let Program_Tables = document.querySelectorAll('table');
+  
     console.log(Program_Name.value);
     console.log(Program_Sessions.value);
     console.log(Program_Tier.value);
 
-    // Logs Table info
-    tables.forEach((table) => {
-      
-      Table_Num = table.querySelector('th.Col_1').innerText;
-      
-      console.log(Table_Num)
+    // Collects Table info
 
-      // Logs row info
-      for (var i = 1, row; row = table.rows[i]; i++) {
-        // Make sure the row has at least three cells
-        if (row.cells.length >= 3) {
-            // Get the data from the first three columns
-            var cell1 = row.cells[0].innerText;
-            var cell2 = row.cells[1].innerText;
-            var cell3 = row.cells[2].innerText;
-            
-            // Print the data
-            console.log(cell1, cell2, cell3);
-          }
-      }     
+    let Tables_Data = {};
+
+    Program_Tables.forEach((table) => {
+        // Extract the table number from the string "Day x"
+        const tableHeader = table.querySelector('th.Col_1').innerText;
+        const tableNum = tableHeader.match(/Day (\d+)/)[1];
+        console.log(`Table Number: Day ${tableNum}`);
+
+        // Initialize the lists for the current table
+        Tables_Data[tableNum] = {
+            yoga: [],
+            preHab: [],
+            mainWorkout: [],
+            mobility: []
+        };
+
+        let currentCategory = null;
+
+        // Iterate through each row in the table, starting from the second row
+        for (let i = 1; i < table.rows.length; i++) {
+            const row = table.rows[i];
+            const rowClass = row.className;
+            console.log(`Row ${i} class: ${rowClass}`);
+
+            switch (rowClass) {
+
+                case "Yoga":
+
+                    console.log("Value is yoga");
+                    currentCategory = "yoga";
+
+                    if (currentCategory && row.cells.length >= 3) {
+
+                      const exercise = {
+                          name: row.cells[0].innerText,
+                          sets: row.cells[1].innerText,
+                          reps: row.cells[2].innerText
+                      };
+
+                      Tables_Data[tableNum][currentCategory].push(exercise);
+
+                    }
+
+                    break;
+
+                case "Pre_Hab":
+
+                    console.log("Value is pre_hab");
+                    currentCategory = "pre_hab";
+                    break;
+
+                case "Main_Workout":
+
+                    console.log("Value is main_workout");
+                    currentCategory = "main_workout";
+                    break;
+
+                case "Mobility":
+
+                    console.log("Value is mobility");
+                    currentCategory = "mobility";
+
+                    if (currentCategory && row.cells.length >= 3) {
+                      const exercise = {
+                          name: row.cells[0].innerText,
+                          sets: row.cells[1].innerText,
+                          reps: row.cells[2].innerText
+                      };
+                      Tables_Data[tableNum][currentCategory].push(exercise);
+                    }
+
+                    break;
+
+                case "Bottom_Row":
+
+                    console.log("Value is bottom_row");
+                    currentCategory = null;
+                    break;
+
+                default:
+
+                    // If the row is not a category label or bottom row, add it to the current category list
+                    console.log("Value is something else");
+                    if (currentCategory && row.cells.length >= 3) {
+                        const exercise = {
+                            name: row.cells[0].innerText,
+                            sets: row.cells[1].innerText,
+                            reps: row.cells[2].innerText
+                        };
+                        Tables_Data[tableNum][currentCategory].push(exercise);
+                    }
+                    
+                    break;
+            }
+        }
     });
+
+    console.log("Tables Data:", Tables_Data);
+
+
+    const Program_Data = {
+
+      programName: Program_Name.value,
+
+      programSessions: Program_Sessions.value,
+
+      programTier: Program_Tier.value,
+
+      tablesData: Tables_Data
+
+  };
 
 // #region Database
 
@@ -348,8 +469,6 @@ function Check_Delete_Buttons(){
     };
 
 
-    // Replace with the actual endpoint
-
     const url = 'save_program.php';
 
     fetch(url, {
@@ -387,8 +506,6 @@ function Check_Delete_Buttons(){
     .catch(error => console.error('Error:', error));
 
 // #endregion
-    
-   console.log("END");
 
   }
 

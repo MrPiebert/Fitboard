@@ -9,10 +9,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customize Program</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- External Stylesheets -->
+    <link rel="stylesheet" href="Home_Page.css">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
+    <link rel="icon" href="../Landing_Page/favicon.ico">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap" rel="stylesheet">
+    <!-- Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
     <link rel="stylesheet" href="Program Modification.css">
   </head>
 
-  <body>
+  <body onload="onload()">
 
     <!-- Sidebar -->
     <div class="sidebar">
@@ -95,6 +108,13 @@
       </ul>
   </div>
    <!-- #endregion -->
+
+   <div class="main_content">
+    <div class="container">
+        <h1 id="sub-heading">Dashboard</h1>
+        <h1 id="main-heading">FitBoard</h1>
+        <h3>&#160&#160Dashboard</h3>      
+    </div>
 
     <input type="text" class = "Program_Specification" ID = "Program_Name" placeholder="Program Name">
     <input type="number" class = "Program_Specification" ID = "Program_Sessions" placeholder="Program Sessions">
@@ -198,8 +218,36 @@
 
     <button class="Save_Program" onclick="Save_Program(this)">Save Program</button>
     <button class="Discard_Changes" onclick="Discard_Changes(this)">Discard All Changes</button>
+  </div>
 
+    
+    <!-- External JavaScript -->
+    <script src="../Settings/darklight_mode.js"></script>
+    <script src="Activite_Sidebar.js"></script>
+    <script src="../Profile/Profile_Pic.js"></script>
+    <script src="../Profile/Profile_Check.js"></script>
+    <script src="../Settings/colour_slider.js"></script>
     <script src="Program Modification.js"></script>
+
+    <script>
+        function onload() {
+           
+            var accessLevel = localStorage.getItem('accessLevel');
+            var userNameElement = document.getElementById('userName');
+            var userRoleElement = document.getElementById('userRole');
+            
+            if (accessLevel === '1') {
+                userNameElement.textContent = 'Rurt Kich';
+                userRoleElement.textContent = 'Admin';
+            } else if (accessLevel === '0') {
+                var studentData = JSON.parse(localStorage.getItem('studentData'));
+                if (studentData && studentData.givenName && studentData.surname) {
+                    userNameElement.textContent = studentData.givenName + ' ' + studentData.surname;
+                    userRoleElement.textContent = 'Student';
+                }
+            }
+        }
+    </script>
 
   </body>
 </html>
