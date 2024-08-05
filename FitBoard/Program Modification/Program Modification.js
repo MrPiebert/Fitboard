@@ -262,12 +262,6 @@ function Check_Delete_Buttons(){
 
 // #region Outer Button Logic
 
-  // #region Validation Logic
-
-
-
-  // #endregion
-
   function Save_Program(button){
 
     /* 
