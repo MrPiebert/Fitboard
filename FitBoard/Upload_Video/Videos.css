@@ -112,8 +112,7 @@
     margin-left: 1rem;
 }
 
-/* Styles for Navigationheadingnot
-Icons */
+/* Styles for Navigation Icons */
 .sidebar p {
     opacity: 0;
 }
@@ -252,7 +251,7 @@ Icons */
 	background-color: var(--gray);
 }
 
-.content .main_video video{
+.content .main_video iframe{
     width: 100%;
     border-radius: 5px;
 }
@@ -301,8 +300,9 @@ Icons */
     border-radius: 50px;
 }
 
-.content .video_list .vid video{
+.content .video_list .vid iframe{
     width: 100px;
+    height: 56px;
     border-radius: 5px;
 }
 
@@ -316,6 +316,7 @@ Icons */
     padding: 10px;
     border: solid rgba(0,0,0,0.1);
     cursor: pointer;
+    position: relative; /* Add this */
 }
 
 .content .video_list .vid:hover {
@@ -339,6 +340,18 @@ Icons */
     color: rgb(255, 255, 255);
     font-size: 16px;
     padding-top: 5px;
+}
+
+.edit-button {
+    position: absolute; /* Make sure it stays within the video item */
+    right: 10px;
+    bottom: 10px;
+    background-color: #04AA6D;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
 }
 
 @media (max-width:991px){
@@ -379,7 +392,7 @@ Icons */
     position: relative;
 }
 
-#button1 {
+#uploadButton {
     background-color: white;
     border: none;
     border-radius: 15px;
@@ -397,24 +410,10 @@ Icons */
     border: 2px solid #04AA6D;
 }
 
-#button1:hover {
+#uploadButton:hover {
     background-color: #04AA6D;
     color: white;
 }
-
-#fileInput {
-    display: none;
-}
-
-#fileInfo {
-    margin-top: 20px;
-}
-
-#displayVideoButton {
-    display: none;
-    margin-top: 10px;
-}
-
 
 /* Add styles for editable input field */
 .editable-input {
