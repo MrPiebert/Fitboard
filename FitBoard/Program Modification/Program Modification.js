@@ -281,7 +281,7 @@ function Check_Delete_Buttons(){
     Check all exercise info has been filled in for each exercise
     */      
 
-            /*
+    /*
             Program Architecture:
 
             -- Create table for exercise programs
@@ -315,26 +315,24 @@ function Check_Delete_Buttons(){
     let Program_Name = document.getElementById("Program_Name");
     let Program_Sessions = document.getElementById("Program_Sessions");
     let Program_Tier = document.getElementById("Program_Tier");
-    let tables = document.querySelectorAll('table');
-    
-    console.log("BEGIN");
-
+    let Program_Tables = document.querySelectorAll('table');
+  
     console.log(Program_Name.value);
     console.log(Program_Sessions.value);
     console.log(Program_Tier.value);
 
-    // Logs Table info
+    // Collects Table info
 
-    let tablesData = {};
+    let Tables_Data = {};
 
-    tables.forEach((table) => {
+    Program_Tables.forEach((table) => {
         // Extract the table number from the string "Day x"
         const tableHeader = table.querySelector('th.Col_1').innerText;
         const tableNum = tableHeader.match(/Day (\d+)/)[1];
         console.log(`Table Number: Day ${tableNum}`);
 
         // Initialize the lists for the current table
-        tablesData[tableNum] = {
+        Tables_Data[tableNum] = {
             yoga: [],
             preHab: [],
             mainWorkout: [],
@@ -364,7 +362,7 @@ function Check_Delete_Buttons(){
                           reps: row.cells[2].innerText
                       };
 
-                      tablesData[tableNum][currentCategory].push(exercise);
+                      Tables_Data[tableNum][currentCategory].push(exercise);
 
                     }
 
@@ -393,7 +391,7 @@ function Check_Delete_Buttons(){
                           sets: row.cells[1].innerText,
                           reps: row.cells[2].innerText
                       };
-                      tablesData[tableNum][currentCategory].push(exercise);
+                      Tables_Data[tableNum][currentCategory].push(exercise);
                     }
 
                     break;
@@ -414,7 +412,7 @@ function Check_Delete_Buttons(){
                             sets: row.cells[1].innerText,
                             reps: row.cells[2].innerText
                         };
-                        tablesData[tableNum][currentCategory].push(exercise);
+                        Tables_Data[tableNum][currentCategory].push(exercise);
                     }
                     
                     break;
@@ -422,8 +420,20 @@ function Check_Delete_Buttons(){
         }
     });
 
-    console.log("Tables Data:", tablesData);
+    console.log("Tables Data:", Tables_Data);
 
+
+    const Program_Data = {
+
+      programName: Program_Name.value,
+
+      programSessions: Program_Sessions.value,
+
+      programTier: Program_Tier.value,
+
+      tablesData: Tables_Data
+
+  };
 
 // #region Database
 
@@ -465,8 +475,6 @@ function Check_Delete_Buttons(){
     };
 
 
-    // Replace with the actual endpoint
-
     const url = 'save_program.php';
 
     fetch(url, {
@@ -504,8 +512,6 @@ function Check_Delete_Buttons(){
     .catch(error => console.error('Error:', error));
 
 // #endregion
-    
-   console.log("END");
 
   }
 
