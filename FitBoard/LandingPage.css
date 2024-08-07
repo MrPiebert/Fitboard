@@ -190,6 +190,10 @@ nav .icon-burger .line {
 	margin-right: 9vw;
   }
 
+  .placeholder{
+	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
  /*Responsive html code: change screen size depending on device*/
 
 @media screen and (max-width: 768px) {
