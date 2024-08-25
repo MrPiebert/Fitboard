@@ -4,19 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
-       <link rel="icon" href="../Landing_Page/favicon.ico">
+    <link rel="icon" href="../Landing_Page/favicon.ico">
     <style>
+        /* Import a font from Google Fonts */
         @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
 
+        /* General body and HTML styling */
         body, html {
             height: 100%;
             margin: 0;
             font-family: Arial, sans-serif;
-            overflow: hidden; /* Prevent scrolling */
+            overflow: hidden; /* Prevent page scrolling */
         }
 
+        /* Styling for the header */
         .header {
-           
             background-color: black;
             color: white;
             padding: 10px 20px;
@@ -27,23 +29,24 @@
             font-variant: small-caps;
             font-weight: 400;
             font-size: 5px;
-            color: #fff;
             margin: 0;
-        
         }
 
+        /* Header title styling */
         .header h1 {
             margin: 0;
-            font-size: 20px;
+            font-size: 30px;
         }
 
-         .home-icon {
+        /* Styling for the home icon link */
+        .home-icon {
             text-decoration: none;
             color: white;
-            font-size: 20px;
+            font-size: 30px; /* Increased size for the home icon */
             text-align: right;
         }
 
+        /* Background image styling */
         .background {
             background-image: url('school.jpg');
             background-size: cover;
@@ -53,6 +56,7 @@
             justify-content: center;
         }
 
+        /* Styling for the login box */
         .login-box {
             background-color: #FFFFFF;
             padding: 40px;
@@ -64,33 +68,36 @@
             text-align: left;
         }
 
+        /* Login box title styling */
         .login-box h2 {
             margin-top: 0;
             color: black;
             font-weight: bold;
-       
         }
 
+        /* Paragraph text inside the login box */
         .login-box p {
             margin: 10px 0;
             color: black;
-    
         }
 
+        /* Styling for email and password input fields */
         .login-box input[type="email"], .login-box input[type="password"] {
             width: 95%;
-            font-size: 16px; /* Larger font for text inside the textboxes */
+            font-size: 16px; /* Larger font size for better readability */
             padding: 10px;
             margin: 10px 0;
             border: 1px solid #ccc;
             border-radius: 0px;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease; /* Smooth background transition */
         }
 
+        /* Focus effect for input fields */
         .login-box input[type="email"]:focus, .login-box input[type="password"]:focus {
             background-color: #fffbdd;
         }
 
+        /* Styling for the submit button */
         .login-box button {
             width: 100%;
             height: 120%;
@@ -105,10 +112,12 @@
             transition: background-color 0.3s ease;
         }
 
+        /* Hover effect for the submit button */
         .login-box button:hover {
             background-color: darkblue;
         }
 
+        /* Error message styling */
         .error-message {
             background-color: red;
             color: white;
@@ -119,46 +128,60 @@
     </style>
 </head>
 <body>
+    <!-- Header section with the FITBOARD ADMIN title and home icon -->
     <div class="header">
         <h1>FITBOARD ADMIN</h1>
-         <a href="../LandingPage.html" class="home-icon">🏠</a>
+        <a href="../LandingPage.html" class="home-icon">🏠</a>
     </div>
+
+    <!-- Background section containing the login form -->
     <div class="background">
         <div class="login-box" id="loginBox">
             <h2>Account Log In</h2>
             <p>Log in with your admin account</p>
-            <form id="loginForm">
-                <div id="errorContainer"></div>
+            <!-- Login form for admin with email and password fields -->
+            <form id="loginForm" method="POST" action="admin_login.php">
+                <div id="errorContainer"></div> <!-- Container for error messages -->
                 <input type="email" id="email" name="email" placeholder="Email" required>
                 <input type="password" id="password" name="password" placeholder="Password" required>
                 <button type="submit">Log In</button>
             </form>
         </div>
     </div>
-<script>
-    document.getElementById('loginForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent form from submitting normally
-        
-        var email = document.getElementById('email').value;
-        var password = document.getElementById('password').value;
-        
-        var errorContainer = document.getElementById('errorContainer');
-        var loginBox = document.getElementById('loginBox');
 
-        if (email === 'admin@email.com') {
-            if (password === 'fitboard123') {
-                localStorage.setItem('accessLevel', '1');
-                window.location.href = '../Home_Page/Home_Page.html';
+    <script>
+        // Event listener for the login form submission
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission behavior
+
+            // Retrieve input values for email and password
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+
+            // Reference to the error container and login box
+            var errorContainer = document.getElementById('errorContainer');
+            var loginBox = document.getElementById('loginBox');
+
+            // Simulate login process for the admin account
+            if (email === 'admin@email.com') {
+                if (password === 'fitboard123') {
+                    // Set access level in local storage for successful login
+                    localStorage.setItem('accessLevel', '1');
+                    // Redirect to the Home Page
+                    window.location.href = '../Dashboard/adminDashboard.html';
+                } else {
+                    // Display error message for incorrect password
+                    errorContainer.innerHTML = '<div class="error-message">Unable to log you in.<br>Unknown email or bad password.</div>';
+                    // Adjust login box height to accommodate the error message
+                    loginBox.style.height = '360px';
+                }
             } else {
-                errorContainer.innerHTML = '<div class="error-message">Unable to log you in.<br>Unknown email or bad password.</div>';
-                loginBox.style.height = '360px'; // Adjust height to accommodate error message
+                // Display error message for non-existing email account
+                errorContainer.innerHTML = '<div class="error-message">Unable to log you in.<br>The specified account does not exist.</div>';
+                // Adjust login box height to accommodate the error message
+                loginBox.style.height = '360px';
             }
-        } else {
-            errorContainer.innerHTML = '<div class="error-message">Unable to log you in.<br>The specified account does not exist.</div>';
-            loginBox.style.height = '360px'; // Adjust height to accommodate error message
-        }
-    });
-</script>
-
+        });
+    </script>
 </body>
 </html>
