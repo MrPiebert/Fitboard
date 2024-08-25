@@ -1,47 +1,252 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>FitBoard</title>
-    <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="Notifications.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="icon" href="../Landing_Page/favicon.ico" />
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap" rel="stylesheet" />
-    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
-    <style>
-        .form-container {
-            margin-top: 20px;
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>FitBoard</title>
+	<meta name="description" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="Notifications.css" />
+	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+	<link rel="icon" href="../Landing_Page/favicon.ico" />
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap" rel="stylesheet" />
+	<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
+	<style>
+		body {
+			font-family: 'Montserrat', sans-serif;
+			display: flex;
+			flex-direction: column;
+			/* Ensures body layout is vertical */
+			min-height: 100vh;
+			margin: 0;
+			background-color: #f4f4f4;
+			overflow-x: hidden;
+             overflow: hidden;
+			/* Prevents horizontal scrolling */
+             background-color: white;
+    color: black;
+		}
+/* Dark Mode Styles */
+.dark-mode body {
+            background-color: #000; /* Dark mode background */
+            color: #fff; /* Dark mode text color */
         }
-        .form-container input[type="text"] {
-            width: calc(100% - 120px);
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
-            border: 1px solid #ccc;
+
+/* Example with !important */
+  .dark-mode .notification-item {
+            background-color: #000; /* Darker background for notification items */
+            color: #fff; /* Light text color for notification items */
+            border-bottom: 1px solid #444; /* Darker border for better contrast */
         }
-        .form-container input[type="submit"] {
-            padding: 10px 20px;
-            background-color: #28a745;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+
+         .dark-mode .notification-item:hover {
+            background-color: #333; /* Slightly lighter background on hover */
         }
-        .form-container input[type="submit"]:hover {
-            background-color: #218838;
+        .dark-mode .notification-item.active {
+			background-color: #777;
+		}
+		.main_content {
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+			padding: 20px;
+			overflow: hidden;
+			/* Ensures no overflow in main content area */
+		}
+    .dark-mode .notification-view {
+            background-color: #111; /* Darker background for notification view */
+            color: #eee; /* Light text color for notification view */
         }
-    </style>
+
+		.container {
+			display: flex;
+			//flex-direction: column; /* Ensures vertical layout for headings and buttons */
+		}
+
+		.form-container {
+			background: #fff;
+			padding: 20px;
+			border-radius: 5px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			margin: 20px 0;
+			width: 100%;
+		}
+
+		.form-container form {
+			display: flex;
+			flex-direction: column;
+		}
+
+		.form-container label {
+			margin-bottom: 10px;
+			font-weight: bold;
+		}
+
+		.form-container input[type="text"] {
+			padding: 10px;
+			margin-bottom: 10px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			width: 100%;
+		}
+
+		.form-container .char-counter {
+			text-align: right;
+			font-size: 12px;
+			color: #666;
+		}
+
+		.form-container button {
+			padding: 10px 20px;
+			background-color: #28a745;
+			color: #fff;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			margin-top: 10px;
+		}
+
+		.form-container button:hover {
+			background-color: #218838;
+		}
+
+		.notification-container {
+			display: flex;
+			flex: 1;
+			overflow: hidden;
+			/* Prevents overflow in the notification container */
+		}
+
+		.notification-list {
+			width: 40%;
+			background-color: #fff;
+			border-right: 1px solid #ddd;
+			overflow-y: auto;
+			max-height: calc(100vh - 150px);
+			/* Adjust the height as needed */
+		}
+
+
+		.notification-item {
+			padding: 15px;
+			border-bottom: 1px solid #ddd;
+			cursor: pointer;
+            
+		}
+
+		.notification-item:hover {
+			background-color: #f1f1f1;
+		}
+
+		.notification-item.active {
+			background-color: #e9ecef;
+		}
+
+		.notification-view {
+			flex: 1;
+			padding: 20px;
+			background-color: #fff;
+			border-radius: 5px;
+			margin-left: 20px;
+			overflow-y: auto;
+            max-height: calc(100vh - 150px);
+			/* Allows scrolling for long content */
+		}
+.notification-view h2 {
+    margin-top: 0;
+    margin-bottom: 10px; /* Space between subject and other details */
+    font-size: 20px; /* Increased font size for subject */
+}
+
+.notification-view h3 {
+    margin-top: 0;
+    margin-bottom: 5px; /* Space between recipient and date */
+    font-size: 18px; /* Increased font size for recipient */
+}
+
+.notification-view small {
+    display: block; /* Ensure date is on a new line */
+    margin-bottom: 15px; /* Space between date and message */
+    font-size: 16px; /* Increased font size for date */
+}
+
+.notification-view p {
+    margin-top: 0;
+    font-size: 16px; /* Increased font size for message */
+}
+
+.form-container textarea {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box; /* Ensures padding and border are included in the total width */
+    resize: vertical; /* Allows vertical resizing */
+}
+
+
+		.compose-container button {
+			background-color: #007bff;
+			color: white;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			font-size: 16px;
+			display: flex;
+			align-items: center;
+		}
+
+		.compose-container button i {
+			margin-right: 10px;
+		}
+
+		.compose-container button:hover {
+			background-color: #0056b3;
+		}
+
+       #toolbar {
+    display: flex;
+    gap: 10px; /* Adds space between the buttons */
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#toolbar button {
+    padding: 10px 20px;
+}
+
+
+#editNotification {
+    margin-top: 30px;
+}
+
+#editForm {
+    display: flex;
+    flex-direction: column;
+}
+
+#editForm label {
+    margin: 10px 0 5px;
+}
+
+#editForm input, #editForm textarea {
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+	</style>
 </head>
+
 <body>
-    <div class="sidebar">
-        <!-- Sidebar content here (same as your current sidebar) -->
-        <div class="top">
-            <div class="logo"> 
-                <img src="../Images/Logo.png" alt="logo" width="50px" height="50px">
+	<div class="sidebar">
+		<!-- Sidebar content here (same as your current sidebar) -->
+		<div class="top">
+			<div class="logo">
+				<img src="../Images/Logo.png" alt="logo" width="50px" height="50px">
                 <span>FITBOARD</span>
             </div>
             <i class='bx bx-menu' id="btn"></i>
@@ -113,59 +318,341 @@
         </ul>
     </div>
     <div class="main_content">
-        <div class="container">
+        <div id="container" class="container">
             <h1>FitBoard</h1>
-            <h2>Send Notifications</h2>
+            <h2>Notifications</h2>
+           
+           
         </div>
-        <div class="form-container">
-            <form id="notificationForm">
-                <label for="message">Message:</label>
-                <input type="text" id="message" name="message" required>
-            </form>
-            <button onclick="sendNotification()">Send Notification</button>
+       <div class="compose-container">
+           <div id="toolbar">
+         <button onclick="composeMessage()"><i class="fas fa-pencil-alt"></i>Compose Message</button>
+           <button id="editBtn" disabled>
+        <i class="fa-regular fa-pen-to-square"></i> Edit
+    </button>
+         <button id="deleteBtn" disabled onclick="deleteNotification()">
+    <i class="fa fa-trash"></i> Delete
+</button>
+
+</div>
+
+           
+        </div>
+
+        
+        <div class="notification-container">
+            <div class="notification-list" id="notificationList">
+                <!-- Notifications previews will be inserted here -->
+            </div>
+            <div class="notification-view" id="notificationView">
+                <!-- Selected notification details will be shown here -->
+            </div>
         </div>
     </div>
-    <script>
-        function sendNotification() {
-            const message = document.getElementById("message").value;
-            fetch("notifications.php", {
+
+    <div id="editNotification" style="display:none;">
+    <h2>Edit Notification</h2>
+    <form id="editForm">
+        <label for="editRecipient">Recipient:</label>
+        <input type="text" id="editRecipient" name="recipient" required>
+
+        <label for="editMessage">Message:</label>
+        <textarea id="editMessage" name="message" required></textarea>
+
+        <button type="submit">Save</button>
+        <button type="button" id="cancelEdit">Cancel</button>
+    </form>
+</div>
+
+<script>
+    let selectedNotification = null;
+
+    window.onload = function () {
+        loadNotifications();
+        console.log('onload function executed');
+        // Set the initial placeholder message in the notification view
+    const notificationView = document.getElementById("notificationView");
+    notificationView.innerHTML = `<h2>Select a notification to view its details</h2>`;
+    
+        const accessLevel = localStorage.getItem('accessLevel');
+        const userNameElement = document.getElementById('userName');
+        const userRoleElement = document.getElementById('userRole');
+
+        if (accessLevel === '1') {
+            userNameElement.textContent = 'Rurt Kich';
+            userRoleElement.textContent = 'Admin';
+        } else if (accessLevel === '0') {
+            const studentData = JSON.parse(localStorage.getItem('studentData'));
+            if (studentData && studentData.givenName && studentData.surname) {
+                userNameElement.textContent = studentData.givenName + ' ' + studentData.surname;
+                userRoleElement.textContent = 'Student';
+            }
+        }
+         document.getElementById('deleteBtn').disabled = true;
+    };
+
+    function loadNotifications() {
+        const notificationList = document.getElementById("notificationList");
+        notificationList.innerHTML = "";
+
+        fetch("fetch_notifications.php")
+            .then(response => response.json())
+            .then(notifications => {
+                if (notifications.error) {
+                    console.error("Error fetching notifications:", notifications.error);
+                    return;
+                }
+
+                notifications.forEach(notification => {
+                    const notificationItem = document.createElement("div");
+                    notificationItem.className = "notification-item";
+                    notificationItem.textContent = notification.subject; // Use subject from the database
+                    notificationItem.onclick = function () {
+                        showNotification(notification);
+                        selectedNotification = notification; // Store the selected notification
+                        document.getElementById('editBtn').disabled = false; // Enable edit button
+                         document.getElementById('deleteBtn').disabled = false; // Enable delete button
+                    };
+                    notificationList.appendChild(notificationItem);
+                      darkmode();
+                });
+            })
+            .catch(error => console.error("Error fetching notifications:", error));
+    }
+
+    function showNotification(notification) {
+        const notificationView = document.getElementById("notificationView");
+
+        // Convert the ISO date string to a Date object
+        const date = new Date(notification.created_at);
+
+        // Format the date as "YYYY-MM-DD HH:MM:SS"
+        const formattedDate = date.toISOString().replace('T', ' ').substring(0, 19);
+
+        // Replace newlines with <br> for proper display in HTML
+        const formattedMessage = notification.message.replace(/\n/g, '<br>');
+
+        notificationView.innerHTML = `
+            <h2>Subject: ${notification.subject}</h2>
+            <h3>To: ${notification.recipient}</h3>
+            <small>${formattedDate}</small> <!-- Display the formatted creation date -->
+            <p>${formattedMessage}</p> <!-- Display the message with line breaks -->
+        `;
+
+        document.querySelectorAll(".notification-item").forEach(item => item.classList.remove("active"));
+        event.currentTarget.classList.add("active");
+    }
+
+    document.getElementById('editBtn').addEventListener('click', () => {
+        if (selectedNotification) {
+            showEditForm(selectedNotification); // Show the edit form for the selected notification
+        }
+    });
+function composeMessage() {
+    showComposeForm(); // This will display the compose form
+}
+
+
+
+    function showComposeForm() {
+        const notificationView = document.getElementById("notificationView");
+
+        notificationView.innerHTML = `
+            <div class="form-container">
+                <form id="composeForm">
+                    <label for="recipient">Recipient:</label>
+                    <input type="text" id="recipient" name="recipient" placeholder="Enter 'all' or a specific SBHS ID" />
+                    
+                    <label for="subject">Subject:</label>
+                    <input type="text" id="subject" name="subject" maxlength="100" required />
+                    <div class="char-counter" id="subjectCounter">100 characters left</div>
+                    
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" required maxlength="500" oninput="updateCharCounter()" rows="5"></textarea>
+                    <div class="char-counter" id="charCounter">0/500 characters</div>
+
+                    <button type="button" onclick="sendNotification()">Send Notification</button>
+                </form>
+            </div>
+        `;
+
+        const subjectInput = document.getElementById("subject");
+        const subjectCounter = document.getElementById("subjectCounter");
+
+        subjectInput.addEventListener("input", function () {
+            const remaining = 100 - subjectInput.value.length;
+            subjectCounter.textContent = `${remaining} characters left`;
+        });
+    }
+
+    function showEditForm(notification) {
+        const notificationView = document.getElementById("notificationView");
+
+        // Convert the ISO date string to a Date object
+        const date = new Date(notification.created_at);
+
+        // Format the date as "YYYY-MM-DD HH:MM:SS"
+        const formattedDate = date.toISOString().replace('T', ' ').substring(0, 19);
+
+        notificationView.innerHTML = `
+            <div class="form-container">
+                <form id="editForm">
+                    <input type="hidden" id="notificationId" value="${notification.id}" />
+                    
+                    <label for="recipient">Recipient:</label>
+                    <input type="text" id="recipient" name="recipient" value="${notification.recipient}" disabled />
+                    
+                    <label for="subject">Subject:</label>
+                    <input type="text" id="subject" name="subject" maxlength="100" required value="${notification.subject}" />
+                    <div class="char-counter" id="subjectCounter">${100 - notification.subject.length} characters left</div>
+                    
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" required maxlength="500" oninput="updateCharCounter()" rows="5">${notification.message}</textarea>
+                    <div class="char-counter" id="charCounter">${notification.message.length}/500 characters</div>
+
+                    <button type="button" onclick="saveNotificationChanges()">Save Changes</button>
+                </form>
+            </div>
+        `;
+
+        const subjectInput = document.getElementById("subject");
+        const subjectCounter = document.getElementById("subjectCounter");
+
+        subjectInput.addEventListener("input", function () {
+            const remaining = 100 - subjectInput.value.length;
+            subjectCounter.textContent = `${remaining} characters left`;
+        });
+    }
+
+    function updateCharCounter() {
+        const message = document.getElementById("message").value;
+        const charCounter = document.getElementById("charCounter");
+        charCounter.textContent = `${message.length}/500 characters`;
+    }
+
+    function sendNotification() {
+        const recipient = document.getElementById("recipient").value.trim();
+        const subject = document.getElementById("subject").value.trim();
+        const message = document.getElementById("message").value.trim();
+
+        if (!subject || !message) {
+            alert("Please fill in both subject and message.");
+            return;
+        }
+
+        fetch("notifications.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ recipient, subject, message }),
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert("Error sending notification: " + data.error);
+                } else {
+                    alert("Notification sent!");
+                    loadNotifications(); // Refresh the list of notifications
+                }
+            })
+            .catch(error => {
+                alert("Error sending notification.");
+                console.error("Error:", error);
+            });
+    }
+
+    function saveNotificationChanges() {
+        const id = document.getElementById("notificationId").value.trim();
+        const recipient = document.getElementById("recipient").value.trim();
+        const subject = document.getElementById("subject").value.trim();
+        const message = document.getElementById("message").value.trim();
+
+        if (!id || !subject || !message) {
+            alert("Please fill in all fields.");
+            return;
+        }
+
+        fetch("save_noti_changes.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ id, recipient, subject, message }),
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert("Error saving notification: " + data.error);
+                } else {
+                    alert("Notification updated!");
+                    loadNotifications(); // Refresh the list of notifications
+                }
+            })
+            .catch(error => {
+                alert("Error updating notification.");
+                console.error("Error:", error);
+            });
+    }
+
+function deleteNotification() {
+    if (selectedNotification) {
+        if (confirm('Are you sure you want to delete this notification?')) {
+            fetch("delete_notification.php", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ message }),
+                body: JSON.stringify({ id: selectedNotification.id }),
             })
-            .then((response) => response.json())
-            .then((data) => {
-                alert("Notification sent!");
-                document.getElementById("message").value = "";
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-            });
-        }
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Notification deleted!');
+                        loadNotifications(); // Refresh the list of notifications
 
-        window.onload = function() {
-            console.log('onload function executed');
-            var accessLevel = localStorage.getItem('accessLevel');
-            var userNameElement = document.getElementById('userName');
-            var userRoleElement = document.getElementById('userRole');
-            
-            if (accessLevel === '1') {
-                userNameElement.textContent = 'Rurt Kich';
-                userRoleElement.textContent = 'Admin';
-            } else if (accessLevel === '0') {
-                var studentData = JSON.parse(localStorage.getItem('studentData'));
-                if (studentData && studentData.givenName && studentData.surname) {
-                    userNameElement.textContent = studentData.givenName + ' ' + studentData.surname;
-                    userRoleElement.textContent = 'Student';
-                }
-            }
-        };
-    </script>
-    <script src="../Home_Page/Activite_Sidebar.js"></script>
-    <script src="../Settings/darklight_mode.js"></script>
-    <script src="../Profile/Profile_Pic.js"></script>
-    <script src="../Profile/Profile_Check.js"></script>
+                        // Clear the notification display area
+                        const notificationView = document.getElementById("notificationView");
+                        notificationView.innerHTML = `
+                            <h2>Select a notification to view its details</h2>
+                        `;
+
+                        // Reset the selected notification and disable the edit and delete buttons
+                        selectedNotification = null;
+                        document.getElementById('editBtn').disabled = true;
+                        document.getElementById('deleteBtn').disabled = true;
+                    } else {
+                        alert('Failed to delete notification: ' + data.error);
+                    }
+                })
+                .catch(error => {
+                    alert('Error deleting notification.');
+                    console.error("Error:", error);
+                });
+        }
+    }
+}
+function darkmode() {
+  const wasDarkmode = localStorage.getItem('darkmode') === 'true';
+  localStorage.setItem('darkmode', !wasDarkmode);
+
+  // Select elements with desired classes
+  const elements = document.querySelectorAll('.sidebar, .main_content, .heading, .main_video, .video_list, .primary_container, .help_container, .notification-item, .notification-details');
+
+  // Toggle the dark-mode class on each selected element
+  for (const element of elements) {
+      element.classList.toggle('dark-mode', !wasDarkmode);
+  }
+}
+
+
+</script>
+
+
+<script src="../Home_Page/Activite_Sidebar.js"></script>
+<script src="../Settings/darklight_mode.js"></script>
+<script src="../Profile/Profile_Pic.js"></script>
+<script src="../Profile/Profile_Check.js"></script>
+<script src="../Settings/colour_slider.js"></script>
 </body>
 </html>
