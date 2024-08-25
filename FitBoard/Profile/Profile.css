@@ -17,7 +17,13 @@
     border: 2px solid #eee;
     object-fit: fill;
 }
-
+.char-counter {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 12px;
+            color: gray;
+        }
 
 /* Sidebar Styles */
 .sidebar {
@@ -334,6 +340,7 @@ textarea {
   }
 
 /* CSS for styling the modal dialog */
+
 .modal {
     display: none;
     position: fixed;
