@@ -1,9 +1,7 @@
 <?php
-header('Content-Type: application/json');
 
-// Get the raw POST data
-$postData = file_get_contents('php://input');
-$data = json_decode($postData, true);
+header('Content-Type: application/json');
+$response = [];
 
 // Database credentials
 $dsn = 'mysql:host=sql112.infinityfree.com;dbname=if0_36607942_exercise_programs;charset=utf8';
@@ -11,44 +9,53 @@ $username = 'if0_36607942';
 $password = 'Lf1knlji5fBcBd';
 
 try {
-    /*
-    // Connect to the database
+    // Database connection
     $db = new PDO($dsn, $username, $password);
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Prepare the SQL statement
-    
+    // Get the posted data
+    $data = json_decode(file_get_contents('php://input'), true);
 
-    $stmt = $db->prepare('INSERT INTO programs (name, sessions, tier) VALUES (:name, :sessions, :tier)');
-    $stmt->bindParam(':name', $data['programName']);
-    $stmt->bindParam(':sessions', $data['programSessions']);
-    $stmt->bindParam(':tier', $data['programTier']);
-    
-    // Execute the SQL statement
-    $stmt->execute();
+    // Insert into exercise_programs table
+    $stmt = $db->prepare('INSERT INTO exercise_programs (name, number_of_sessions, tier) VALUES (:name, :sessions, :tier)');
+    $stmt->execute([
+        ':name' => $data['programName'],
+        ':sessions' => $data['programSessions'],
+        ':tier' => $data['programTier']
+    ]);
 
-    // Get the last inserted program ID
     $programId = $db->lastInsertId();
 
-    // Prepare the SQL statement for exercises
-    $stmtExercise = $db->prepare('INSERT INTO exercises (program_id, day, category, name, sets, reps) VALUES (:program_id, :day, :category, :name, :sets, :reps)');
+    // Insert into program_tables and program_exercises tables
+    foreach ($data['tablesData'] as $tableNumber => $tableData) {
+        $stmt = $db->prepare('INSERT INTO program_tables (program_id, table_number) VALUES (:program_id, :table_number)');
+        $stmt->execute([
+            ':program_id' => $programId,
+            ':table_number' => $tableNumber
+        ]);
 
-    // Loop through exercises and insert them
-    foreach ($data['exercises'] as $exercise) {
-        $stmtExercise->bindParam(':program_id', $programId);
-        $stmtExercise->bindParam(':day', $exercise['day']);
-        $stmtExercise->bindParam(':category', $exercise['category']);
-        $stmtExercise->bindParam(':name', $exercise['name']);
-        $stmtExercise->bindParam(':sets', $exercise['sets']);
-        $stmtExercise->bindParam(':reps', $exercise['reps']);
-        $stmtExercise->execute();
+        $tableId = $db->lastInsertId();
+
+        $exerciseStmt = $db->prepare('INSERT INTO program_exercises (table_id, name, sets, reps, type) VALUES (:table_id, :name, :sets, :reps, :type)');
+        foreach (['yoga', 'pre_hab', 'main_workout', 'mobility'] as $category) {
+            foreach ($tableData[$category] as $exercise) {
+                $exerciseStmt->execute([
+                    ':table_id' => $tableId,
+                    ':name' => $exercise['name'],
+                    ':sets' => $exercise['sets'],
+                    ':reps' => $exercise['reps'],
+                    ':type' => $category
+                ]);
+            }
+        }
     }
 
-    // Return a success response
-    echo json_encode(['success' => true]);
-} catch (PDOException $e) {
-    // Return an error response
-    echo json_encode(['success' => false, 'error' => $e->getMessage()]);
-    */
+    $response['success'] = true;
+} catch (Exception $e) {
+    $response['success'] = false;
+    $response['error'] = $e->getMessage();
 }
+
+echo json_encode($response);
+
 ?>

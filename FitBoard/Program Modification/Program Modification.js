@@ -304,7 +304,7 @@ function Check_Delete_Buttons(){
                 type ENUM('yoga', 'pre_hab', 'main_workout', 'mobility') NOT NULL,
                 FOREIGN KEY (table_id) REFERENCES program_tables(table_id)
             );
-        */
+    */
 
     let Program_Name = document.getElementById("Program_Name");
     let Program_Sessions = document.getElementById("Program_Sessions");
@@ -328,8 +328,8 @@ function Check_Delete_Buttons(){
         // Initialize the lists for the current table
         Tables_Data[tableNum] = {
             yoga: [],
-            preHab: [],
-            mainWorkout: [],
+            pre_hab: [],
+            main_workout: [],
             mobility: []
         };
 
@@ -348,17 +348,15 @@ function Check_Delete_Buttons(){
                     console.log("Value is yoga");
                     currentCategory = "yoga";
 
-                    if (currentCategory && row.cells.length >= 3) {
+                    const yog_exercise = {
+                        name: row.cells[0].innerText,
+                        sets: row.cells[1].innerText,
+                        reps: row.cells[2].innerText
+                    };
 
-                      const exercise = {
-                          name: row.cells[0].innerText,
-                          sets: row.cells[1].innerText,
-                          reps: row.cells[2].innerText
-                      };
-
-                      Tables_Data[tableNum][currentCategory].push(exercise);
-
-                    }
+                    Tables_Data[tableNum][currentCategory].push(yog_exercise);
+                    console.log("success...!")
+                    
 
                     break;
 
@@ -379,14 +377,13 @@ function Check_Delete_Buttons(){
                     console.log("Value is mobility");
                     currentCategory = "mobility";
 
-                    if (currentCategory && row.cells.length >= 3) {
-                      const exercise = {
-                          name: row.cells[0].innerText,
-                          sets: row.cells[1].innerText,
-                          reps: row.cells[2].innerText
-                      };
-                      Tables_Data[tableNum][currentCategory].push(exercise);
-                    }
+                    const mob_exercise = {
+                        name: row.cells[0].innerText,
+                        sets: row.cells[1].innerText,
+                        reps: row.cells[2].innerText
+                    };
+                    Tables_Data[tableNum][currentCategory].push(mob_exercise);
+                    
 
                     break;
 
@@ -400,13 +397,14 @@ function Check_Delete_Buttons(){
 
                     // If the row is not a category label or bottom row, add it to the current category list
                     console.log("Value is something else");
+       
                     if (currentCategory && row.cells.length >= 3) {
-                        const exercise = {
+                        const norm_exercise = {
                             name: row.cells[0].innerText,
                             sets: row.cells[1].innerText,
                             reps: row.cells[2].innerText
                         };
-                        Tables_Data[tableNum][currentCategory].push(exercise);
+                        Tables_Data[tableNum][currentCategory].push(norm_exercise);
                     }
                     
                     break;
