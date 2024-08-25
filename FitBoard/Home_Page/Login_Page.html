@@ -135,13 +135,13 @@
     </div>
 
     <!-- Background section containing the login form -->
-    <div class="background">
+     <div class="background">
         <div class="login-box" id="loginBox">
             <h2>Account Log In</h2>
             <p>Log in with your admin account</p>
-            <!-- Login form for admin with email and password fields -->
+            <!-- Modified form action to PHP -->
             <form id="loginForm" method="POST" action="admin_login.php">
-                <div id="errorContainer"></div> <!-- Container for error messages -->
+                <div id="errorContainer"></div>
                 <input type="email" id="email" name="email" placeholder="Email" required>
                 <input type="password" id="password" name="password" placeholder="Password" required>
                 <button type="submit">Log In</button>
@@ -149,39 +149,5 @@
         </div>
     </div>
 
-    <script>
-        // Event listener for the login form submission
-        document.getElementById('loginForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent default form submission behavior
-
-            // Retrieve input values for email and password
-            var email = document.getElementById('email').value;
-            var password = document.getElementById('password').value;
-
-            // Reference to the error container and login box
-            var errorContainer = document.getElementById('errorContainer');
-            var loginBox = document.getElementById('loginBox');
-
-            // Simulate login process for the admin account
-            if (email === 'admin@email.com') {
-                if (password === 'fitboard123') {
-                    // Set access level in local storage for successful login
-                    localStorage.setItem('accessLevel', '1');
-                    // Redirect to the Home Page
-                    window.location.href = '../Dashboard/adminDashboard.html';
-                } else {
-                    // Display error message for incorrect password
-                    errorContainer.innerHTML = '<div class="error-message">Unable to log you in.<br>Unknown email or bad password.</div>';
-                    // Adjust login box height to accommodate the error message
-                    loginBox.style.height = '360px';
-                }
-            } else {
-                // Display error message for non-existing email account
-                errorContainer.innerHTML = '<div class="error-message">Unable to log you in.<br>The specified account does not exist.</div>';
-                // Adjust login box height to accommodate the error message
-                loginBox.style.height = '360px';
-            }
-        });
-    </script>
 </body>
 </html>
