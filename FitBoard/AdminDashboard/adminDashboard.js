@@ -1,5 +1,4 @@
 let editMode = false;
-let studentToDeleteId = null;
 
 /* On Page Load */
 function onload() {
@@ -18,11 +17,9 @@ function onload() {
         }
     }
 
-    fetchStudentData();  // Ensure this is called
-    // Set the toggle switch to off when the page loads
+    fetchStudentData();
     document.getElementById('editToggle').checked = false;
     document.querySelector(".edit-mode").style.display = "none";
-
 }
 
 /* Fetch Student Data */
@@ -43,29 +40,36 @@ function fetchStudentData() {
     };
     xhr.send();
 }
-
-/* Populate the Table with Data */
+// Populate the Table with Data
 function populateTable(students) {
     var tableBody = document.querySelector("#studentTable tbody");
     tableBody.innerHTML = "";
 
     students.forEach(function (student) {
-
         var row = tableBody.insertRow();
-        row.dataset.id = student.id; // Add student ID as data attribute
+        row.dataset.id = student.id;
 
         var cell1 = row.insertCell(0);
         var cell2 = row.insertCell(1);
         var cell3 = row.insertCell(2);
         var cell4 = row.insertCell(3);
         var cell5 = row.insertCell(4);
+        var cell6 = row.insertCell(5); // New column for checkbox
 
-        // Assign data to the correct cells
-        cell1.textContent = student.sbhs_id;   // SBHS ID
-        cell2.textContent = student.firstName; // First Name
-        cell3.textContent = student.lastName;  // Last Name
-        cell4.textContent = student.studentYear;      // Year
-        cell5.textContent = student.tier;      // Tier
+        cell1.textContent = student.sbhs_id;
+        cell2.textContent = student.firstName;
+        cell3.textContent = student.lastName;
+        cell4.textContent = student.studentYear;
+        cell5.textContent = student.tier;
+
+        // Create and add a checkbox
+
+           // Create and add a checkbox
+        var checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.className = 'student-checkbox';
+        checkbox.value = student.id; // Set value to student ID
+        cell6.appendChild(checkbox);
 
         if (editMode) {
             cell1.contentEditable = "true";
@@ -73,56 +77,87 @@ function populateTable(students) {
             cell3.contentEditable = "true";
             cell4.contentEditable = "true";
             cell5.contentEditable = "true";
+
+            // Add validation event listeners
+            cell1.addEventListener('blur', validateSBHSId);
+            cell2.addEventListener('blur', validateName);
+            cell3.addEventListener('blur', validateName);
+            cell4.addEventListener('blur', validateYear);
         }
     });
 }
 
+function filterTable() {
+    // Get filter values
+    var yearFilter = document.getElementById("filterYear").value;
+    
+    // Get the table and its rows
+    var table = document.getElementById("studentTable");
+    var rows = table.getElementsByTagName("tr");
+    
+    // Loop through all rows, skipping the header (index 0)
+    for (var i = 1; i < rows.length; i++) {
+        // Get the year cells from the current row
+        var yearCell = rows[i].getElementsByTagName("td")[3]; // Assuming year is in column 4 (index 3)
+    
+        // Check if year cells exist (for safety)
+        if (yearCell) {
+            // Get the values from the cells, trimmed of extra spaces
+            var year = yearCell.textContent.trim();
+           
 
-/* Show the delete confirmation modal */
-function showModal(studentId) {
-    studentToDeleteId = studentId;
-    var modal = document.getElementById('deleteModal');
-    modal.style.display = 'block';
-}
+            // Check if the row matches the selected filters (empty means 'all')
+            var yearMatch = (yearFilter === "" || year === yearFilter);
 
-/* Close the delete confirmation modal */
-function closeModal() {
-    studentToDeleteId = null;
-    var modal = document.getElementById('deleteModal');
-    modal.style.display = 'none';
-}
-
-
-/* Confirm the delete action */
-function confirmDelete() {
-    if (studentToDeleteId !== null) {
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "delete_student.php", true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.onreadystatechange = function () {
-            if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-                var response = JSON.parse(this.responseText);
-                if (response.status === 'success') {
-                    alert(response.message);
-                    fetchStudentData(); // Refresh the student list
-                } else {
-                    alert('Error: ' + response.message);
-                }
-                closeModal();
-            } else if (this.readyState === XMLHttpRequest.DONE) {
-                console.error('Failed to delete student: ', this.status, this.statusText);
+            // Display the row if both filters match, otherwise hide it
+            if (yearMatch) {
+                rows[i].style.display = "";
+            } else {
+                rows[i].style.display = "none";
             }
-        };
-        xhr.send("id=" + studentToDeleteId);
+        }
     }
 }
 
-/* Toggle Edit Mode */
-function toggleEditMode() {
-    editMode = !editMode;
-    document.querySelector(".edit-mode").style.display = editMode ? "inline-block" : "none";
-    fetchStudentData();
+/* Validate SBHS ID */
+function validateSBHSId(event) {
+    const sbhsId = event.target.textContent.trim();
+    const sbhsIdRegex = /^\d{9}$/;
+
+    if (!sbhsIdRegex.test(sbhsId)) {
+        event.target.style.border = "2px solid red"; // Add red border for invalid SBHS ID
+        alert('SBHS ID must be exactly 9 digits.');
+    } else {
+        event.target.style.border = ""; // Remove border if valid
+    }
 }
+
+/* Validate Name */
+function validateName(event) {
+    const name = event.target.textContent.trim();
+    const nameRegex = /^[A-Z][A-Za-z\s-]*$/;
+
+    if (!nameRegex.test(name)) {
+        event.target.style.border = "2px solid red"; // Add red border for invalid name
+        alert('Name must start with a capital letter and contain only letters, spaces, and hyphens.');
+    } else {
+        event.target.style.border = ""; // Remove border if valid
+    }
+}
+
+/* Validate Year */
+function validateYear(event) {
+    const year = event.target.textContent.trim();
+    const yearRegex = /^(7|8|9|10|11|12)$/;
+
+    if (!yearRegex.test(year)) {
+        event.target.style.border = "2px solid red"; // Add red border for invalid year
+        alert('Year must be a number between 7 and 12.');
+    } else {
+        event.target.style.border = ""; // Remove border if valid
+    }
+}
+
 
 /* Save Changes to the Database */
 function saveChanges() {
@@ -130,6 +165,8 @@ function saveChanges() {
 
     var table = document.getElementById("studentTable");
     var students = [];
+    let isValid = true;
+    let invalidRows = [];
 
     for (var i = 1, row; row = table.rows[i]; i++) {
         var student = {
@@ -140,7 +177,20 @@ function saveChanges() {
             studentYear: row.cells[3].textContent.trim(),
             tier: row.cells[4].textContent.trim()
         };
-        students.push(student);
+
+        const errorMsg = validateStudentData(student);
+        if (errorMsg) {
+            invalidRows.push(i); // Track invalid rows
+            alert('Validation error: ' + errorMsg);
+            isValid = false; // Mark as invalid if any error
+        } else {
+            students.push(student);
+        }
+    }
+
+    if (!isValid) {
+        highlightInvalidRows(invalidRows);
+        return; // Prevent sending data if validation fails
     }
 
     console.log("Student data to be sent:", students);
@@ -159,7 +209,7 @@ function saveChanges() {
             if (this.status === 200) {
                 var response = JSON.parse(this.responseText);
                 if (response.status === 'success') {
-                    //alert(response.message);
+                    alert('Changes saved successfully.');
                 } else {
                     alert('Error: ' + response.message);
                 }
@@ -175,6 +225,37 @@ function saveChanges() {
     };
 
     xhr.send(JSON.stringify(students));
+}
+/* Highlight Invalid Data */
+function highlightInvalidRows(invalidRows) {
+    var table = document.getElementById('studentTable');
+    var rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+    // Clear previous highlights
+    for (var i = 1; i < rows.length; i++) {
+        var cells = rows[i].getElementsByTagName('td');
+        for (var j = 0; j < cells.length; j++) {
+            cells[j].style.backgroundColor = ""; // Remove red background
+        }
+    }
+
+    // Highlight invalid cells
+    invalidRows.forEach(function(rowIndex) {
+        var row = rows[rowIndex];
+        var cells = row.getElementsByTagName('td');
+        cells.forEach(function(cell) {
+            cell.style.backgroundColor = "red"; // Apply red background to invalid cells
+        });
+    });
+}
+
+
+
+/* Toggle Edit Mode */
+function toggleEditMode() {
+    editMode = !editMode;
+    document.querySelector(".edit-mode").style.display = editMode ? "inline-block" : "none";
+    fetchStudentData();
 }
 
 /* Show Help Modal */
@@ -211,21 +292,12 @@ function searchTable() {
     }
 }
 
-function validateName(input) {
-    const regex = /^[A-Za-z]+$/;
-    if (!regex.test(input.value)) {
-        input.setCustomValidity('Please enter only letters.');
-    } else {
-        input.setCustomValidity('');
-    }
-}
-
 /* Sort Table Functionality */
 function sortTable(n) {
     var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
     table = document.getElementById("studentTable");
     switching = true;
-    dir = "asc"; // Set the sorting direction to ascending
+    dir = "asc"; // Set the default sorting direction to ascending
 
     while (switching) {
         switching = false;
@@ -236,13 +308,24 @@ function sortTable(n) {
             x = rows[i].getElementsByTagName("TD")[n];
             y = rows[i + 1].getElementsByTagName("TD")[n];
 
-            if (dir == "asc") {
-                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+            // Detect if the column contains numbers (e.g., Year)
+            if (!isNaN(x.innerHTML) && !isNaN(y.innerHTML)) {
+                // Convert strings to numbers for comparison
+                xVal = parseInt(x.innerHTML);
+                yVal = parseInt(y.innerHTML);
+            } else {
+                // Treat as strings for other columns
+                xVal = x.innerHTML.toLowerCase();
+                yVal = y.innerHTML.toLowerCase();
+            }
+
+            if (dir === "asc") {
+                if (xVal > yVal) {
                     shouldSwitch = true;
                     break;
                 }
-            } else if (dir == "desc") {
-                if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+            } else if (dir === "desc") {
+                if (xVal < yVal) {
                     shouldSwitch = true;
                     break;
                 }
@@ -254,13 +337,84 @@ function sortTable(n) {
             switching = true;
             switchcount++;
         } else {
-            if (switchcount == 0 && dir == "asc") {
+            if (switchcount === 0 && dir === "asc") {
                 dir = "desc";
                 switching = true;
             }
         }
     }
 }
+
+
+/* Validate Student Data */
+function validateStudentData(student) {
+    const sbhsIdRegex = /^\d{9}$/;
+    const nameRegex = /^[A-Z][A-Za-z\s-]*$/;
+    const yearRegex = /^(7|8|9|10|11|12)$/;
+
+    let errorMsg = null;
+
+    if (!sbhsIdRegex.test(student.sbhs_id)) {
+        errorMsg = 'SBHS ID must be exactly 9 digits.';
+    } else if (!nameRegex.test(student.firstName)) {
+        errorMsg = 'First Name must start with a capital letter and contain only letters, spaces, and hyphens.';
+    } else if (!nameRegex.test(student.lastName)) {
+        errorMsg = 'Last Name must start with a capital letter and contain only letters, spaces, and hyphens.';
+    } else if (!yearRegex.test(student.studentYear)) {
+        errorMsg = 'Year must be a number between 7 and 12.';
+    }
+
+    return errorMsg;
+}
+function confirmDelete() {
+    // Get all checked checkboxes
+    var checkboxes = document.querySelectorAll('#studentTable tbody input[type="checkbox"]:checked');
+    
+    if (checkboxes.length === 0) {
+        alert("No students selected for deletion.");
+        return;
+    }
+
+    // Show confirmation dialog
+    if (confirm("Are you sure you want to delete the selected students? This action cannot be undone.")) {
+        let idsToDelete = [];
+        
+        checkboxes.forEach(function(checkbox) {
+            idsToDelete.push(checkbox.value); // Collect IDs from checked checkboxes
+        });
+        
+        console.log("IDs to delete:", idsToDelete); // For debugging
+
+        // Call delete function with selected IDs
+        deleteSelectedStudents(idsToDelete);
+    }
+}
+
+
+function deleteSelectedStudents(ids) {
+    fetch('delete_students.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ ids: ids })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            alert("Selected students have been deleted successfully.");
+            // Refresh the student table to reflect changes
+            fetchStudentData();
+        } else {
+            alert("Error deleting students: " + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+
 
 /* Initialize on page load */
 window.onload = onload;
