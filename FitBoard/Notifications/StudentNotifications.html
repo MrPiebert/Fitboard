@@ -14,25 +14,72 @@
 	<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
 	<style>
+		/* Same styles as before */
+		html,
+		body {
+			height: 100%;
+			margin: 0;
+			overflow: hidden;
+			/* Prevent scrolling */
+		}
+
+		body {
+			font-family: 'Montserrat', sans-serif;
+			display: flex;
+			flex-direction: column;
+		}
+
+		.main_content {
+			flex: 1;
+			padding: 20px;
+			box-sizing: border-box;
+			overflow: hidden;
+			/* Prevent scrolling within the main content */
+		}
+
+		.container {
+			overflow: auto;
+			/* Allow scrolling within container if needed */
+			max-height: calc(100vh - 80px);
+			/* Adjust based on sidebar height */
+		}
+
+		.search-container {
+			margin-top: 20px;
+		}
+
+		.notification-container {
+			margin-top: 20px;
+		}
+
 		.notification-list {
-			margin-top: 70px;
-			max-height: calc(100vh - 120px);
-            transform: translateX(-70%); /* Move the notifications to the left */
-			/* Adjust as needed */
+			max-height: calc(100vh - 140px);
+			/* Adjust based on padding and other margins */
 			overflow-y: auto;
+			padding: 10px;
 		}
 
 		.notification-item {
 			background-color: #f9f9f9;
 			border: 1px solid #ddd;
-			border-radius: 5px;
-			padding: 15px;
-			margin-bottom: 10px;
+			border-radius: 15px;
+			padding: 20px;
+			margin-bottom: 15px;
+			min-height: 120px;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+		}
+
+		.notification-item:hover {
+			background-color: #f1f1f1;
 		}
 
 		.notification-header {
 			font-weight: bold;
 			margin-bottom: 5px;
+			font-size: 1.1em;
 		}
 
 		.notification-date {
@@ -44,76 +91,205 @@
 		.notification-message {
 			font-size: 1em;
 		}
+
+		.notification-subject {
+			font-weight: bold;
+			margin-bottom: 5px;
+			font-size: 1.2em;
+		}
+
+		.search-bar {
+			display: flex;
+			align-items: center;
+		}
+
+		.search-bar input {
+			flex-grow: 1;
+			padding: 10px;
+			border: 1px solid #ddd;
+			border-radius: 5px;
+		}
+
+		.help-button {
+			position: fixed;
+			bottom: 20px;
+			right: 20px;
+			width: 50px;
+			height: 50px;
+			background-color: #5bc0de;
+			color: white;
+			border: none;
+			border-radius: 50%;
+			font-size: 24px;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.help-button:hover {
+			background-color: #46b8da;
+		}
+
+		.help-popup {
+			display: none;
+			position: fixed;
+			bottom: 80px;
+			right: 20px;
+			background-color: white;
+			border: 1px solid #ddd;
+			border-radius: 5px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+			padding: 20px;
+			width: 300px;
+		}
+
+		.help-popup p {
+			margin: 0;
+		}
+        
 	</style>
 </head>
 
 <body>
 	<div class="sidebar">
+
 		<div class="top">
+			<!--Top of Sidebar (Logo)-->
 			<div class="logo">
 				<img src="../Images/Logo.png" alt="logo" width="50px" height="50px">
-                <span>FITBOARD</span>
+                    <span>FITBOARD</span>
+                </div>
+                <i class='bx bx-menu' id="btn"></i>
             </div>
-            <i class='bx bx-menu' id="btn"></i>
-        </div>
-        <div class="user">
-            <img src="../Images/User_Image.jpg" alt="profile picture" class="User_Image" id="userImage">
-            <div>
-                <p class="bold" id="userName">Default&#160User</p>
+
+            <div class="user">          <!--Username and Profile-->
+                <img src="../Images/User_Image.jpg" alt="profile picture" class="User_Image" id="userImage">
+                <div>
+                      <p class="bold" id="userName">Default&#160User</p>
                 <p id="userRole">Admin</p>
+                </div>
+            </div>
+
+            <!--unordered list of all of the sidebar icons-->
+
+            <ul>        
+                <li>
+                    <a href="../Home_Page/Home_Page.html">
+                        <i class="bx bxs-grid-alt"></i>
+                        <span class="Nav_Item">Dashboard</span>
+                    </a>
+                    <span class="tooltip">Dashboard</span>
+                </li>
+                <li>
+                    <a href="../Profile/Profile.html">
+                        <i class="bx bxs-user-circle"></i>
+                        <span class="Nav_Item">Profile</span>
+                    </a>
+                    <span class="tooltip">Profile</span>
+                </li>
+                <li>
+                    <a href="../Program Modification/Program Modification.html">
+                        <i class="bx bxs-duplicate"></i>
+                        <span class="Nav_Item">Modify&#160Programs</span>
+                    </a>
+                    <span class="tooltip">Modify&#160Programs </span>
+                </li>
+                <li>
+                    <a href="../Notifications/Notifications.html">
+                        <i class="bx bxs-bell-ring"></i>
+                        <span class="Nav_Item">Notifications</span>
+                    </a>
+                    <span class="tooltip">Notifications</span>
+                </li>
+                <li>
+                    <a href="../Upload_Video/Videos.html">
+                        <i class="bx bxs-video"></i>
+                        <span class="Nav_Item">Video&#160Tutorials</span>
+                    </a>
+                    <span class="tooltip">Video&#160Tutorials</span>
+                </li>
+                <li>
+                    <a href="../Settings/Settings.html">
+                        <i class="bx bxs-cog"></i>
+                        <span class="Nav_Item">Settings</span>
+                    </a>
+                    <span class="tooltip">Settings</span>
+                </li>
+                <li>
+                    <a href="../Help/Help.html">
+                        <i class="bx bxs-help-circle"></i>
+                        <span class="Nav_Item">Help</span>
+                    </a>
+                    <span class="tooltip">Help</span>
+                </li>
+                <li>
+                    <a href="../LandingPage.html">
+                        <i class="bx bxs-log-out"></i>
+                        <span class="Nav_Item">Logout</span>
+                    </a>
+                    <span class="tooltip">Logout</span>
+                </li>
+            </ul>
+        </div>
+
+    <div class="main_content">
+        <div id = "container" class="container">
+            <h1>FitBoard</h1>
+            <h2>Student Notices</h2>
+        </div>
+        
+        <div class="search-container">
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search notifications..." oninput="searchNotifications()">
             </div>
         </div>
-        <ul>
-            <li><a href="../Home_Page/Home_Page.html"><i class="bx bxs-grid-alt"></i><span class="Nav_Item">Dashboard</span></a><span class="tooltip">Dashboard</span></li>
-            <li><a href="../Profile/Profile.html"><i class="bx bxs-user-circle"></i><span class="Nav_Item">Profile</span></a><span class="tooltip">Profile</span></li>
-            <li><a href="../Program Modification/Program Modification.html"><i class="bx bxs-duplicate"></i><span class="Nav_Item">Modify Programs</span></a><span class="tooltip">Modify Programs </span></li>
-            <li><a href="Notifications.html"><i class="bx bxs-bell-ring"></i><span class="Nav_Item">Notifications</span></a><span class="tooltip">Notifications</span></li>
-            <li><a href="../Upload_Video/Videos.html"><i class="bx bxs-video"></i><span class="Nav_Item">Video&#160Tutorials</span></a><span class="tooltip">Video&#160Tutorials</span></li>
-            <li><a href="../Settings/Settings.html"><i class="bx bxs-cog"></i><span class="Nav_Item">Settings</span></a><span class="tooltip">Settings</span></li>
-            <li><a href="../Help/Help.html"><i class="bx bxs-help-circle"></i><span class="Nav_Item">Help</span></a><span class="tooltip">Help</span></li>
-            <li><a href="../Landing_Page/LandingPage.html"><i class="bx bxs-log-out"></i><span class="Nav_Item">Logout</span></a><span class="tooltip">Logout</span></li>
-        </ul>
+
+        <div class="notification-container">
+            <div id="notifications" class="notification-list">
+                <!-- Notifications will be added dynamically here -->
+            </div>
+        </div>
     </div>
-	<div class="main_content">
-		<div class="container">
-			<h1>FitBoard</h1>
-			<h2>Student Notices</h2>
-			<div id="notifications" class="notification-list">
-				<!-- Notifications will be added dynamically here -->
-			</div>
-		</div>
-	</div>
-	<script>
-		window.onload = function() {
-    // Fetch notifications
-    fetch("notifications.php")
+    
+    <button class="help-button" onclick="toggleHelpPopup()">?</button>
+    <div class="help-popup" id="helpPopup">
+        <p>Here you can find notifications and search through them using the search bar above.</p>
+    </div>
+    <script>
+         window.onload = function () {
+           
+              // Set user details
+            var accessLevel = localStorage.getItem("accessLevel");
+    var userNameElement = document.getElementById("userName");
+    var userRoleElement = document.getElementById("userRole");
+
+    let studentID = null; // Initialize the studentID
+
+    if (accessLevel === "1") {
+        userNameElement.textContent = "Kurt Rich";
+        userRoleElement.textContent = "Admin";
+    } else if (accessLevel === "0") {
+        var studentData = JSON.parse(localStorage.getItem("studentData"));
+        if (studentData && studentData.givenName && studentData.surname) {
+            userNameElement.textContent = studentData.givenName + " " + studentData.surname;
+            userRoleElement.textContent = "Student";
+            studentID = studentData.studentId; // Assign the studentID from studentData
+        }
+    }
+           
+            // Fetch notifications filtered by studentID
+    fetch("notifications.php?studentID=" + studentID)
         .then(response => response.json())
         .then(data => {
             const notificationsDiv = document.getElementById("notifications");
             const maxNotifications = 10; // Adjust the maximum number of notifications to display
 
+            // Store all notifications for dynamic search
+            window.allNotifications = data.notifications;
+
             // Display up to maxNotifications notifications or all if fewer
-            data.notifications.slice(0, maxNotifications).forEach(notification => {
-                const notificationElement = document.createElement("div");
-                notificationElement.className = "notification-item";
-                
-                const header = document.createElement("div");
-                header.className = "notification-header";
-                header.textContent = "From: Rurt Kich"; // Replace with actual sender
-                notificationElement.appendChild(header);
-                
-                const date = document.createElement("div");
-                date.className = "notification-date";
-                date.textContent = "Sent on: " + notification.created_at; // Adjust date format if needed
-                notificationElement.appendChild(date);
-                
-                const message = document.createElement("div");
-                message.className = "notification-message";
-                message.textContent = notification.message;
-                notificationElement.appendChild(message);
-                
-                notificationsDiv.appendChild(notificationElement);
-            });
+            updateNotificationList(window.allNotifications.slice(0, maxNotifications));
 
             // If more notifications exist than displayed, indicate to scroll
             if (data.notifications.length > maxNotifications) {
@@ -125,32 +301,74 @@
         .catch(error => {
             console.error("Error:", error);
         });
+};
 
-    // Set user details
-    var accessLevel = localStorage.getItem("accessLevel");
-    var userNameElement = document.getElementById("userName");
-    var userRoleElement = document.getElementById("userRole");
+        function searchNotifications() {
+            const input = document.getElementById("searchInput").value.toLowerCase();
+            const filteredNotifications = window.allNotifications.filter(notification => {
+                const message = notification.message.toLowerCase();
+                const header = "From: Kurt Rich".toLowerCase(); // Adjust if using dynamic sender info
+                return message.includes(input) || header.includes(input);
+            });
 
-    if (accessLevel === "1") {
-        userNameElement.textContent = "Rurt Kich";
-        userRoleElement.textContent = "Admin";
-    } else if (accessLevel === "0") {
-        var studentData = JSON.parse(localStorage.getItem("studentData"));
-        if (studentData && studentData.givenName && studentData.surname) {
-            userNameElement.textContent = studentData.givenName + " " + studentData.surname;
-            userRoleElement.textContent = "Student";
+            updateNotificationList(filteredNotifications);
+        }
+
+          function updateNotificationList(notifications) {
+        const notificationsDiv = document.getElementById("notifications");
+        notificationsDiv.innerHTML = ''; // Clear previous results
+
+        const maxNotifications = 10; // Adjust as needed
+        const notificationsToDisplay = notifications.slice(0, maxNotifications);
+
+        notificationsToDisplay.forEach(notification => {
+            const notificationElement = document.createElement("div");
+            notificationElement.className = "notification-item";
+
+            const subject = document.createElement("div");
+            subject.className = "notification-subject";
+            subject.textContent = "Subject: " + notification.subject;
+            notificationElement.appendChild(subject);
+
+            const header = document.createElement("div");
+            header.className = "notification-header";
+            header.textContent = "From: Kurt Rich"; // Replace with actual sender
+            notificationElement.appendChild(header);
+
+            const date = document.createElement("div");
+            date.className = "notification-date";
+            date.textContent = "Sent on: " + notification.created_at; // Adjust date format if needed
+            notificationElement.appendChild(date);
+
+         const message = document.createElement("div");
+        // Replace newlines with <br> for proper display in HTML
+        const formattedMessage = notification.message.replace(/\n/g, '<br>');
+        message.className = "notification-message";
+        // Set the HTML content with line breaks
+        message.innerHTML = formattedMessage;
+
+        notificationElement.appendChild(message);
+
+        notificationsDiv.appendChild(notificationElement);
+        });
+
+        if (notifications.length > maxNotifications) {
+            const scrollMessage = document.createElement("div");
+            scrollMessage.textContent = "Scroll to view more notifications";
+            notificationsDiv.appendChild(scrollMessage);
         }
     }
-};
-	</script>
-	<script src="../Home_Page/Activite_Sidebar.js">
-	</script>
-	<script src="../Settings/darklight_mode.js">
-	</script>
-	<script src="../Profile/Profile_Pic.js">
-	</script>
-	<script src="../Profile/Profile_Check.js">
-	</script>
+        function toggleHelpPopup() {
+            const helpPopup = document.getElementById("helpPopup");
+            helpPopup.style.display = (helpPopup.style.display === "block") ? "none" : "block";
+        }
+    
+    </script>
+    <script src="../Home_Page/Activite_Sidebar.js"></script>
+    <script src="../Settings/darklight_mode.js"></script>
+    <script src="../Profile/Profile_Pic.js"></script>
+    <script src="../Profile/Profile_Check.js"></script>
+    <script src="../Settings/colour_slider.js"></script>
 </body>
 
 </html>
