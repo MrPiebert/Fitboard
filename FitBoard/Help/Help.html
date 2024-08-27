@@ -1,167 +1,270 @@
 <!DOCTYPE html>
 <html lang="en">
-    <!-- #region head (stylesheets and refs) -->
+<!-- #region head (stylesheets and refs) -->
 
-    <head>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>FitBoard</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- External Stylesheets -->
+	<link rel="stylesheet" href="Help.css">
+	<!-- Favicon -->
+	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+	<link rel="icon" href="../Landing_Page/favicon.ico">
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap" rel="stylesheet">
+	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+	<!-- Custom Styles -->
+	<style>
+		body {
+			font-family: 'Montserrat', sans-serif;
+			background-color: #f0f2f5;
+			margin: 0;
+			padding: 0;
+		}
 
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>FitBoard</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- External Stylesheets -->
-        <link rel="stylesheet" href="Help.css">
-        <!-- Favicon -->
-        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
-        <link rel="icon" href="../Landing_Page/favicon.ico">
-        <!-- Google Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap" rel="stylesheet">
-        <!-- Boxicons -->
-        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
-        
-    </head>
+		.main_content {
+			padding: 20px;
+		}
 
-    <!-- #endregion -->
+		.container {
+			text-align: center;
+			margin-bottom: 30px;
+		}
 
-    <!-- #region main -->
+		.help_container {
+			background: #fff;
+			padding: 20px;
+			border-radius: 10px;
+			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+		}
 
-    <body onload="onload()">
+		.help_container h2,
+		.help_container h3 {
+			color: #333;
+		}
 
-        <!-- #region Sidebar Navigation -->
+		.help_container p,
+		.help_container ul {
+			color: #555;
+		}
 
-        <div class="sidebar">
+		.help_container ul {
+			padding-left: 20px;
+		}
 
-            <div class="top">           <!--Top of Sidebar (Logo)-->
-                <div class="logo"> 
-                    <img src="../Images/Logo.png" alt="logo" width="50px" height="50px">
-                    <span>FITBOARD</span>
-                </div>
-                <i class='bx bx-menu' id="btn"></i>
+		.help_container ul li {
+			margin: 10px 0;
+		}
+
+		.faq_item {
+			cursor: pointer;
+			padding: 10px 0;
+			border-bottom: 1px solid #eaeaea;
+		}
+
+		.faq_item:last-child {
+			border-bottom: none;
+		}
+
+		.faq_answer {
+			display: none;
+			padding: 10px 0;
+			color: #555;
+		}
+	</style>
+</head>
+<!-- #endregion -->
+
+<!-- #region main -->
+
+<body onload="onload()">
+	<!-- #region Sidebar Navigation -->
+	<div class="sidebar">
+		<div class="top">
+			<!--Top of Sidebar (Logo)-->
+			<div class="logo">
+				<img src="../Images/Logo.png" alt="logo" width="50px" height="50px">
+                <span>FITBOARD</span>
             </div>
-
-            <div class="user">          <!--Username and Profile-->
-                <img src="../Images/User_Image.jpg" alt="profile picture" class="User_Image" id="userImage">
-                <div>
-                    <p class="bold">Default&#160User</p>
-                    <p>Admin</p>
-                </div>
-            </div>
-
-            <!--unordered list of all of the sidebar icons-->
-
-            <ul>        
-                <li>
-                    <a href="../Home_Page/Home_Page.html">
-                        <i class="bx bxs-grid-alt"></i>
-                        <span class="Nav_Item">Dashboard</span>
-                    </a>
-                    <span class="tooltip">Dashboard</span>
-                </li>
-                <li>
-                    <a href="../Profile/Profile.html">
-                        <i class="bx bxs-user-circle"></i>
-                        <span class="Nav_Item">Profile</span>
-                    </a>
-                    <span class="tooltip">Profile</span>
-                </li>
-                <li>
-                    <a href="../Program Modification/Program Modification.html">
-                        <i class="bx bxs-duplicate"></i>
-                        <span class="Nav_Item">Modify&#160Programs</span>
-                    </a>
-                    <span class="tooltip">Modify&#160Programs </span>
-                </li>
-                <li>
-                    <a href="../Notifications/Notifications.html">
-                        <i class="bx bxs-bell-ring"></i>
-                        <span class="Nav_Item">Notifications</span>
-                    </a>
-                    <span class="tooltip">Notifications</span>
-                </li>
-                <li>
-                    <a href="../Upload_Video/Videos.html">
-                        <i class="bx bxs-video"></i>
-                        <span class="Nav_Item">Video&#160Tutorials</span>
-                    </a>
-                    <span class="tooltip">Video&#160Tutorials</span>
-                </li>
-                <li>
-                    <a href="../Settings/Settings.html">
-                        <i class="bx bxs-cog"></i>
-                        <span class="Nav_Item">Settings</span>
-                    </a>
-                    <span class="tooltip">Settings</span>
-                </li>
-                <li>
-                    <a href="../Help/Help.html">
-                        <i class="bx bxs-help-circle"></i>
-                        <span class="Nav_Item">Help</span>
-                    </a>
-                    <span class="tooltip">Help</span>
-                </li>
-                <li>
-                    <a href="../LandingPage.html">
-                        <i class="bx bxs-log-out"></i>
-                        <span class="Nav_Item">Logout</span>
-                    </a>
-                    <span class="tooltip">Logout</span>
-                </li>
-            </ul>
+            <i class='bx bx-menu' id="btn"></i>
         </div>
 
-        <!-- #endregion -->
-
-        <!-- #region Page Content --> 
-
-        <div class="main_content">
-
-            <div class="container" id="container">
-                <h1 id="main-heading">FitBoard</h1>
-                <h1 id="sub-heading">Help</h1>
-                <h3>&#160&#160Help</h3>      
+        <div class="user">          <!--Username and Profile-->
+            <img src="../Images/User_Image.jpg" alt="profile picture" class="User_Image" id="userImage">
+            <div>
+                <p class="bold" id="userName">Default&#160User</p>
+                <p id="userRole">Admin</p>
             </div>
-
-            <div class="help_container">
-                This ia a program for weight. this does this that does that
-                contact us at 1300655506
-            </div>
-
         </div>
 
-        <!-- #endregion -->
-
-        <!-- #region Javascript calls -->
-
-        <script src="../Home_Page/Activite_Sidebar.js"> </script>
-        <script src="../Settings/darklight_mode.js"></script>
-        <script src="../Profile/Profile_Pic.js"></script>
-        <script src="../Profile/Profile_Check.js"></script>
-        <script src="../Settings/colour_slider.js"></script>
-         <script>
-        function onload() {
+        <!--unordered list of all of the sidebar icons-->
+        <ul>        
+            <li>
+                <a href="../Home_Page/Home_Page.html">
+                    <i class="bx bxs-grid-alt"></i>
+                    <span class="Nav_Item">Dashboard</span>
+                </a>
+                <span class="tooltip">Dashboard</span>
+            </li>
+            <li>
+                <a href="../Profile/Profile.html">
+                    <i class="bx bxs-user-circle"></i>
+                    <span class="Nav_Item">Profile</span>
+                </a>
+                <span class="tooltip">Profile</span>
+            </li>
            
-            var accessLevel = localStorage.getItem('accessLevel');
-            var userNameElement = document.getElementById('userName');
-            var userRoleElement = document.getElementById('userRole');
-            
-            if (accessLevel === '1') {
-                userNameElement.textContent = 'Rurt&#160Kich';
-                userRoleElement.textContent = 'Admin';
-            } else if (accessLevel === '0') {
-                var studentData = JSON.parse(localStorage.getItem('studentData'));
-                if (studentData && studentData.givenName && studentData.surname) {
-                    userNameElement.textContent = studentData.givenName + '\u00A0' + studentData.surname;
-                    userRoleElement.textContent = 'Student';
-                }
-            }
-        }
-    </script>
-        <!-- #endregion -->
-
-    </body>
-
+            <li>
+                <a href="../Notifications/StudentNotifications.html">
+                    <i class="bx bxs-bell-ring"></i>
+                    <span class="Nav_Item">Notifications</span>
+                </a>
+                <span class="tooltip">Notifications</span>
+            </li>
+            <li>
+                <a href="../Upload_Video/Videos.html">
+                    <i class="bx bxs-video"></i>
+                    <span class="Nav_Item">Video&#160Tutorials</span>
+                </a>
+                <span class="tooltip">Video&#160Tutorials</span>
+            </li>
+            <li>
+                <a href="../Settings/Settings.html">
+                    <i class="bx bxs-cog"></i>
+                    <span class="Nav_Item">Settings</span>
+                </a>
+                <span class="tooltip">Settings</span>
+            </li>
+            <li>
+                <a href="Help.html">
+                    <i class="bx bxs-help-circle"></i>
+                    <span class="Nav_Item">Help</span>
+                </a>
+                <span class="tooltip">Help</span>
+            </li>
+            <li>
+        <a id="logoutLink" href="#" onclick="logout()">
+            <i class="bx bxs-log-out"></i>
+            <span class="Nav_Item">Logout</span>
+        </a>
+        <span class="tooltip">Logout</span>
+    </li>
+        </ul>
+    </div>
     <!-- #endregion -->
-    
+
+    <!-- #region Page Content --> 
+    <div class="main_content">
+        <div class="container" id="container">
+            <h1 id="main-heading">FitBoard</h1>
+            <h1 id="sub-heading">Help</h1>
+            <h3>&#160&#160Help</h3>      
+        </div>
+
+        <div class="help_container">
+            <h2>Welcome to FitBoard Help</h2>
+            <p>FitBoard is designed to help you manage your fitness programs, track your progress, and stay connected with the weights room. This help section will guide you through various features and functionalities of the application.</p>
+            
+            <h3>Getting Started</h3>
+            <ul>
+                <li><strong>Dashboard:</strong>This is where students can view various programs and where admin can view and modify student details.</li>
+                <li><strong>Profile:</strong> Update your profile picture, view personal details and record a biography.</li>
+                <li><strong>Modify Programs:</strong> Create and edit fitness programs tailored to your goals.</li>
+                <li><strong>Notifications:</strong> Stay updated with the latest announcements and messages from your coaches or fitness community.</li>
+                <li><strong>Video Tutorials:</strong> Access a library of instructional videos to help you perform exercises correctly.</li>
+                <li><strong>Settings:</strong> Customize your FitBoard experience, including display preferences and account settings.</li>
+            </ul>
+
+            <h3>Frequently Asked Questions</h3>
+            <div class="faq">
+                <div class="faq_item">
+                    <p><strong>Q:</strong> How do I create a new fitness program?</p>
+                    <div class="faq_answer">
+                        <p><strong>A:</strong> Navigate to the "Modify Programs" section from the sidebar, and click on "Create New Program". Fill in the required details and save your program.</p>
+                    </div>
+                </div>
+                <div class="faq_item">
+                    <p><strong>Q:</strong> How can I change my profile picture?</p>
+                    <div class="faq_answer">
+                        <p><strong>A:</strong> Go to the "Profile" section, click on your current profile picture, and upload a new image.</p>
+                    </div>
+                </div>
+                <div class="faq_item">
+                    <p><strong>Q:</strong> What should I do if I forget my password?</p>
+                    <div class="faq_answer">
+                        <p><strong>A:</strong> Click on the "Forgot Password" link on the login page and follow the instructions to reset your password.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Contact Us</h3>
+            <p>If you need further assistance, feel free to contact our support team:</p>
+            <ul>
+                <li>Email: support@fitboard.com</li>
+                <li>Phone: 1300 655 506</li>
+                <li>Address: 123 Fitness St, Wellness City, Fitland</li>
+            </ul>
+
+            <h3>Feedback</h3>
+            <p>We value your feedback! Please let us know how we can improve FitBoard to better serve your needs. Send your feedback to feedback@fitboard.com.</p>
+        </div>
+    </div>
+    <!-- #endregion -->
+
+    <!-- #region Javascript calls -->
+    <script src="../accessControl.js"></script>
+    <script src="../update_sidebar_role.js"></script>
+    <script src="../Home_Page/Activite_Sidebar.js"> </script>
+    <script src="../Settings/darklight_mode.js"></script>
+    <script src="../Profile/Profile_Pic.js"></script>
+    <script src="../Profile/Profile_Check.js"></script>
+    <script src="../Settings/colour_slider.js"></script>
+
+    <script>
+        document.querySelectorAll('.faq_item').forEach(item => {
+            item.addEventListener('click', () => {
+                const answer = item.querySelector('.faq_answer');
+                answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+                item.classList.toggle('active');
+            });
+        });
+
+// Logout button click event handler
+document.getElementById("logoutLink").addEventListener("click", function (event) {
+    event.preventDefault(); // Prevent default link behavior (navigation)
+
+    // Call logout function
+    logout();
+
+    // Optional: Redirect to logout page
+    window.location.href = this.href; // Redirect to the logout page
+});
+
+
+    document.addEventListener("DOMContentLoaded", function() {
+        checkAccessLevel();
+    });
+
+
+
+// Function to logout (remove student data from local storage)
+ function logout() {
+        // Clear access data from localStorage
+        localStorage.clear();
+        
+        // Redirect to the PHP logout handler
+        window.location.href = "../LandingPage.html";
+
+    }
+
+    </script>
+    <!-- #endregion -->
+</body>
+<!-- #endregion -->
 </html>
