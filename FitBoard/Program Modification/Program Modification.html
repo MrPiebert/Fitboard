@@ -248,7 +248,7 @@
             } else if (accessLevel === '0') {
                 var studentData = JSON.parse(localStorage.getItem('studentData'));
                 if (studentData && studentData.givenName && studentData.surname) {
-                    userNameElement.textContent = studentData.givenName + '&#160' + studentData.surname;
+                    userNameElement.textContent = studentData.givenName + '\u00A0' + studentData.surname;
                     userRoleElement.textContent = 'Student';
                 }
             }

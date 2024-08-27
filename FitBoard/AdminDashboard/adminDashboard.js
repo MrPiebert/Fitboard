@@ -7,12 +7,12 @@ function onload() {
     var userRoleElement = document.getElementById('userRole');
 
     if (accessLevel === '1') {
-        userNameElement.textContent = 'Rurt Kich';
+        userNameElement.textContent = 'Rurt&#160Kich';
         userRoleElement.textContent = 'Admin';
     } else if (accessLevel === '0') {
         var studentData = JSON.parse(localStorage.getItem('studentData'));
         if (studentData && studentData.givenName && studentData.surname) {
-            userNameElement.textContent = studentData.givenName + ' ' + studentData.surname;
+            userNameElement.textContent = studentData.givenName + '\u00A0' + studentData.surname;
             userRoleElement.textContent = 'Student';
         }
     }
