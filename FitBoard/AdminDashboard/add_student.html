@@ -153,20 +153,20 @@
         <div class="user">
             <img src="../Images/User_Image.jpg" alt="profile picture" class="User_Image" id="userImage">
             <div>
-                <p class="bold" id="userName">Default&#160User</p>
+                <p class="bold" id="userName">Default User</p>
                 <p id="userRole">Admin</p>
             </div>
         </div>
         <ul>
             <li>
-                <a href="../Home_Page/Home_Page.html">
+                <a href="../Home_Page/adminDashboard.html">
                     <i class="bx bxs-grid-alt"></i>
                     <span class="Nav_Item">Dashboard</span>
                 </a>
                 <span class="tooltip">Dashboard</span>
             </li>
             <li>
-                <a href="../Profile/Profile.html">
+                <a href="../Profile/adminProfile.html">
                     <i class="bx bxs-user-circle"></i>
                     <span class="Nav_Item">Profile</span>
                 </a>
@@ -180,7 +180,7 @@
                 <span class="tooltip">Modify&#160Programs </span>
             </li>
             <li>
-                <a href="../Notifications/Notifications.html">
+                <a href="../Notifications/TeacherNotifications.html">
                     <i class="bx bxs-bell-ring"></i>
                     <span class="Nav_Item">Notifications</span>
                 </a>
@@ -194,26 +194,26 @@
                 <span class="tooltip">Video&#160Tutorials</span>
             </li>
             <li>
-                <a href="../Settings/Settings.html">
+                <a href="../Settings/adminSettings.html">
                     <i class="bx bxs-cog"></i>
                     <span class="Nav_Item">Settings</span>
                 </a>
                 <span class="tooltip">Settings</span>
             </li>
             <li>
-                <a href="../Help/Help.html">
+                <a href="../Help/adminHelp.html">
                     <i class="bx bxs-help-circle"></i>
                     <span class="Nav_Item">Help</span>
                 </a>
                 <span class="tooltip">Help</span>
             </li>
-            <li>
-                <a href="../LandingPage.html">
-                    <i class="bx bxs-log-out"></i>
-                    <span class="Nav_Item">Logout</span>
-                </a>
-                <span class="tooltip">Logout</span>
-            </li>
+           <li>
+        <a id="logoutLink" href="#" onclick="logout()">
+            <i class="bx bxs-log-out"></i>
+            <span class="Nav_Item">Logout</span>
+        </a>
+        <span class="tooltip">Logout</span>
+    </li>
             
         </ul>
     </div>
@@ -258,7 +258,8 @@
         <p>Here you can add a student to the database by filling out their details and clicking submit. Ensure all fields are correctly filled.</p>
     </div>
     
- <script src="../update_sidebar_role.js"></script>
+    <script src="../adminAccessControl.js"></script>
+    <script src="../update_sidebar_role.js"></script>
     <script src="../Home_Page/Activite_Sidebar.js"></script>
     <script src="../Settings/darklight_mode.js"></script>
     <script src="../Profile/Profile_Pic.js"></script>
@@ -299,6 +300,29 @@
         function redirectToDashboard() {
     window.location.href = 'adminDashboard.html';
 }
+
+// Logout button click event handler
+document.getElementById("logoutLink").addEventListener("click", function (event) {
+    event.preventDefault(); // Prevent default link behavior (navigation)
+
+    // Call logout function
+    logout();
+
+    // Optional: Redirect to logout page
+    window.location.href = this.href; // Redirect to the logout page
+});
+
+
+// Function to logout (remove student data from local storage)
+ function logout() {
+        // Clear access data from localStorage
+        localStorage.clear();
+        
+        // Redirect to the PHP logout handler
+        window.location.href = "../LandingPage.html";
+
+    }
+
     </script>
         
 </body>
