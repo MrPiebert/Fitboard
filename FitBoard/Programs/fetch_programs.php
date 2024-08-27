@@ -12,7 +12,7 @@ try {
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Fetch all programs
-    $stmt = $db->query('SELECT id, name FROM programs');
+    $stmt = $db->query('SELECT program_id, name FROM exercise_programs');
     $programs = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     // Return programs as JSON
