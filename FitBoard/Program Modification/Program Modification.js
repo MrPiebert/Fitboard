@@ -265,14 +265,14 @@ function Check_Delete_Buttons(){
   function Save_Program(button){
 
     /* 
-    Save button should:
-    Check Program Name is Valid and Exclusive
-    Check no reserved terms are being used
-    Group info in the same table together
-    Group exercises within each table between pre-hab, main workout and mobility
-    Check no duplicate exercise names are used in the same day
-    Check validity of exercise names
-    Check all exercise info has been filled in for each exercise
+        Save button should:
+        Check Program Name is Valid and Exclusive
+        Check no reserved terms are being used
+        Group info in the same table together
+        Group exercises within each table between pre-hab, main workout and mobility
+        Check no duplicate exercise names are used in the same day
+        Check validity of exercise names
+        Check all exercise info has been filled in for each exercise
     */      
 
     /*
@@ -449,7 +449,7 @@ function Check_Delete_Buttons(){
 
       if (data.success) {
 
-          alert('Program saved successfully!');
+          alert('Program saved successfully.');
 
       } else {
 
@@ -541,10 +541,13 @@ function Check_Delete_Buttons(){
 
 // #endregion
 
+    location.reload(true)
+
   }
 
   function Discard_Changes(button){
-
+      alert('Unsaved changes discarded.')
+      location.reload(true)
   }
     
 // #endregion
