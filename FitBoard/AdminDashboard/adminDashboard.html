@@ -14,7 +14,28 @@
 	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
 	<style>
-		/* Styling for the Table */
+		body {
+			overflow: hidden;
+			/* Prevents scrolling of the whole page */
+		}
+
+		.main_content {
+			overflow: hidden;
+			/* Ensures the main content area doesn't scroll */
+		}
+
+		/* Styling for the Table Container */
+		.table-container {
+			max-height: 500px;
+			/* Adjust the height as needed */
+			overflow-y: auto;
+			/* Enables vertical scrolling */
+			margin-top: 20px;
+			/* Adds margin to the top of the container */
+			border: 1px solid #ddd;
+			/* Optional: Adds a border around the container */
+		}
+
 		table {
 			width: 100%;
 			border-collapse: collapse;
@@ -155,7 +176,7 @@
 		.filter-container label,
 		.filter-container select {
 			margin-top: 5px;
-	
+
 		}
 
 		/* General styling for the select element */
@@ -380,23 +401,26 @@
             </div>
             <i class='bx bx-menu' id="btn"></i>
         </div>
+
+ <!-- User Profile Section -->
+
         <div class="user">
             <img src="../Images/User_Image.jpg" alt="profile picture" class="User_Image" id="userImage">
             <div>
-                <p class="bold" id="userName">Default&#160User</p>
+               <p class="bold" id="userName">Default&#160User</p>
                 <p id="userRole">Admin</p>
             </div>
         </div>
         <ul>
             <li>
-                <a href="../Home_Page/Home_Page.html">
+                <a href="../Dashboard/adminDashboard.html">
                     <i class="bx bxs-grid-alt"></i>
                     <span class="Nav_Item">Dashboard</span>
                 </a>
                 <span class="tooltip">Dashboard</span>
             </li>
             <li>
-                <a href="../Profile/Profile.html">
+                <a href="../Profile/adminProfile.html">
                     <i class="bx bxs-user-circle"></i>
                     <span class="Nav_Item">Profile</span>
                 </a>
@@ -410,7 +434,7 @@
                 <span class="tooltip">Modify&#160Programs </span>
             </li>
             <li>
-                <a href="../Notifications/Notifications.html">
+                <a href="../Notifications/TeacherNotifications.html">
                     <i class="bx bxs-bell-ring"></i>
                     <span class="Nav_Item">Notifications</span>
                 </a>
@@ -424,14 +448,14 @@
                 <span class="tooltip">Video&#160Tutorials</span>
             </li>
             <li>
-                <a href="../Settings/Settings.html">
+                <a href="../Settings/adminSettings.html">
                     <i class="bx bxs-cog"></i>
                     <span class="Nav_Item">Settings</span>
                 </a>
                 <span class="tooltip">Settings</span>
             </li>
             <li>
-                <a href="../Help/Help.html">
+                <a href="../Help/adminHelp.html">
                     <i class="bx bxs-help-circle"></i>
                     <span class="Nav_Item">Help</span>
                 </a>
@@ -494,6 +518,7 @@
     </div>
 
     <!-- Student Table -->
+    <div class="table-container">
     <table id="studentTable">
         <thead>
             <tr>
@@ -508,6 +533,8 @@
         <tbody>
         </tbody>
     </table>
+    </div>
+
 </div>
 
 <button class="help-button" onclick="toggleHelpPopup()">?</button>
@@ -539,9 +566,11 @@ function redirectToAddStudent() {
 }
 </script>
 
+        <script src="../adminAccessControl.js"></script>
+        <script src="../update_sidebar_role.js"></script>
         <script src="adminDashboard.js"></script>
         <script src="../Home_Page/Activite_Sidebar.js"> </script>
-        <!-- <script src="../Settings/darklight_mode.js"></script> -->
+        <!-- <script src="../Settings/darklight_mode.js"></script>  -->
         <script src="../Profile/Profile_Pic.js"></script>
         <script src="../Profile/Profile_Check.js"></script>
         <script src="../Settings/colour_slider.js"></script>
