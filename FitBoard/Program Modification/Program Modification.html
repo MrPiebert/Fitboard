@@ -6,23 +6,33 @@
 
 <html lang="en">
   <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Customise Program</title>
+
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <!-- External Stylesheets -->
-    <link rel="stylesheet" href="Home_Page.css">
+    <link rel="stylesheet" href="Home_Page.css?v=1.0">
+
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
     <link rel="icon" href="../Landing_Page/favicon.ico">
+
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap" rel="stylesheet">
+
     <!-- Boxicons -->
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css?v=1.0' rel='stylesheet'>
+
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
-    <link rel="stylesheet" href="Program Modification.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css?v=1.0">
+    
+    <link rel="stylesheet" href="Program Modification.css?v=1.0">
+
   </head>
 
   <body onload="onload()">
@@ -111,13 +121,14 @@
    <div class="main_content">
 
     <div class="container">
-        <h1 id="sub-heading">Dashboard</h1>
+        <h1 id="sub-heading">Modify Program</h1>
         <h1 id="main-heading">FitBoard</h1>
-        <h3>&#160&#160Dashboard</h3>      
+        <h3>&#160&#160Modify&#160Program</h3>      
     </div>
 
-    <select id="programSelect" onchange="fetchProgramDetails()">
-        <option value="" disabled selected>Select a program</option>
+    <select id="Select_Program" onchange="Fetch_Program_Details()">
+        <option value="" disabled selected>Load Pre-existing Program</option>
+        <option value="Empty Program">Create New Program</option>
     </select>
 
     <input type="text" class = "Program_Specification" ID = "Program_Name" placeholder="Program Name">
@@ -190,7 +201,7 @@
 
         <tr class = "Mobility">
 
-          <td><u><span class="Editable" contenteditable="false">Moblity Exercise</span></u></td>
+          <td><u><span class="Editable" contenteditable="false">Mobility</span></u></td>
           <td><span class="Editable" contenteditable="false"></span></td>
           <td><span class="Editable" contenteditable="false"></span></td>
           
@@ -228,12 +239,12 @@
 
     
     <!--#region External JavaScript -->
-    <script src="../Settings/darklight_mode.js"></script>
-    <script src="Activite_Sidebar.js"></script>
-    <script src="../Profile/Profile_Pic.js"></script>
-    <script src="../Profile/Profile_Check.js"></script>
-    <script src="../Settings/colour_slider.js"></script>
-    <script src="Program Modification.js"></script>
+    <script src="../Settings/darklight_mode.js?v=1.0"></script>
+    <script src="Activite_Sidebar.js?v=1.0"></script>
+    <script src="../Profile/Profile_Pic.js?v=1.0"></script>
+    <script src="../Profile/Profile_Check.js?v=1.0"></script>
+    <script src="../Settings/colour_slider.js?v=1.0"></script>
+    <script src="Program Modification.js?v=1.2"></script>
 
     <script>
         function onload() {

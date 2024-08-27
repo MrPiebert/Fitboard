@@ -1,41 +1,86 @@
 <?php
 
-// CHANGE TO FIT PROGRAM MOD CODE
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-header('Content-Type: application/json');
+$program_id = intval($_GET['program_id']); // Always sanitize input
 
-// Get the program ID from the query parameter
-$programId = $_GET['id'];
+// Prepare the SQL query
+$sql = "SELECT ep.name as program_name, ep.number_of_sessions, ep.tier,
+               pt.table_id, pt.table_number, 
+               pe.exercise_id, pe.name as exercise_name, pe.sets, pe.reps, pe.type
+        FROM exercise_programs ep
+        LEFT JOIN program_tables pt ON ep.program_id = pt.program_id
+        LEFT JOIN program_exercises pe ON pt.table_id = pe.table_id
+        WHERE ep.program_id = ?";
 
-// Database credentials
-$dsn = 'mysql:host=sql112.infinityfree.com;dbname=if0_36607942_exercise_programs;charset=utf8';
-$username = 'if0_36607942';
-$password = 'Lf1knlji5fBcBd';
+// Prepare and execute the statement
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $program_id);
+$stmt->execute();
 
-try {
-    // Connect to the database
-    $db = new PDO($dsn, $username, $password);
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+// Get the result
+$result = $stmt->get_result();
 
-    // Fetch exercises for the selected program
-    $stmt = $db->prepare('SELECT day, category, name, sets, reps FROM exercises WHERE program_id = :program_id ORDER BY day');
-    $stmt->bindParam(':program_id', $programId);
-    $stmt->execute();
-    $exercises = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// Initialize an array to hold the program data
+$programData = [
+    'name' => '',
+    'number_of_sessions' => 0,
+    'tier' => '',
+    'tables' => []
+];
 
-    // Organize exercises by day
-    $programDetails = [];
-    foreach ($exercises as $exercise) {
-        $day = $exercise['day'];
-        if (!isset($programDetails[$day])) {
-            $programDetails[$day] = ['day' => $day, 'exercises' => []];
-        }
-        $programDetails[$day]['exercises'][] = $exercise;
+while ($row = $result->fetch_assoc()) {
+    $programName = $row['program_name'];
+    $numberOfSessions = $row['number_of_sessions'];
+    $tier = $row['tier'];
+
+    $tableId = $row['table_id'];
+    $tableNumber = $row['table_number'];
+
+    $exerciseId = $row['exercise_id'];
+    $exerciseName = $row['exercise_name'];
+    $sets = $row['sets'];
+    $reps = $row['reps'];
+    $type = $row['type'];
+
+    // Populate the program data
+    if (empty($programData['name'])) {
+        $programData['name'] = $programName;
+        $programData['number_of_sessions'] = $numberOfSessions;
+        $programData['tier'] = $tier;
     }
 
-    // Return program details as JSON
-    echo json_encode(['exercises' => array_values($programDetails)]);
-} catch (PDOException $e) {
-    echo json_encode(['success' => false, 'error' => $e->getMessage()]);
+    if ($tableId) {
+        if (!isset($programData['tables'][$tableId])) {
+            $programData['tables'][$tableId] = [
+                'table_id' => $tableId,
+                'table_number' => $tableNumber,
+                'exercises' => []
+            ];
+        }
+
+        if ($exerciseId) {
+            $programData['tables'][$tableId]['exercises'][] = [
+                'exercise_id' => $exerciseId,
+                'name' => $exerciseName,
+                'sets' => $sets,
+                'reps' => $reps,
+                'type' => $type
+            ];
+        }
+    }
 }
+
+// Convert the associative array to a JSON-encoded string
+$jsonData = json_encode($programData);
+
+// Close the statement and connection
+$stmt->close();
+$conn->close();
+
+// Output the JSON data
+header('Content-Type: application/json');
+echo $jsonData;
 ?>
