@@ -1,6 +1,6 @@
 <!--#region HTML-->
 
-<!--Joseph's Work-->
+<!--J's Work-->
 
 <!DOCTYPE html>
 
@@ -31,7 +31,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
     
-    <link rel="stylesheet" href="Program Modification.css">
+    <link rel="stylesheet" href="Program Modification.css?v=1.1">
 
   </head>
 
@@ -42,7 +42,7 @@
       <!-- Top Bar -->
       <div class="top">   <!--Top of Sidebar (Logo)-->
           <div class="logo"> 
-              <img src="../Images/Logo.png" alt="logo" width="50px" height="50px">
+              <img src="../Images/Logo.png?v=1.1" alt="logo" width="50px" height="50px">
               <span>FITBOARD</span>
           </div>
           <i class='bx bx-menu' id="btn"></i> <!-- Sidebar toggle button -->
@@ -50,7 +50,7 @@
 
       <!-- User Profile Section -->
       <div class="user">
-          <img src="../Images/User_Image.jpg" alt="profile picture" class="User_Image" id="userImage">
+          <img src="../Images/User_Image.jpg?v=1.1" alt="profile picture" class="User_Image" id="userImage">
           <div>
               <p class="bold" id="userName">Default&#160User</p>
               <p id="userRole">Admin</p>
@@ -60,56 +60,56 @@
       <!-- Navigation Links -->
       <ul>
           <li>
-              <a href="Home_Page.html">
+              <a href="../Dashboard/adminDashboard.html">
                   <i class="bx bxs-grid-alt"></i>
                   <span class="Nav_Item">Dashboard</span>
               </a>
               <span class="tooltip">Dashboard</span>
           </li>
           <li>
-              <a href="../Profile/Profile.html">
+              <a href="../Profile/adminProfile.html">
                   <i class="bx bxs-user-circle"></i>
                   <span class="Nav_Item">Profile</span>
               </a>
               <span class="tooltip">Profile</span>
           </li>
           <li>
-              <a href="../Program Modification/Program Modification.html">
+              <a href="../Program Modification/Program Modification.html?v=1.1">
                   <i class="bx bxs-duplicate"></i>
                   <span class="Nav_Item">Modify&#160Programs</span>
               </a>
               <span class="tooltip">Modify&#160Programs</span>
           </li>
           <li>
-              <a href="../Notifications/Notifications.html">
+              <a href="../Notifications/TeacherNotifications.html">
                   <i class="bx bxs-bell-ring"></i>
                   <span class="Nav_Item">Notifications</span>
               </a>
               <span class="tooltip">Notifications</span>
           </li>
           <li>
-              <a href="../Upload_Video/Videos.html">
+              <a href="../Upload_Video/Videos.html?v=1.1">
                   <i class="bx bxs-video"></i>
                   <span class="Nav_Item">Video&#160Tutorials</span>
               </a>
               <span class="tooltip">Video&#160Tutorials</span>
           </li>
           <li>
-              <a href="../Settings/Settings.html">
+              <a href="../Settings/adminSettings.html">
                   <i class="bx bxs-cog"></i>
                   <span class="Nav_Item">Settings</span>
               </a>
               <span class="tooltip">Settings</span>
           </li>
           <li>
-              <a href="../Help/Help.html">
+              <a href="../Help/adminHelp.html">
                   <i class="bx bxs-help-circle"></i>
                   <span class="Nav_Item">Help</span>
               </a>
               <span class="tooltip">Help</span>
           </li>
           <li>
-              <a href="../LandingPage.html">
+              <a href="../LandingPage.html?v=1.1">
                   <i class="bx bxs-log-out"></i>
                   <span class="Nav_Item">Logout</span>
               </a>
@@ -151,17 +151,18 @@
 
     <button class="Save_Program" style="display: none;" onclick="Save_Program(this)">Save&#160Program</button>
     <button class="Discard_Changes" style="display: none;" onclick="Discard_Changes(this)">Discard&#160All&#160Changes</button>
+    <button class="Delete_Program" style="display: none;" onclick="Delete_Existing_Program() " disabled>Delete&#160Selected&#160Program</button>
   </div>
 
     
     <!--#region External JavaScript -->
-    <script src="../Settings/darklight_mode.js?v=1.0"></script>
-    <script src="Activite_Sidebar.js?v=1.0"></script>
-    <script src="../Profile/Profile_Pic.js?v=1.0"></script>
-    <script src="../Profile/Profile_Check.js?v=1.0"></script>
-    <script src="../Settings/colour_slider.js?v=1.0"></script>
-    <script src="Program Modification.js?v=1.2"></script>
- <script src="../update_sidebar_role.js"></script>
+    <script src="../Settings/darklight_mode.js?v=1.1"></script>
+    <script src="Activite_Sidebar.js?v=1.1"></script>
+    <script src="../Profile/Profile_Pic.js?v=1.1"></script>
+    <script src="../Profile/Profile_Check.js?v=1."></script>
+    <script src="../Settings/colour_slider.js?v=1.1"></script>
+    <script src="Program Modification.js?v=1.5"></script>
+    <script src="../update_sidebar_role.js?v=1.1"></script>
 
 
     <!--#endregion-->

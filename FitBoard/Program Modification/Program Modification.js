@@ -2,6 +2,12 @@
 
 // J's Work
 
+/*
+    Current bugs:
+    i forgot to put the delete row button in the new rows
+    loading data into yoga and mobility rows removes the editable boxes.
+*/
+
 // #region Top Logic
 
     // Executes program fetching function on load
@@ -75,13 +81,15 @@
         let Program_Tier = document.getElementById("Program_Tier");
 
         const Table_Container = document.getElementById("Table_Container");
-        const Save_Button = document.getElementsByClassName("Save_Program")[0];
-        const Delete_Button = document.getElementsByClassName("Discard_Changes")[0];
+        const Save_Program_Button = document.getElementsByClassName("Save_Program")[0];
+        const Discard_Changes_Button = document.getElementsByClassName("Discard_Changes")[0];
+        const Delete_Program_Button = document.getElementsByClassName("Delete_Program")[0];
         
         // Make the container and buttons visible
         Table_Container.style.display = 'inline-block';
-        Save_Button.style.display = 'inline-block';
-        Delete_Button.style.display = 'inline-block';
+        Save_Program_Button.style.display = 'inline-block';
+        Discard_Changes_Button.style.display = 'inline-block';
+        Delete_Program_Button.style.display = 'inline-block';
 
         Table_Container.innerHTML = ""; // Clear existing tables
         let Empty_Table = Create_New_Day_Table();
@@ -93,8 +101,12 @@
             Program_Name.value = '';
             Program_Sessions.value = '';
             Program_Tier.value = 'I_1';
+            
+            Delete_Program_Button.disabled = true;
 
         } else if (programId) {    
+
+            Delete_Program_Button.disabled = false;
 
             fetch(`Program Exercise Fetching.php?program_id=${programId}`)
             .then(response => response.json())  // Parse the JSON from the response
@@ -256,10 +268,6 @@
                 // Create a new row and populate it with the correct exercise data (change where this is put (put it in the casewhere) )
                 let New_Row = document.createElement('tr');
                 
-                /* 
-                    add the deleterow if it is not mobility or yoga:
-                        <button class="Delete" onclick="Delete_Row(this)" style="display: none;">Delete</button>
-                */
 
                 let rowTemplate = `
                     <td>
@@ -274,6 +282,7 @@
                     <td>
                         <button class="Edit" onclick="Edit_Row(this)">Edit</button>
                         <button class="Save" onclick="Save_Row(this)" style="display: none;">Save</button>
+                        <button class="Delete" onclick="Delete_Row(this)" style="display: none;">Delete</button>
                     </td>
                 `;
     
@@ -321,9 +330,13 @@
                         Target_Row = Target_Table.getElementsByClassName("Yoga")[0];
                         console.log(Target_Row);
 
-                        Target_Row.children[0].textContent = Exercise_Name;
-                        Target_Row.children[1].textContent = Exercise_Sets;
-                        Target_Row.children[2].textContent = Exercise_Reps;
+                        // Access the <span> elements within each <td> in the row
+                        Target_Row_Spans = Target_Row.getElementsByClassName('Editable');
+
+                        // Update the content of the <span> elements
+                        Target_Row_Spans[0].innerHTML = Exercise_Name;
+                        Target_Row_Spans[1].innerHTML = Exercise_Sets;
+                        Target_Row_Spans[2].innerHTML = Exercise_Reps;
 
                         break;
 
@@ -358,9 +371,13 @@
                         Target_Row = Target_Table.getElementsByClassName("Mobility")[0];
                         console.log(Target_Row);
 
-                        Target_Row.children[0].textContent = Exercise_Name;
-                        Target_Row.children[1].textContent = Exercise_Sets;
-                        Target_Row.children[2].textContent = Exercise_Reps;
+                        // Access the <span> elements within each <td> in the row
+                        Target_Row_Spans = Target_Row.getElementsByClassName('Editable');
+
+                        // Update the content of the <span> elements
+                        Target_Row_Spans[0].innerHTML = Exercise_Name;
+                        Target_Row_Spans[1].innerHTML = Exercise_Sets;
+                        Target_Row_Spans[2].innerHTML = Exercise_Reps;
 
                         break;
                     
@@ -669,69 +686,135 @@ function Check_Delete_Buttons(){
 
 // #region Bottom Logic
 
-    function Save_Program(button){
+/*
+    Program Structure:
 
-        /* 
-            Save button:
-            Checks program name is unique, requesting to overwrite a previous program if not.
-            Groups info in the same table together
-            Groups exercises within each table into yoga, pre-hab, main workout and mobility
-            Check no duplicate exercise names are used in the same day
-            Check all exercise info has been filled in for each exercise
-        */      
+    -- Create table for exercise programs
+    CREATE TABLE exercise_programs (
+        program_id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(255) NOT NULL,
+        number_of_sessions INT NOT NULL,
+        tier VARCHAR(50) NOT NULL
+    );
 
-        /*
-                Program Structure:
+    -- Create table for tables within each exercise program
+    CREATE TABLE program_tables (
+        table_id INT AUTO_INCREMENT PRIMARY KEY,
+        program_id INT NOT NULL,
+        table_number INT NOT NULL,
+        FOREIGN KEY (program_id) REFERENCES exercise_programs(program_id)
+    );
 
-                -- Create table for exercise programs
-                CREATE TABLE exercise_programs (
-                    program_id INT AUTO_INCREMENT PRIMARY KEY,
-                    name VARCHAR(255) NOT NULL,
-                    number_of_sessions INT NOT NULL,
-                    tier VARCHAR(50) NOT NULL
-                );
+    -- Create table for exercises within each table
+    CREATE TABLE program_exercises (
+        exercise_id INT AUTO_INCREMENT PRIMARY KEY,
+        table_id INT NOT NULL,
+        name VARCHAR(255) NOT NULL,
+        sets VARCHAR(50) NOT NULL,
+        reps VARCHAR(50) NOT NULL,
+        type ENUM('yoga', 'pre_hab', 'main_workout', 'mobility') NOT NULL,
+        FOREIGN KEY (table_id) REFERENCES program_tables(table_id)
+    );
+*/
 
-                -- Create table for tables within each exercise program
-                CREATE TABLE program_tables (
-                    table_id INT AUTO_INCREMENT PRIMARY KEY,
-                    program_id INT NOT NULL,
-                    table_number INT NOT NULL,
-                    FOREIGN KEY (program_id) REFERENCES exercise_programs(program_id)
-                );
+    function Save_Program(button) {
 
-                -- Create table for exercises within each table
-                CREATE TABLE program_exercises (
-                    exercise_id INT AUTO_INCREMENT PRIMARY KEY,
-                    table_id INT NOT NULL,
-                    name VARCHAR(255) NOT NULL,
-                    sets VARCHAR(50) NOT NULL,
-                    reps VARCHAR(50) NOT NULL,
-                    type ENUM('yoga', 'pre_hab', 'main_workout', 'mobility') NOT NULL,
-                    FOREIGN KEY (table_id) REFERENCES program_tables(table_id)
-                );
-        */
-
-        let Program_Name = document.getElementById("Program_Name");
-        let Program_Sessions = document.getElementById("Program_Sessions");
-        let Program_Tier = document.getElementById("Program_Tier");
+        let Program_Name = document.getElementById("Program_Name").value.trim();
+        let Program_Sessions = document.getElementById("Program_Sessions").value.trim();
+        let Program_Tier = document.getElementById("Program_Tier").value;
         let Program_Tables = document.querySelectorAll('table');
-    
-        console.log(Program_Name.value);
-        console.log(Program_Sessions.value);
-        console.log(Program_Tier.value);
 
-        // Collects Table info
+        // Ensure that all top fields are filled
+        if (!Program_Name || !Program_Sessions || !Program_Tier) {
+            alert("Please fill in all required fields.");
+            return;
+        }
+
+        // Ensure that session is an integer greater than zero
+        let Sessions_Test = Number(Program_Sessions);
+
+        // Check if the converted value is an integer and greater than 0
+        if (!isNaN(Sessions_Test) && Number.isInteger(Sessions_Test) && Sessions_Test > 0) {
+            console.log("Program_Sessions is a valid integer greater than 0.");
+        } else {
+            console.log("Program_Sessions is not a valid integer greater than 0.");
+            alert("Program sessions must be an integer greater than 0.");
+            return;
+        }
+
+        // Validate that no duplicate exercise names are used in the same day
+        let duplicateExerciseFound = false;
+        Program_Tables.forEach((table) => {
+            let exerciseNames = [];
+            const rows = table.querySelectorAll('tr');
+
+            rows.forEach((row) => {
+                const exerciseName = row.querySelector('.Editable')?.innerText.trim();
+                if (exerciseName) {
+                    if (exerciseNames.includes(exerciseName)) {
+                        duplicateExerciseFound = true;
+                    }
+                    exerciseNames.push(exerciseName);
+                }
+            });
+        });
+
+        if (duplicateExerciseFound) {
+            alert("Duplicate exercise names found within the same day. Please correct this.");
+            return;
+        }
+
+        // Check for empty cells in rows that are not header or bottom rows
+        let emptyCellsFound = false;
+        Program_Tables.forEach((table) => {
+            const rows = table.querySelectorAll('tr');
+            rows.forEach((row) => {
+                const rowClass = row.className;
+                if (rowClass !== "Pre_Hab" && rowClass !== "Main_Workout" && rowClass !== "Bottom_Row" && !row.querySelector('th')) { // Skip bottom and header rows
+                    const cells = row.querySelectorAll('td');
+                    cells.forEach((cell) => {
+                        if (!cell.innerText.trim()) {
+                            emptyCellsFound = true;
+                        }
+                    });
+                }
+            });
+        });
+
+        if (emptyCellsFound) {
+            alert("Empty cells found in some rows. Please ensure all exercise details are filled in.");
+            return;
+        }
+
+        // Ensure the program name is unique by fetching existing program names from the database
+        fetch('Program Fetching.php')
+            .then(response => response.json())
+            .then(data => {
+                const existingProgram = data.find(program => program.name.toLowerCase() === Program_Name.toLowerCase());
+                
+                if (existingProgram) {
+
+                    alert("Duplicate program name found within the database. Either delete the old program or rename the current one.");
+                    return;
+
+                } else {
+                    // No existing program, save the new one directly
+                    Save_New_Program(Program_Name, Program_Sessions, Program_Tier, Program_Tables);
+                }
+            })
+            .catch(error => console.error('Error fetching existing programs:', error));
+    }
+
+    // Function to save the new program data
+    function Save_New_Program(Program_Name, Program_Sessions, Program_Tier, Program_Tables) {
 
         let Tables_Data = {};
 
         Program_Tables.forEach((table) => {
 
-            // Extract the table number from the string "Day x"
             const tableHeader = table.querySelector('th.Col_1').innerText;
             const tableNum = tableHeader.match(/Day (\d+)/)[1];
-            console.log(`Table Number: Day ${tableNum}`);
 
-            // Initialize the lists for the current table
             Tables_Data[tableNum] = {
                 yoga: [],
                 pre_hab: [],
@@ -741,142 +824,133 @@ function Check_Delete_Buttons(){
 
             let currentCategory = null;
 
-            // Iterate through each row in the table, starting from the second row
             for (let i = 1; i < table.rows.length; i++) {
 
                 const row = table.rows[i];
                 const rowClass = row.className;
-                console.log(`Row ${i} class: ${rowClass}`);
 
                 switch (rowClass) {
 
                     case "Yoga":
-
-                        console.log("Value is yoga");
                         currentCategory = "yoga";
-
                         const yog_exercise = {
-                            name: row.cells[0].innerText,
-                            sets: row.cells[1].innerText,
-                            reps: row.cells[2].innerText
+                            name: row.cells[0].innerText.trim(),
+                            sets: row.cells[1].innerText.trim(),
+                            reps: row.cells[2].innerText.trim()
                         };
-
                         Tables_Data[tableNum][currentCategory].push(yog_exercise);
-                        
                         break;
 
                     case "Pre_Hab":
-
-                        console.log("Value is pre_hab");
                         currentCategory = "pre_hab";
-
                         break;
 
                     case "Main_Workout":
-
-                        console.log("Value is main_workout");
                         currentCategory = "main_workout";
-
                         break;
 
                     case "Mobility":
-
-                        console.log("Value is mobility");
                         currentCategory = "mobility";
-
                         const mob_exercise = {
-                            name: row.cells[0].innerText,
-                            sets: row.cells[1].innerText,
-                            reps: row.cells[2].innerText
+                            name: row.cells[0].innerText.trim(),
+                            sets: row.cells[1].innerText.trim(),
+                            reps: row.cells[2].innerText.trim()
                         };
-
                         Tables_Data[tableNum][currentCategory].push(mob_exercise);
-             
                         break;
 
                     case "Bottom_Row":
-
-                        console.log("Value is bottom_row");
                         currentCategory = null;
-
                         break;
 
                     default:
-                        // If the row is not a category label or bottom row, add it to the current category list
-                        console.log("Value is something else");
-       
                         const norm_exercise = {
-                            name: row.cells[0].innerText,
-                            sets: row.cells[1].innerText,
-                            reps: row.cells[2].innerText
+                            name: row.cells[0].innerText.trim(),
+                            sets: row.cells[1].innerText.trim(),
+                            reps: row.cells[2].innerText.trim()
                         };
-
                         Tables_Data[tableNum][currentCategory].push(norm_exercise);
-                        
                         break;
                 }
             }
         });
 
-        console.log("Tables Data:", Tables_Data);
-
-
         const Program_Data = {
-
-        programName: Program_Name.value,
-
-        programSessions: Program_Sessions.value,
-
-        programTier: Program_Tier.value,
-
-        tablesData: Tables_Data
-
+            programName: Program_Name,
+            programSessions: Program_Sessions,
+            programTier: Program_Tier,
+            tablesData: Tables_Data
         };
 
         const Save_Url = 'Program Saving.php';
 
         fetch(Save_Url, {
-
             method: 'POST',
-
             headers: {
-
                 'Content-Type': 'application/json'
-
             },
-
             body: JSON.stringify(Program_Data)
-
         })
-
         .then(response => response.json())
-
         .then(data => {
-
             if (data.success) {
-
                 alert('Program saved successfully.');
-
+                location.reload(true);
             } else {
-
                 alert('Failed to save the program.');
-
                 console.error(data.error);
-
             }
-
         })
+        .catch(error => console.error('Error:', error));
+    }
 
-  .catch(error => console.error('Error:', error));
+    // Function to delete an existing program by ID (Currently Broken)
+    function Delete_Existing_Program() {
+        // Get the selected program ID from a dropdown or other UI element
+        const Program_Selector = document.getElementById('Select_Program')
 
-    location.reload(true)
+        const programId = Program_Selector.value;
+        console.log(programId)
 
-}
+        if (!programId) {
+            alert("Please select a program to delete.");
+            return;
+        }
 
-  function Discard_Changes(button){
+        // Confirm deletion with the user
+        if (!confirm(`Are you sure you want to delete this program? This action cannot be undone.`)) {
+            return;
+        }
+
+        // Define the server endpoint for deleting the program
+        const deleteUrl = 'Program Deletion.php'; // Replace with your actual endpoint
+
+        // Send a request to delete the program by its ID
+        fetch(deleteUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ programId })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Program deleted successfully.');
+                location.reload(true);
+            } else {
+                alert('Failed to delete the program.');
+                console.error(data.error);
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    }
+
+
+    function Discard_Changes(button){
       alert('Unsaved changes discarded.')
       location.reload(true)
-  }
+    }
     
 // #endregion
 

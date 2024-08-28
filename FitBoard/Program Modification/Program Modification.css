@@ -197,6 +197,21 @@ input {
   border-radius: 10px;
 }
 
+.Delete_Program {
+  font-size: medium;
+  outline: none;
+  border: none;
+  padding: 5px 5px;
+  margin: 5px;
+  margin-top: 10px;
+  cursor: pointer;
+  background: #e62100;
+  color: #ffffff;
+  width: 230px;
+  height: 30px;
+  border-radius: 10px;
+}
+
 button:disabled {
   background-color: #d3d3d3; /* Light grey background */
   color: #808080; /* Grey text */
