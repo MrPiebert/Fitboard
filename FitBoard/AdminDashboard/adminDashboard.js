@@ -1,26 +1,32 @@
 let editMode = false;
 
 /* On Page Load */
-function onload() {
+document.addEventListener('DOMContentLoaded', function() {
+    function onload() {
+        var accessLevel = localStorage.getItem('accessLevel');
+        var userNameElement = document.getElementById('userName');
+        var userRoleElement = document.getElementById('userRole');
 
-    var accessLevel = localStorage.getItem('accessLevel');
-    var userNameElement = document.getElementById('userName');
-    var userRoleElement = document.getElementById('userRole');
-
-    if (accessLevel === '1') {
-        userNameElement.textContent = 'Kurt&#160Rich';
-        userRoleElement.textContent = 'Admin';
-    } else if (accessLevel === '0') {
-        var studentData = JSON.parse(localStorage.getItem('studentData'));
-        if (studentData && studentData.givenName && studentData.surname) {
-            userNameElement.textContent = studentData.givenName + '\u00A0' + studentData.surname;
-            userRoleElement.textContent = 'Student';
+         // Set user details based on access level
+        if (accessLevel === '1') {
+            userNameElement.innerHTML = 'Kurt&nbsp;Rich';
+            userRoleElement.textContent = 'Admin';
+        } else if (accessLevel === '0') {
+            var studentData = JSON.parse(localStorage.getItem('studentData'));
+            if (studentData && studentData.givenName && studentData.surname) {
+               userNameElement.innerHTML = studentData.givenName + '&nbsp;' + studentData.surname;
+                userRoleElement.textContent = 'Student';
+            }
         }
+
+        fetchStudentData(); // Load student data
+        document.getElementById('editToggle').checked = false; // Ensure edit toggle is off by default
+        document.querySelector(".edit-mode").style.display = "none"; // Hide edit mode UI initially
     }
-    fetchStudentData();
-    document.getElementById('editToggle').checked = false;
-    document.querySelector(".edit-mode").style.display = "none";
-}
+
+    onload();
+});
+
 
 
 /* Fetch Student Data */
@@ -31,7 +37,7 @@ function fetchStudentData() {
         if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
             var response = JSON.parse(this.responseText);
             if (Array.isArray(response) && response.length > 0) {
-                populateTable(response);
+                populateTable(response); // Populate table with student data
             } else {
                 console.log("No students to display.");
             }
@@ -44,17 +50,17 @@ function fetchStudentData() {
 // Populate the Table with Data
 function populateTable(students) {
     var tableBody = document.querySelector("#studentTable tbody");
-    tableBody.innerHTML = "";
+    tableBody.innerHTML = ""; // Clear existing table rows
 
     students.forEach(function (student) {
         var row = tableBody.insertRow();
         row.dataset.id = student.id;
 
-        var cell1 = row.insertCell(0);
-        var cell2 = row.insertCell(1);
-        var cell3 = row.insertCell(2);
-        var cell4 = row.insertCell(3);
-        var cell5 = row.insertCell(4);
+        var cell1 = row.insertCell(0); //SBHS_ID
+        var cell2 = row.insertCell(1); //First Name
+        var cell3 = row.insertCell(2); //Last Name
+        var cell4 = row.insertCell(3); //Year
+        var cell5 = row.insertCell(4); //Tier
         var cell6 = row.insertCell(5); // New column for checkbox
 
         cell1.textContent = student.sbhs_id;
@@ -64,8 +70,6 @@ function populateTable(students) {
         cell5.textContent = student.tier;
 
         // Create and add a checkbox
-
-           // Create and add a checkbox
         var checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
         checkbox.className = 'student-checkbox';
@@ -77,16 +81,32 @@ function populateTable(students) {
             cell2.contentEditable = "true";
             cell3.contentEditable = "true";
             cell4.contentEditable = "true";
-            cell5.contentEditable = "true";
-
-            // Add validation event listeners
-            cell1.addEventListener('blur', validateSBHSId);
-            cell2.addEventListener('blur', validateName);
-            cell3.addEventListener('blur', validateName);
-            cell4.addEventListener('blur', validateYear);
+            // Create and add select box for tier in edit mode
+            var select = document.createElement('select');
+            var options = ['I_1', 'I_2', 'I_3', 'P_1', 'P_2', 'P_3', 'ADV'];
+            options.forEach(option => {
+                var opt = document.createElement('option');
+                opt.value = option;
+                opt.textContent = option;
+                if (option === student.tier) {
+                    opt.selected = true;
+                }
+                select.appendChild(opt);
+            });
+            cell5.innerHTML = '';
+            cell5.appendChild(select);
+        } else {
+            cell5.textContent = student.tier;
         }
+
+        // Add validation event listeners
+        cell1.addEventListener('blur', validateSBHSId);
+        cell2.addEventListener('blur', validateName);
+        cell3.addEventListener('blur', validateName);
+        cell4.addEventListener('blur', validateYear);
     });
 }
+
 
 function filterTable() {
     // Get filter values
@@ -162,7 +182,6 @@ function validateYear(event) {
 
 /* Save Changes to the Database */
 function saveChanges() {
-    console.log("saveChanges function called");
 
     var table = document.getElementById("studentTable");
     var students = [];
@@ -176,7 +195,7 @@ function saveChanges() {
             firstName: row.cells[1].textContent.trim(),
             lastName: row.cells[2].textContent.trim(),
             studentYear: row.cells[3].textContent.trim(),
-            tier: row.cells[4].textContent.trim()
+             tier: row.cells[4].querySelector('select') ? row.cells[4].querySelector('select').value : row.cells[4].textContent.trim()
         };
 
         const errorMsg = validateStudentData(student);
@@ -194,18 +213,18 @@ function saveChanges() {
         return; // Prevent sending data if validation fails
     }
 
-    console.log("Student data to be sent:", students);
+    //console.log("Student data to be sent:", students);
 
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "save_changes_students.php", true);
     xhr.setRequestHeader("Content-Type", "application/json");
 
     xhr.onreadystatechange = function () {
-        console.log("Ready state change: ", this.readyState);
+        //console.log("Ready state change: ", this.readyState);
 
         if (this.readyState === XMLHttpRequest.DONE) {
-            console.log("XHR status: ", this.status);
-            console.log("XHR response: ", this.responseText);
+            //console.log("XHR status: ", this.status);
+            //console.log("XHR response: ", this.responseText);
 
             if (this.status === 200) {
                 var response = JSON.parse(this.responseText);
@@ -383,8 +402,6 @@ function confirmDelete() {
         checkboxes.forEach(function(checkbox) {
             idsToDelete.push(checkbox.value); // Collect IDs from checked checkboxes
         });
-        
-        console.log("IDs to delete:", idsToDelete); // For debugging
 
         // Call delete function with selected IDs
         deleteSelectedStudents(idsToDelete);
