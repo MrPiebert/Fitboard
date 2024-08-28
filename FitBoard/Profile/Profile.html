@@ -43,64 +43,58 @@
         </div>
    <!-- Navigation Links -->
            <!-- Navigation Links -->
-<ul class="tabs">
-    <li>
-        <a id="dashboardLink" href="#">
-            <i class="bx bxs-grid-alt"></i>
-            <span class="Nav_Item">Dashboard</span>
-        </a>
-        <span class="tooltip">Dashboard</span>
-    </li>
-    <li>
-        <a href="Profile.html">
-            <i class="bx bxs-user-circle"></i>
-            <span class="Nav_Item">Profile</span>
-        </a>
-        <span class="tooltip">Profile</span>
-    </li>
-    <li>
-        <a href="../Program Modification/Program Modification.html">
-            <i class="bx bxs-duplicate"></i>
-            <span class="Nav_Item">Modify&#160Programs</span>
-        </a>
-        <span class="tooltip">Modify&#160Programs </span>
-    </li>
-    <li>
-        <a id="notificationsLink" href="#">
-            <i class="bx bxs-bell-ring"></i>
-            <span class="Nav_Item">Notifications</span>
-        </a>
-        <span class="tooltip">Notifications</span>
-    </li>
-    <li>
-        <a href="../Upload_Video/Videos.html">
-            <i class="bx bxs-video"></i>
-            <span class="Nav_Item">Video&#160Tutorials</span>
-        </a>
-        <span class="tooltip">Video&#160Tutorials</span>
-    </li>
-    <li>
-        <a id="settingsLink" href="#">
-            <i class="bx bxs-cog"></i>
-            <span class="Nav_Item">Settings</span>
-        </a>
-        <span class="tooltip">Settings</span>
-    </li>
-    <li>
-        <a id="helpLink" href="#">
-            <i class="bx bxs-help-circle"></i>
-            <span class="Nav_Item">Help</span>
-        </a>
-        <span class="tooltip">Help</span>
-    </li>
-    <li>
+<ul>
+                <li>
+                    <a href="../Home_Page/Home_Page.html">
+                        <i class="bx bxs-grid-alt"></i>
+                        <span class="Nav_Item">Dashboard</span>
+                    </a>
+                    <span class="tooltip">Dashboard</span>
+                </li>
+                <li>
+                    <a href="../Profile/Profile.html">
+                        <i class="bx bxs-user-circle"></i>
+                        <span class="Nav_Item">Profile</span>
+                    </a>
+                    <span class="tooltip">Profile</span>
+                </li>
+                
+                <li>
+                    <a href="../Notifications/StudentNotifications.html">
+                        <i class="bx bxs-bell-ring"></i>
+                        <span class="Nav_Item">Notifications</span>
+                    </a>
+                    <span class="tooltip">Notifications</span>
+                </li>
+                <li>
+                    <a href="../Upload_Video/Videos.html">
+                        <i class="bx bxs-video"></i>
+                        <span class="Nav_Item">Video&#160Tutorials</span>
+                    </a>
+                    <span class="tooltip">Video&#160Tutorials</span>
+                </li>
+                <li>
+                    <a href="../Settings/Settings.html">
+                        <i class="bx bxs-cog"></i>
+                        <span class="Nav_Item">Settings</span>
+                    </a>
+                    <span class="tooltip">Settings</span>
+                </li>
+                <li>
+                    <a href="../Help/Help.html">
+                        <i class="bx bxs-help-circle"></i>
+                        <span class="Nav_Item">Help</span>
+                    </a>
+                    <span class="tooltip">Help</span>
+                </li>
+                <li>
         <a id="logoutLink" href="#" onclick="logout()">
             <i class="bx bxs-log-out"></i>
             <span class="Nav_Item">Logout</span>
         </a>
         <span class="tooltip">Logout</span>
     </li>
-</ul>
+            </ul>
 
         </div>
 
@@ -258,48 +252,7 @@ document.getElementById("logoutLink").addEventListener("click", function (event)
     window.location.href = this.href; // Redirect to the logout page
 });
 document.addEventListener("DOMContentLoaded", function () {
-    // Get the user's access level from local storage
-    const accessLevel = parseInt(localStorage.getItem("accessLevel"), 10);
-
-    // Check if the access level is invalid
-    if (accessLevel !== 0 && accessLevel !== 1) {
-        alert('Invalid access level. Redirecting to the landing page.');
-        window.location.href = '../LandingPage.html';
-        return;  // Stop the rest of the script from executing
-    }
-
-    // Define page redirection based on access level
-    const pages = {
-        settings: {
-            0: '../Settings/Settings.html',
-            1: '../Settings/adminSettings.html'
-        },
-        dashboard: {
-            0: '../Home_Page/Home_Page.html',
-            1: '../Dashboard/adminDashboard.html'
-        },
-        help: {
-            0: '../Help/Help.html',
-            1: '../Help/adminHelp.html'
-        }
-    };
-
-    // Apply the correct page links based on the user's access level
-    document.getElementById("settingsLink").href = pages.settings[accessLevel] || '#';
-    document.getElementById("dashboardLink").href = pages.dashboard[accessLevel] || '#';
-    document.getElementById("helpLink").href = pages.help[accessLevel] || '#';
-
-    // Handle notifications link as previously implemented
-    document.getElementById("notificationsLink").addEventListener("click", function (event) {
-        event.preventDefault();
-        if (accessLevel === 0) {
-            window.location.href = '../Notifications/StudentNotifications.html';
-        } else if (accessLevel === 1) {
-            window.location.href = '../Notifications/TeacherNotifications.html';
-        } else {
-            alert('Invalid access level. Please contact support.');
-        }
-    });
+     checkAccessLevel();
 });
 
 
@@ -331,8 +284,6 @@ function fetchBiography(studentId) {
 
 // Execute displayStudentProfile function on page load
 displayStudentProfile();
-
-
   </script>
   
   
@@ -341,7 +292,7 @@ displayStudentProfile();
    
 </script>
 
-
+        <script src="../accessControl.js"></script>
         <script src="../update_sidebar_role.js"></script>
         <script src="../cropperjs/cropper.js"></script>
         <script src="../Home_Page/Activite_Sidebar.js"> </script>
