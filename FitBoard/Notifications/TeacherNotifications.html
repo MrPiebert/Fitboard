@@ -23,30 +23,39 @@
 			margin: 0;
 			background-color: #f4f4f4;
 			overflow-x: hidden;
-             overflow: hidden;
+			overflow: hidden;
 			/* Prevents horizontal scrolling */
-             background-color: white;
-    color: black;
+			background-color: white;
+			color: black;
 		}
-/* Dark Mode Styles */
-.dark-mode body {
-            background-color: #000; /* Dark mode background */
-            color: #fff; /* Dark mode text color */
-        }
 
-/* Example with !important */
-  .dark-mode .notification-item {
-            background-color: #000; /* Darker background for notification items */
-            color: #fff; /* Light text color for notification items */
-            border-bottom: 1px solid #444; /* Darker border for better contrast */
-        }
+		/* Dark Mode Styles */
+		.dark-mode body {
+			background-color: #000;
+			/* Dark mode background */
+			color: #fff;
+			/* Dark mode text color */
+		}
 
-         .dark-mode .notification-item:hover {
-            background-color: #333; /* Slightly lighter background on hover */
-        }
-        .dark-mode .notification-item.active {
+		/* Example with !important */
+		.dark-mode .notification-item {
+			background-color: #000;
+			/* Darker background for notification items */
+			color: #fff;
+			/* Light text color for notification items */
+			border-bottom: 1px solid #444;
+			/* Darker border for better contrast */
+		}
+
+		.dark-mode .notification-item:hover {
+			background-color: #333;
+			/* Slightly lighter background on hover */
+		}
+
+		.dark-mode .notification-item.active {
 			background-color: #777;
 		}
+
 		.main_content {
 			flex: 1;
 			display: flex;
@@ -55,10 +64,13 @@
 			overflow: hidden;
 			/* Ensures no overflow in main content area */
 		}
-    .dark-mode .notification-view {
-            background-color: #111; /* Darker background for notification view */
-            color: #eee; /* Light text color for notification view */
-        }
+
+		.dark-mode .notification-view {
+			background-color: #111;
+			/* Darker background for notification view */
+			color: #eee;
+			/* Light text color for notification view */
+		}
 
 		.container {
 			display: flex;
@@ -133,7 +145,7 @@
 			padding: 15px;
 			border-bottom: 1px solid #ddd;
 			cursor: pointer;
-            
+
 		}
 
 		.notification-item:hover {
@@ -151,41 +163,52 @@
 			border-radius: 5px;
 			margin-left: 20px;
 			overflow-y: auto;
-            max-height: calc(100vh - 150px);
+			max-height: calc(100vh - 150px);
 			/* Allows scrolling for long content */
 		}
-.notification-view h2 {
-    margin-top: 0;
-    margin-bottom: 10px; /* Space between subject and other details */
-    font-size: 20px; /* Increased font size for subject */
-}
 
-.notification-view h3 {
-    margin-top: 0;
-    margin-bottom: 5px; /* Space between recipient and date */
-    font-size: 18px; /* Increased font size for recipient */
-}
+		.notification-view h2 {
+			margin-top: 0;
+			margin-bottom: 10px;
+			/* Space between subject and other details */
+			font-size: 20px;
+			/* Increased font size for subject */
+		}
 
-.notification-view small {
-    display: block; /* Ensure date is on a new line */
-    margin-bottom: 15px; /* Space between date and message */
-    font-size: 16px; /* Increased font size for date */
-}
+		.notification-view h3 {
+			margin-top: 0;
+			margin-bottom: 5px;
+			/* Space between recipient and date */
+			font-size: 18px;
+			/* Increased font size for recipient */
+		}
 
-.notification-view p {
-    margin-top: 0;
-    font-size: 16px; /* Increased font size for message */
-}
+		.notification-view small {
+			display: block;
+			/* Ensure date is on a new line */
+			margin-bottom: 15px;
+			/* Space between date and message */
+			font-size: 16px;
+			/* Increased font size for date */
+		}
 
-.form-container textarea {
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 100%;
-    box-sizing: border-box; /* Ensures padding and border are included in the total width */
-    resize: vertical; /* Allows vertical resizing */
-}
+		.notification-view p {
+			margin-top: 0;
+			font-size: 16px;
+			/* Increased font size for message */
+		}
+
+		.form-container textarea {
+			padding: 10px;
+			margin-bottom: 10px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			width: 100%;
+			box-sizing: border-box;
+			/* Ensures padding and border are included in the total width */
+			resize: vertical;
+			/* Allows vertical resizing */
+		}
 
 
 		.compose-container button {
@@ -208,36 +231,37 @@
 			background-color: #0056b3;
 		}
 
-       #toolbar {
-    display: flex;
-    gap: 10px; /* Adds space between the buttons */
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
+		#toolbar {
+			display: flex;
+			gap: 10px;
+			/* Adds space between the buttons */
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
 
-#toolbar button {
-    padding: 10px 20px;
-}
+		#toolbar button {
+			padding: 10px 20px;
+		}
 
 
-#editNotification {
-    margin-top: 30px;
-}
+		#editNotification {
+			margin-top: 30px;
+		}
 
-#editForm {
-    display: flex;
-    flex-direction: column;
-}
+		#editForm {
+			display: flex;
+			flex-direction: column;
+		}
 
-#editForm label {
-    margin: 10px 0 5px;
-}
+		#editForm label {
+			margin: 10px 0 5px;
+		}
 
-#editForm input, #editForm textarea {
-    padding: 10px;
-    margin-bottom: 10px;
-}
-
+		#editForm input,
+		#editForm textarea {
+			padding: 10px;
+			margin-bottom: 10px;
+		}
 	</style>
 </head>
 
@@ -260,7 +284,7 @@
         </div>
         <ul>
             <li>
-                <a href="../Home_Page/Home_Page.html">
+                <a href="../Dashboard/adminDashboard.html">
                     <i class="bx bxs-grid-alt"></i>
                     <span class="Nav_Item">Dashboard</span>
                 </a>
@@ -281,7 +305,7 @@
                 <span class="tooltip">Modify Programs </span>
             </li>
             <li>
-                <a href="Notifications.html">
+                <a href="TeacherNotifications.html">
                     <i class="bx bxs-bell-ring"></i>
                     <span class="Nav_Item">Notifications</span>
                 </a>
@@ -295,26 +319,26 @@
                 <span class="tooltip">Video Tutorials</span>
             </li>
             <li>
-                <a href="../Settings/Settings.html">
+                <a href="../Settings/adminSettings.html">
                     <i class="bx bxs-cog"></i>
                     <span class="Nav_Item">Settings</span>
                 </a>
                 <span class="tooltip">Settings</span>
             </li>
             <li>
-                <a href="../Help/Help.html">
+                <a href="../Help/adminHelp.html">
                     <i class="bx bxs-help-circle"></i>
                     <span class="Nav_Item">Help</span>
                 </a>
                 <span class="tooltip">Help</span>
             </li>
             <li>
-                <a href="../Landing_Page/LandingPage.html">
-                    <i class="bx bxs-log-out"></i>
-                    <span class="Nav_Item">Logout</span>
-                </a>
-                <span class="tooltip">Logout</span>
-            </li>
+        <a id="logoutLink" href="#" onclick="logout()">
+            <i class="bx bxs-log-out"></i>
+            <span class="Nav_Item">Logout</span>
+        </a>
+        <span class="tooltip">Logout</span>
+    </li>
         </ul>
     </div>
     <div class="main_content">
@@ -369,6 +393,7 @@
 
     window.onload = function () {
         loadNotifications();
+        checkAdminAccess();
         console.log('onload function executed');
         // Set the initial placeholder message in the notification view
     const notificationView = document.getElementById("notificationView");
@@ -379,12 +404,12 @@
         const userRoleElement = document.getElementById('userRole');
 
         if (accessLevel === '1') {
-            userNameElement.textContent = 'Rurt&#160Kich';
+           userNameElement.innerHTML = 'Kurt&nbsp;Rich';
             userRoleElement.textContent = 'Admin';
         } else if (accessLevel === '0') {
             const studentData = JSON.parse(localStorage.getItem('studentData'));
             if (studentData && studentData.givenName && studentData.surname) {
-                userNameElement.textContent = studentData.givenName + '&#160' + studentData.surname;
+                userNameElement.innerHTML = studentData.givenName + '&nbsp;' + studentData.surname;
                 userRoleElement.textContent = 'Student';
             }
         }
@@ -524,6 +549,16 @@ function composeMessage() {
         });
     }
 
+    function isValidRecipient(recipient) {
+        // Regular expression to match a 9-digit SBHS ID
+        const sbhsIdPattern = /^\d{9}$/;
+    
+        // Convert recipient to lowercase for case-insensitive comparison
+        const normalizedRecipient = recipient.toLowerCase();
+    
+        return normalizedRecipient === 'all' || sbhsIdPattern.test(recipient);
+    }
+
     function updateCharCounter() {
         const message = document.getElementById("message").value;
         const charCounter = document.getElementById("charCounter");
@@ -539,6 +574,11 @@ function composeMessage() {
             alert("Please fill in both subject and message.");
             return;
         }
+
+         if (!isValidRecipient(recipient)) {
+        alert("Recipient must be 'All', 'all', or a 9-digit SBHS ID.");
+        return;
+    }
 
         fetch("notifications.php", {
             method: "POST",
@@ -646,9 +686,30 @@ function darkmode() {
 }
 
 
+// Logout button click event handler
+document.getElementById("logoutLink").addEventListener("click", function (event) {
+    event.preventDefault(); // Prevent default link behavior (navigation)
+
+    // Call logout function
+    logout();
+
+    // Optional: Redirect to logout page
+    window.location.href = this.href; // Redirect to the logout page
+});
+
+
+// Function to logout (remove student data from local storage)
+ function logout() {
+        // Clear access data from localStorage
+        localStorage.clear();
+        
+        // Redirect to the PHP logout handler
+        window.location.href = "../LandingPage.html";
+
+    }
 </script>
 
-
+ <script src="../adminAccessControl.js"></script>
 <script src="../Home_Page/Activite_Sidebar.js"></script>
 <script src="../Settings/darklight_mode.js"></script>
 <script src="../Profile/Profile_Pic.js"></script>
