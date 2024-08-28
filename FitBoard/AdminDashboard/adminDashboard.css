@@ -1,0 +1,336 @@
+body {
+    overflow: hidden; /* Prevents scrolling of the whole page */
+}
+
+.main_content {
+    overflow: hidden; /* Ensures the main content area doesn't scroll */
+}
+
+/* Styling for the Table Container */
+.table-container {
+    max-height: 500px;
+    overflow-y: auto; /* Enables vertical scrolling */
+    margin-top: 20px; /* Adds margin to the top of the container */
+    border: 1px solid #ddd;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px; /* Added margin to create space above the table */
+}
+
+th,
+td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    cursor: pointer;
+}
+
+/* Sorting Arrows */
+th.sort-asc::after {
+    content: " \25B2";
+}
+
+th.sort-desc::after {
+    content: " \25BC";
+}
+
+/* Search Container Styling */
+.search-container {
+    margin-bottom: 20px;
+}
+
+.search-container input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+/* Edit Mode Styling */
+.edit-mode {
+    display: none;
+}
+
+/* Help Icon Styling */
+.help-icon {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+/* Toggle Switch Container Styling */
+.toggle-container {
+    display: flex;
+    align-items: center;
+    margin-top: 20px; /* Added margin to move the toggle down */
+}
+
+/* Label Styling */
+.toggle-container label {
+    margin-right: 10px; /* Space between label and toggle */
+    font-size: 16px; 
+}
+
+/* Toggle Switch Styling */
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/* Ensure checkboxes are visible and correctly styled */
+.student-checkbox {
+    margin: 0;
+    padding: 0;
+    width: 16px; 
+    height: 16px; 
+}
+
+/* Styling for filter container */
+.filter-container {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.filter-container label,
+.filter-container select {
+    margin-top: 5px;
+}
+
+/* General styling for the select element */
+#filterYear {
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Save Changes Button Styling */
+.save-button {
+    margin-left: 10px; /* Added margin to space it from the toggle */
+    padding: 10px 20px;
+    background-color: #4CAF50; 
+    color: white; 
+    border: none; 
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.save-button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+/* Styling for the delete button */
+.delete-button {
+    margin-left: 10px; /* Added margin to space it from the toggle */
+    padding: 10px 20px;
+    background-color: #f44336; 
+    color: white; 
+    border: none;
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.delete-button:hover {
+    background-color: #d32f2f;
+}
+
+/* Modal Animation */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+    animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Modal content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px; /* Maximum width */
+    border-radius: 5px; /* Rounded corners */
+    animation: slideIn 0.3s;
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Close button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Help Button Styling */
+.help-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #5bc0de; 
+    color: white;
+    border: none; 
+    border-radius: 50%; 
+    font-size: 24px;
+    cursor: pointer; /* Pointer cursor on hover */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.help-button:hover {
+    background-color: #46b8da; 
+}
+
+/* Help Popup */
+.help-popup {
+    display: none;
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+    animation: fadeIn 0.3s;
+}
+
+.help-popup p {
+    margin: 0;
+}
+
+/* Modal Buttons */
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.modal-buttons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.modal-buttons .confirm {
+    background-color: #f44336; /* Red background */
+    color: white; /* White text */
+}
+
+.modal-buttons .cancel {
+    background-color: #aaa; /* Gray background */
+    color: white; /* White text */
+}
+
+/* New styling for the Add Student button */
+.add-student-button {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #007bff; /* Blue background */
+    color: white; /* White text */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+    margin-left: 10px; /* Space between the toggle switch and the button */
+}
+
+.add-student-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+.add-student-button i {
+    margin-right: 8px; /* Space between icon and text */
+}
+
+/* CSS to Apply Red Background for Invalid Data */
+td.invalid {
+    background-color: red;
+    color: white; /* Optional: Make text more readable on red background */
+}

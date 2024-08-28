@@ -1,0 +1,116 @@
+/* Modern styling for the form */
+.permission_container {
+    background-color: #f4f4f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 40px auto; /* Reduced top margin */
+    /* Positioned lower with margin */
+}
+
+.permission_container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.permission_container label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.permission_container input {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+}
+
+.permission_container button {
+    background-color: #5bc0de; /* Original button color */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    display: flex; /* Enable flexbox layout */
+    align-items: center; /* Vertically center items */
+    justify-content: center; /* Horizontally center items */
+    gap: 10px; /* Space between icon and text */
+    text-align: center; /* Center the text within the button */
+}
+
+.permission_container button:hover {
+    background-color: #46b8da; /* Hover color */
+}
+
+.permission_container button i {
+    font-size: 16px; /* Size of the icon */
+}
+
+/* Styling for help button and popup */
+.help-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #5bc0de;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.help-button:hover {
+    background-color: #46b8da;
+}
+
+.help-popup {
+    display: none;
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+}
+
+.help-popup p {
+    margin: 0;
+}
+
+.back-to-dashboard-button {
+    background-color: #0275d8; /* Darker blue color */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    margin-top: 20px; /* Adjust as needed */
+    display: flex; /* Use flexbox to align icon and text */
+    align-items: center; /* Center items vertically */
+    gap: 8px; /* Space between icon and text */
+    margin-left: 10px;
+}
+
+.back-to-dashboard-button:hover {
+    background-color: #025aa5; /* Slightly darker shade on hover */
+}
+
+.back-to-dashboard-button i {
+    font-size: 18px; /* Size of the icon */
+}

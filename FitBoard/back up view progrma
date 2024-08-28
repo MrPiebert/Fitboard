@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+ <!-- #region head (stylesheets and refs) -->
+<head>
+ <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Home Page</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- External Stylesheets -->
+        <link rel="stylesheet" href="../Home_Page/Home_Page.css">
+        <!-- Favicon -->
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
+        <link rel="icon" href="../Landing_Page/favicon.ico">
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap" rel="stylesheet">
+        <!-- Boxicons -->
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			line-height: 1.6;
+			margin: 0;
+			padding: 0;
+			background-color: #f4f4f4;
+			color: #333;
+		}
+
+		header {
+			background-color: #FFFFFF;
+			color: #fff;
+			padding: 1rem;
+			text-align: center;
+		}
+
+		.main-container {
+			width: 80%;
+			margin: 0 auto;
+			padding: 2rem;
+            overflow: auto; /* Allows scrolling if content exceeds viewport */
+		}
+
+		h1,
+		h2 {
+			color: #007bff;
+		}
+
+		select,
+		button {
+			padding: 0.5rem;
+			border: none;
+			border-radius: 4px;
+			margin-right: 1rem;
+			font-size: 1rem;
+		}
+
+		select {
+			background-color: #fff;
+			border: 1px solid #ccc;
+		}
+
+		button {
+			background-color: #007bff;
+			color: #fff;
+			cursor: pointer;
+		}
+
+		button:hover {
+			background-color: #0056b3;
+		}
+
+		button:disabled {
+			background-color: #b0bec5;
+			cursor: not-allowed;
+		}
+
+		.buttons {
+			margin-bottom: 1.5rem;
+			display: flex;
+			align-items: center;
+		}
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			margin-bottom: 1.5rem;
+			background-color: #fff;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		}
+
+		th,
+		td {
+			border: 1px solid #ddd;
+			padding: 12px;
+			text-align: left;
+		}
+
+		th {
+			background-color: #007bff;
+			color: #fff;
+		}
+
+		.day-heading {
+			font-size: 1.2em;
+			margin: 20px 0;
+			color: #007bff;
+		}
+
+		.category-heading {
+			font-size: 1.1em;
+			margin: 10px 0;
+			font-weight: bold;
+			text-align: center;
+			background-color: #e9ecef;
+			color: #495057;
+		}
+
+		.category-row {
+			background-color: #f9f9f9;
+			font-weight: bold;
+		}
+
+		.category-row td {
+			padding: 8px;
+		}
+
+		.comments-column {
+			text-align: left;
+		}
+
+		.select-container {
+			display: flex;
+			align-items: center;
+			margin-bottom: 1.5rem;
+		}
+
+		.select-container select {
+			width: auto;
+		}
+
+		.message {
+			color: #d9534f;
+			font-weight: bold;
+			margin-top: 1rem;
+		}
+
+		.page-break {
+			page-break-before: always;
+		}
+
+		/* CSS to handle page breaks */
+		@media print {
+			h1,
+			h2 {
+				page-break-before: avoid;
+				page-break-after: avoid;
+			}
+
+			.day-section {
+				page-break-inside: avoid;
+				/* Prevents breaking inside the container */
+				page-break-before: always;
+				/* Ensures a break before each day-section */
+			}
+
+			table {
+				page-break-inside: avoid;
+				/* Prevents the table from being split across pages */
+			}
+
+			.page-break {
+				page-break-before: always;
+			}
+
+			@page {
+				margin: 0;
+			}
+
+			body {
+				margin: 1cm;
+				/* Adjust as needed */
+			}
+		}
+	</style>
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Top Bar -->
+        <div class="top">   <!--Top of Sidebar (Logo)-->
+            <div class="logo"> 
+                <img src="../Images/Logo.png" alt="logo" width="50px" height="50px">
+                <span>FITBOARD</span>
+            </div>
+            <i class='bx bx-menu' id="btn"></i> <!-- Sidebar toggle button -->
+        </div>
+
+        <!-- User Profile Section -->
+        <div class="user">
+            <img src="../Images/User_Image.jpg" alt="profile picture" class="User_Image" id="userImage">
+            <div>
+                <p class="bold" id="userName">Default&#160User</p>
+                <p id="userRole">Admin</p>
+            </div>
+        </div>
+        
+        <!-- Navigation Links -->
+        <ul>
+            <li>
+                <a href="Home_Page.html">
+                    <i class="bx bxs-grid-alt"></i>
+                    <span class="Nav_Item">Dashboard</span>
+                </a>
+                <span class="tooltip">Dashboard</span>
+            </li>
+            <li>
+                <a href="../Profile/Profile.html">
+                    <i class="bx bxs-user-circle"></i>
+                    <span class="Nav_Item">Profile</span>
+                </a>
+                <span class="tooltip">Profile</span>
+            </li>
+            
+            <li>
+                <a href="../Notifications/StudentNotifications.html">
+                    <i class="bx bxs-bell-ring"></i>
+                    <span class="Nav_Item">Notifications</span>
+                </a>
+                <span class="tooltip">Notifications</span>
+            </li>
+            <li>
+                <a href="../Upload_Video/Videos.html">
+                    <i class="bx bxs-video"></i>
+                    <span class="Nav_Item">Video&#160Tutorials</span>
+                </a>
+                <span class="tooltip">Video&#160Tutorials</span>
+            </li>
+            <li>
+                <a href="../Settings/Settings.html">
+                    <i class="bx bxs-cog"></i>
+                    <span class="Nav_Item">Settings</span>
+                </a>
+                <span class="tooltip">Settings</span>
+            </li>
+            <li>
+                <a href="../Help/Help.html">
+                    <i class="bx bxs-help-circle"></i>
+                    <span class="Nav_Item">Help</span>
+                </a>
+                <span class="tooltip">Help</span>
+            </li>
+          <li>
+        <a id="logoutLink" href="#" onclick="logout()">
+            <i class="bx bxs-log-out"></i>
+            <span class="Nav_Item">Logout</span>
+        </a>
+        <span class="tooltip">Logout</span>
+    </li>
+        </ul>
+    </div>
+     <!-- #endregion -->
+
+     
+	<header>
+		<h1>Program Viewer</h1>
+	</header>
+
+	<div class="main-container">
+		<div class="select-container">
+			<select id="actionSelect">
+                <option value="">Select action...</option>
+                <option value="print">Print</option>
+                <option value="pdf">Download as PDF</option>
+            </select>
+            <button id="goButton" disabled>Go</button>
+        </div>
+        <div id="message" class="message"></div>
+
+        <h2>Select a Program</h2>
+        <select id="programSelect">
+            <option value="">Select a program...</option>
+        </select>
+
+        <div id="programContent"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script>
+     document.addEventListener('DOMContentLoaded', function () {
+    const programSelect = document.getElementById('programSelect');
+    const programContent = document.getElementById('programContent');
+    const goButton = document.getElementById('goButton');
+    const actionSelect = document.getElementById('actionSelect');
+    const messageDiv = document.getElementById('message');
+
+    
+
+    // Category mapping for display names
+    const categoryMapping = {
+        yoga: 'Yoga',
+        pre_hab: 'Pre-Hab',
+        main_workout: 'Main Workout',
+        mobility: 'Mobility'
+        // Add more mappings as needed
+    };
+
+    // Fetch programs and populate the select dropdown
+    fetch('get_programs.php')
+        .then(response => response.json())
+        .then(programs => {
+            if (Array.isArray(programs)) {
+                programs.forEach(program => {
+                    const option = document.createElement('option');
+                    option.value = program.program_id;
+                    option.textContent = `${program.name} (Sessions: ${program.sessions}, Tier: ${program.tier})`;
+                    option.dataset.sessions = program.sessions; // Store sessions value
+                    programSelect.appendChild(option);
+                });
+            } else {
+                console.error('Unexpected data format:', programs);
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching programs:', error);
+        });
+
+    // Handle program selection
+    programSelect.addEventListener('change', function () {
+        const programId = programSelect.value;
+        const numSessions = programSelect.selectedOptions[0]?.dataset.sessions;
+
+        if (programId && numSessions) {
+            // Enable the Go button and clear any message
+            goButton.disabled = false;
+            messageDiv.textContent = '';
+
+            // Fetch the program exercises
+            fetch(`get_program_exercises.php?program_id=${programId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success && Array.isArray(data.program)) {
+                        // Clear the previous content
+                        programContent.innerHTML = '';
+
+                        // Create a title for the PDF or print
+                       // Title should only be added once, outside of the loop
+if (!programContent.querySelector('h1')) {
+    const programName = programSelect.selectedOptions[0]?.textContent.split(' (')[0] || 'Program';
+    const title = document.createElement('h1');
+    title.textContent = `SBHS Weights Room - ${programName}`;
+    programContent.appendChild(title);
+}
+
+                        // Group exercises by day and category
+                        const exercisesByDay = data.program.reduce((acc, exercise) => {
+                            const day = exercise.table_number || 'Unknown';
+                            if (!acc[day]) {
+                                acc[day] = [];
+                            }
+                            acc[day].push(exercise);
+                            return acc;
+                        }, {});
+
+                        // Create a table for each day
+                        Object.keys(exercisesByDay).forEach(day => {
+                            const dayExercises = exercisesByDay[day];
+
+                            // Create a heading for the day
+                            const dayHeading = document.createElement('h2');
+                            dayHeading.textContent = `Day ${day}`;
+                            programContent.appendChild(dayHeading);
+
+                            // Create a table for the day's exercises
+                            const table = document.createElement('table');
+                            const thead = document.createElement('thead');
+                            const tbody = document.createElement('tbody');
+
+                            // Define table headers with dynamic session columns
+                            let headers = '<tr><th>Exercise</th><th>Sets</th><th>Reps</th>';
+                            for (let i = 1; i <= numSessions; i++) {
+                                headers += `<th>${i}</th>`;
+                            }
+                            headers += '<th class="comments-column">Comments</th></tr>';
+                            thead.innerHTML = headers;
+
+                            // Populate table rows
+                            let currentCategory = '';
+                            let categoryRowCreated = false;
+
+                            dayExercises.forEach(exercise => {
+                                const category = exercise.type || 'Uncategorized';
+                                const displayCategory = categoryMapping[category] || category.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+
+                                // Create a new category row if needed
+                                if (category !== currentCategory) {
+                                    if (categoryRowCreated) {
+                                        // Add an empty row before creating a new category heading
+                                        tbody.appendChild(document.createElement('tr')).innerHTML = `
+                                            <td colspan="${numSessions + 4}" class="category-row"></td>
+                                        `;
+                                    }
+
+                                    // Create a category heading row
+                                    const categoryHeadingRow = document.createElement('tr');
+                                    categoryHeadingRow.classList.add('category-row');
+                                    categoryHeadingRow.innerHTML = `
+                                        <td colspan="${numSessions + 4}" class="category-heading">${displayCategory}</td>
+                                    `;
+                                    tbody.appendChild(categoryHeadingRow);
+
+                                    currentCategory = category;
+                                    categoryRowCreated = true;
+                                }
+
+                                // Add the exercise row
+                                const sessionColumns = Array.from({ length: numSessions }, () => '<td></td>').join('');
+                                const row = document.createElement('tr');
+                                row.innerHTML = `
+                                    <td>${exercise.exercise_name || 'N/A'}</td>
+                                    <td>${exercise.sets || 'N/A'}</td>
+                                    <td>${exercise.reps || 'N/A'}</td>
+                                    ${sessionColumns}
+                                    <td class="comments-column">${exercise.comments || ''}</td>
+                                `;
+                                tbody.appendChild(row);
+                            });
+
+                            table.appendChild(thead);
+                            table.appendChild(tbody);
+                            programContent.appendChild(table);
+                            programContent.appendChild(document.createElement('div')).classList.add('page-break');
+                        });
+                    } else {
+                        console.error('Program data is missing or invalid:', data);
+                        messageDiv.textContent = 'Program data is missing or invalid.';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching program exercises:', error);
+                });
+        } else {
+            goButton.disabled = true;
+            programContent.innerHTML = '';
+        }
+    });
+
+  // Handle print and download actions
+// Function to prepare print view
+function preparePrintView() {
+    const printWindow = window.open('', '', 'height=800,width=1000');
+    const programContent = document.getElementById('programContent').innerHTML;
+    const programName = document.querySelector('#programSelect option:checked').textContent.split(' (')[0] || 'Program';
+
+    printWindow.document.open();
+    printWindow.document.write(`
+        <html>
+        <head>
+            <title>${programName} Print</title>
+            <style>
+                @media print {
+                    @page {
+                        size: potrait;
+                        margin: 0.5in;
+                    }
+                    body {
+                        margin: 0;
+                        padding: 0;
+                    }
+                    table {
+                        width: 95%;
+                        border-collapse: collapse;
+                        page-break-inside: avoid;
+                    }
+                    th, td {
+                        border: 1px solid #000;
+                        padding: 5px;
+                        text-align: left;
+                        page-break-inside: avoid;
+                    }
+                    th {
+                        background-color: #f2f2f2;
+                    }
+                    .day-table {
+                        page-break-before: always;
+                    }
+                }
+            </style>
+        </head>
+        <body>
+           
+            ${programContent}
+        </body>
+        </html>
+    `);
+    printWindow.document.close();
+    printWindow.focus();
+    printWindow.print();
+}
+
+// Handle print and download actions
+goButton.addEventListener('click', function () {
+    if (!programSelect.value) {
+        messageDiv.textContent = 'Please select a program to proceed.';
+        return;
+    }
+
+    if (actionSelect.value === 'print') {
+        preparePrintView();
+    } else if (actionSelect.value === 'pdf') {
+        const programName = document.querySelector('#programSelect option:checked').textContent.split(' (')[0] || 'Program';
+        const options = {
+            filename: `${programName}.pdf`,
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2 },
+            margin: [0.5, 0.5, 0.5, 0.5],
+            pagebreak: { mode: ['avoid-all', 'css', 'legacy'] },
+            jsPDF: { orientation: 'landscape' }
+        };
+
+        html2pdf().from(programContent).set(options).save();
+    }
+});
+
+
+
+
+    // Action select functionality
+    actionSelect.addEventListener('change', function () {
+        goButton.disabled = !programSelect.value;
+    });
+});
+
+    </script>
+
+      <!-- External JavaScript -->
+    <script src="../accessControl.js"></script>
+    <script src="../update_sidebar_role.js"></script>
+   <!-- <script src="../Settings/darklight_mode.js"></script> Write your comments here -->
+    <script src="../Home_Page/Activite_Sidebar.js"></script>
+    <script src="../Profile/Profile_Pic.js"></script>
+    <script src="../Profile/Profile_Check.js"></script>
+    <script src="../Settings/colour_slider.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+
+   
+<script>
+    
+
+    document.getElementById("logoutLink").addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent default link behavior (navigation)
+        logout(); // Call logout function
+        window.location.href = this.href; // Redirect to the logout page
+    });
+
+    function logout() {
+        // Clear access data from localStorage
+        localStorage.clear();
+        // Redirect to the PHP logout handler
+        window.location.href = "../LandingPage.html";
+    }
+</script>
+</body>
+</html>

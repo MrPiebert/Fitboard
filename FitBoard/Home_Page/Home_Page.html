@@ -83,6 +83,7 @@
                 padding: 10px;
                 font-size: 16px;
                 margin-right: 10px;
+                width: 200px; /* Adjust the width value as needed */
             }
 
             .program-container .print-download button {
@@ -119,7 +120,6 @@
                 margin: 0;
             }
 
-        
             table {
                 width: 100%;
                 border-collapse: collapse;
@@ -137,19 +137,33 @@
             }
 
             
-    @media print {
+   @media print {
     body * {
         visibility: hidden;
     }
+
     #programDetails, #programDetails * {
         visibility: visible;
     }
+
     #programDetails {
-        position: absolute;
-        left: 0; /* Adjust this value to move the content further to the left */
-        top: 0;
-        width: 100%; /* Ensure it takes full width */
-        margin: 0; /* Ensure no extra margins */
+        display: block;
+        position: static; /* Remove absolute positioning */
+        width: 100%; /* Make it span the full width of the page */
+        margin: 0 auto; /* Center the content */
+        overflow: auto; /* Handle overflowing content */
+    }
+
+    table {
+        width: 100%; /* Ensure the table spans the full width */
+        border-collapse: collapse; /* Ensure the table fits well */
+        margin: 0 auto; /* Center the table */
+    }
+
+    /* Ensure proper margins */
+    @page {
+        size: auto; /* Let the content define the page size */
+        margin: 20mm; /* Adjust margins to prevent cutting off */
     }
 }
 
@@ -159,7 +173,7 @@
 
     <!-- #region main -->
 
-    <body onload="onload()">
+    <body>
 
     <!-- Sidebar -->
     <div class="sidebar">
@@ -197,15 +211,9 @@
                 </a>
                 <span class="tooltip">Profile</span>
             </li>
+            
             <li>
-                <a href="../Program Modification/Program Modification.html">
-                    <i class="bx bxs-duplicate"></i>
-                    <span class="Nav_Item">Modify&#160Programs</span>
-                </a>
-                <span class="tooltip">Modify&#160Programs</span>
-            </li>
-            <li>
-                <a href="../Notifications/Notifications.html">
+                <a href="../Notifications/StudentNotifications.html">
                     <i class="bx bxs-bell-ring"></i>
                     <span class="Nav_Item">Notifications</span>
                 </a>
@@ -232,13 +240,13 @@
                 </a>
                 <span class="tooltip">Help</span>
             </li>
-            <li>
-                <a href="../LandingPage.html">
-                    <i class="bx bxs-log-out"></i>
-                    <span class="Nav_Item">Logout</span>
-                </a>
-                <span class="tooltip">Logout</span>
-            </li>
+          <li>
+        <a id="logoutLink" href="#" onclick="logout()">
+            <i class="bx bxs-log-out"></i>
+            <span class="Nav_Item">Logout</span>
+        </a>
+        <span class="tooltip">Logout</span>
+    </li>
         </ul>
     </div>
      <!-- #endregion -->
@@ -278,7 +286,9 @@
     </div>
 
     <!-- External JavaScript -->
-    <script src="../Settings/darklight_mode.js"></script>
+    <script src="../accessControl.js"></script>
+    <script src="../update_sidebar_role.js"></script>
+   <!-- <script src="../Settings/darklight_mode.js"></script> Write your comments here -->
     <script src="Activite_Sidebar.js"></script>
     <script src="../Profile/Profile_Pic.js"></script>
     <script src="../Profile/Profile_Check.js"></script>
@@ -286,24 +296,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
     <script src="view_program.js"></script>
 
-    <script>
-        function onload() {
-           
-            var accessLevel = localStorage.getItem('accessLevel');
-            var userNameElement = document.getElementById('userName');
-            var userRoleElement = document.getElementById('userRole');
-            
-            if (accessLevel === '1') {
-                userNameElement.textContent = 'Rurt&#160Kich';
-                userRoleElement.textContent = 'Admin';
-            } else if (accessLevel === '0') {
-                var studentData = JSON.parse(localStorage.getItem('studentData'));
-                if (studentData && studentData.givenName && studentData.surname) {
-                    userNameElement.textContent = studentData.givenName + '\u00A0' + studentData.surname;
-                    userRoleElement.textContent = 'Student';
-                }
-            }
-        }
-    </script>
+   
+<script>
+    
+
+    document.getElementById("logoutLink").addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent default link behavior (navigation)
+        logout(); // Call logout function
+        window.location.href = this.href; // Redirect to the logout page
+    });
+
+    function logout() {
+        // Clear access data from localStorage
+        localStorage.clear();
+        // Redirect to the PHP logout handler
+        window.location.href = "../LandingPage.html";
+    }
+</script>
 </body>
 </html>

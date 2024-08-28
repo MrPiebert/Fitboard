@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>FitBoard</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="Profile.css">
+	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+	<link rel="icon" href="../favicon.ico">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap" rel="stylesheet">
+	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/fontawesome.min.css">
+	<link rel="stylesheet" href="../cropperjs/cropper.css">
+	<style>
+		.bold {
+			font-weight: bold;
+		}
+
+		.info {
+			margin-top: 20px;
+			/* Optional: Adjust margin to ensure some space between the profile sections */
+		}
+
+		.role {
+			font-size: 18px;
+		}
+
+		.total-students {
+			font-size: 18px;
+		}
+
+		#totalStudentsNumber {
+			font-size: 16px;
+			margin-top: 5px;
+		}
+	</style>
+</head>
+
+<body>
+
+	<!-- Sidebar -->
+	<div class="sidebar">
+		<!-- Top Bar -->
+		<div class="top">
+			<div class="logo">
+				<img src="../Images/Logo.png" alt="logo" width="50px" height="50px">
+                <span>FITBOARD</span>
+            </div>
+            <i class='bx bx-menu' id="btn"></i>
+        </div>
+
+        <!-- User Profile Section -->
+        <div class="user">
+            <img src="../Images/User_Image.jpg" alt="profile picture" class="User_Image" id="userImage">
+            <div>
+                <p class="bold" id="userName">Default&#160User</p>
+                <p id="userRole">Admin</p>
+            </div>
+        </div>
+
+        <!-- Navigation Links -->
+        <ul>
+            <li>
+                <a href="../Dashboard/adminDashboard.html">
+                    <i class="bx bxs-grid-alt"></i>
+                    <span class="Nav_Item">Dashboard</span>
+                </a>
+                <span class="tooltip">Dashboard</span>
+            </li>
+            <li>
+                <a href="../Profile/adminProfile.html">
+                    <i class="bx bxs-user-circle"></i>
+                    <span class="Nav_Item">Profile</span>
+                </a>
+                <span class="tooltip">Profile</span>
+            </li>
+            <li>
+                <a href="../Program Modification/Program Modification.html">
+                    <i class="bx bxs-duplicate"></i>
+                    <span class="Nav_Item">Modify&#160Programs</span>
+                </a>
+                <span class="tooltip">Modify&#160Programs </span>
+            </li>
+            <li>
+                <a href="../Notifications/TeacherNotifications.html">
+                    <i class="bx bxs-bell-ring"></i>
+                    <span class="Nav_Item">Notifications</span>
+                </a>
+                <span class="tooltip">Notifications</span>
+            </li>
+            <li>
+                <a href="../Upload_Video/Videos.html">
+                    <i class="bx bxs-video"></i>
+                    <span class="Nav_Item">Video&#160Tutorials</span>
+                </a>
+                <span class="tooltip">Video&#160Tutorials</span>
+            </li>
+            <li>
+                <a href="../Settings/adminSettings.html">
+                    <i class="bx bxs-cog"></i>
+                    <span class="Nav_Item">Settings</span>
+                </a>
+                <span class="tooltip">Settings</span>
+            </li>
+            <li>
+                <a href="../Help/adminHelp.html">
+                    <i class="bx bxs-help-circle"></i>
+                    <span class="Nav_Item">Help</span>
+                </a>
+                <span class="tooltip">Help</span>
+            </li>
+            <li>
+                <a href="../LandingPage.html">
+                    <i class="bx bxs-log-out"></i>
+                    <span class="Nav_Item">Logout</span>
+                </a>
+                <span class="tooltip">Logout</span>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main_content">
+        <div class="container" id="container">
+            <h1 id="main-heading">FitBoard</h1>
+            <h1 id="sub-heading">Profile</h1>
+            <h3>&#160&#160Profile</h3>
+        </div>
+
+        <div class="name">
+            <p class="bold" id="studentName">Kurt Rich</p> <!-- Example student name -->
+        </div>
+
+     <div class="info">
+    <ul style="list-style-type: none;">
+        <li style="margin-bottom: 15px;">
+            <span class="Student_ID"><span class="bold">Role:</span></br><span id="studentId">Admin</span></span>
+        </li>
+        <li>
+            <span class="Student_Count" id="totalStudents"><span class="bold">Total Students:</span> Loading...</span>
+        </li>
+    </ul>
+</div>
+
+
+
+        <!-- Profile Picture Upload Section -->
+        <div class="profile_picture">
+            <input type="file" class="editable_image" accept="image/*" id="fileInput">
+            <label for="fileInput" class="upload_button">Upload Image</label>
+            <img id="previewImage" src="../Images/User_Image.jpg" alt="Preview" />
+        </div>
+
+        <!-- Biography Section -->
+        <div class="biography">
+            <span class="text"><span class="bold">Biography</span></span>
+            <div class="textbox">
+                <!-- Biography Textarea -->
+                <textarea id="biography" maxlength="500" oninput="updateCharCounter()"></textarea>
+                <div class="char-counter" id="charCounter">0/500 characters</div>
+            </div>
+        </div>
+
+        <!-- Save Button -->
+        <button class="Save_Button">
+            <i class="bx bxs-save"></i> <span>Save</span>
+        </button>
+
+        <!-- Modal Dialog for Help -->
+        <div id="modalDialog" class="modal">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <img id="selectedImage" src="#" alt="Selected Image">
+                    <div id="cropperContainer" class="cropper-inner-container">
+                        <img id="cropperImage" src="#" alt="Crop Image">
+                    </div>
+                    <div class="help-section">
+                        <h3>Help</h3>
+                        <p>Drag edges of circle to resize. Drag across a blank area to draw a new circle. Move the existing circle by dragging its center. Press crop to save.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="btnCrop">Crop</button>
+                    <button class="close">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Section -->
+         <script src="../adminAccessControl.js"></script>
+        <script src="../update_sidebar_role.js"></script>
+        <script src="../cropperjs/cropper.js"></script>
+        <script src="../Home_Page/Activite_Sidebar.js"> </script>
+        <script src="../Settings/darklight_mode.js"> </script>
+        <script src="../Profile/Profile_Pic.js"></script>
+        <script src="../Profile/Profile_Check.js"></script>
+        <script src="../Settings/colour_slider.js"></script>
+
+  <script>
+     
+// Function to logout (remove student data from local storage)
+ function logout() {
+        // Clear access data from localStorage
+        localStorage.clear();
+        
+        // Redirect to the PHP logout handler
+        window.location.href = "../LandingPage.html";
+
+    }
+
+// Logout button click event handler
+document.getElementById("logoutLink").addEventListener("click", function (event) {
+    event.preventDefault(); // Prevent default link behavior (navigation)
+
+    // Call logout function
+    logout();
+
+});
+
+  </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Execute on page load
+            displayAdminProfile();
+            fetchBiography(); // Fetch the biography upon loading the page
+            fetchTotalStudents(); // Fetch the total student count
+            checkAdminAccess();
+   
+        });
+
+        function displayAdminProfile() {
+            // Simulating admin data display - replace with actual data fetching if needed
+            document.getElementById("studentName").textContent = "Kurt Rich"; // Placeholder data
+            document.getElementById("studentId").textContent = "Admin"; // Placeholder data
+        }
+
+        function fetchBiography() {
+            // Fetch biography data from the server
+            fetch('fetch_admin_biography.php')
+                .then(response => response.json())
+                .then(data => {
+                    console.log('API Response:', data); // Debugging
+
+                    // Ensure biography is successfully fetched and exists
+                    if (data.success) {
+                        const textarea = document.getElementById('biography'); // Correct element selection
+                        textarea.value = data.biography || ''; // Set biography, allow empty value
+                        updateCharCounter(); // Update character counter
+                    } else {
+                        console.error('Error fetching biography:', data.error);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+        function fetchTotalStudents() {
+    // Fetch the total number of students from the database
+    fetch('fetch_total_students.php')
+        .then(response => response.json())
+        .then(data => {
+            console.log('Total Students:', data); // Debugging line
+            if (data.success) {
+                document.getElementById('totalStudents').textContent = `Total Students: ${data.total_students}`;
+            } else {
+                console.error('Error fetching total students:', data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
+        document.querySelector('.Save_Button').addEventListener('click', function () {
+            // Save biography to the server
+            var biography = document.getElementById('biography').value.trim();
+            if (biography) {
+                fetch('save_admin_biography.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        biography: biography
+                    }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Biography saved successfully!');
+                    } else {
+                        alert('Error saving biography: ' + data.error);
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    alert('An error occurred while saving the biography.');
+                });
+            } else {
+                alert('Please enter a biography.');
+            }
+        });
+
+        function updateCharCounter() {
+            // Update the character counter for biography textarea
+            var biography = document.getElementById('biography');
+            var charCounter = document.getElementById('charCounter');
+            if (biography && charCounter) {
+                var currentLength = biography.value.length;
+                var maxLength = biography.getAttribute('maxlength') || 500;
+                charCounter.textContent = currentLength + '/' + maxLength + ' characters';
+            }
+        }
+
+        // Trigger updateCharCounter on biography input
+        document.getElementById('biography').addEventListener('input', updateCharCounter);
+    </script>
+
+</body>
+</html>

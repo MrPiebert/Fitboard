@@ -2,171 +2,56 @@
 <html lang="en">
 
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>FitBoard</title>
-	<meta name="description" content="">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="../Help/Help.css">
-	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
-	<link rel="icon" href="../Landing_Page/favicon.ico">
-	<link href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap" rel="stylesheet">
-	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
-	<style>
-		/* Modern styling for the form */
-		.permission_container {
-			background-color: #f4f4f9;
-			padding: 20px;
-			border-radius: 8px;
-			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-			max-width: 500px;
-			 margin: 40px auto; /* Reduced top margin */
-            
-			/* Positioned lower with margin */
-		}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Add Student - FitBoard</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-		.permission_container form {
-			display: flex;
-			flex-direction: column;
-		}
+    <!-- Link to external stylesheets -->
+    <link rel="stylesheet" href="../Help/Help.css">
+    <link rel="stylesheet" href="add_student.css">
 
-		.permission_container label {
-			margin-bottom: 5px;
-			font-weight: bold;
-			color: #333;
-		}
-
-		.permission_container input {
-			margin-bottom: 15px;
-			padding: 10px;
-			border-radius: 4px;
-			border: 1px solid #ddd;
-			font-size: 16px;
-		}
-
-	.permission_container button {
-    background-color: #5bc0de; /* Original button color */
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s;
-     display: flex; /* Enable flexbox layout */
-    align-items: center; /* Vertically center items */
-    justify-content: center; /* Horizontally center items */
-    gap: 10px; /* Space between icon and text */
-    text-align: center; /* Center the text within the button */
-}
-
-.permission_container button:hover {
-    background-color: #46b8da; /* Hover color */
-}
-
-.permission_container button i {
-    font-size: 16px; /* Size of the icon */
-}
-
-		/* Styling for help button and popup */
-		.help-button {
-			position: fixed;
-			bottom: 20px;
-			right: 20px;
-			width: 50px;
-			height: 50px;
-			background-color: #5bc0de;
-			color: white;
-			border: none;
-			border-radius: 50%;
-			font-size: 24px;
-			cursor: pointer;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-		}
-
-		.help-button:hover {
-			background-color: #46b8da;
-		}
-
-		.help-popup {
-			display: none;
-			position: fixed;
-			bottom: 80px;
-			right: 20px;
-			background-color: white;
-			border: 1px solid #ddd;
-			border-radius: 5px;
-			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-			padding: 20px;
-			width: 300px;
-		}
-
-		.help-popup p {
-			margin: 0;
-		}
-
-		.back-to-dashboard-button {
-			background-color: #0275d8;
-			/* Darker blue color */
-			color: white;
-			padding: 10px 20px;
-			border: none;
-			border-radius: 4px;
-			cursor: pointer;
-			font-size: 16px;
-			transition: background-color 0.3s;
-			margin-top: 20px;
-			/* Adjust as needed */
-			display: flex;
-			/* Use flexbox to align icon and text */
-			align-items: center;
-			/* Center items vertically */
-			gap: 8px;
-			/* Space between icon and text */
-			margin-left: 10px;
-		}
-
-		.back-to-dashboard-button:hover {
-			background-color: #025aa5;
-			/* Slightly darker shade on hover */
-		}
-
-		.back-to-dashboard-button i {
-			font-size: 18px;
-			/* Size of the icon */
-		}
-	</style>
+       <!-- Google Fonts and icon libraries -->
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="icon" href="../Landing_Page/favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
 </head>
 
 <body onload="onload()">
-	<div class="sidebar">
-		<div class="top">
-			<div class="logo">
-				<img src="../Images/Logo.png" alt="logo" width="50px" height="50px">
+
+    <!-- Sidebar navigation -->
+    <div class="sidebar">
+        <div class="top">
+            <div class="logo">
+                <img src="../Images/Logo.png" alt="logo" width="50px" height="50px">
                 <span>FITBOARD</span>
             </div>
             <i class='bx bx-menu' id="btn"></i>
         </div>
+
+        <!-- User Details -->
         <div class="user">
             <img src="../Images/User_Image.jpg" alt="profile picture" class="User_Image" id="userImage">
             <div>
-                <p class="bold" id="userName">Default&#160User</p>
+                <p class="bold" id="userName">Default User</p>
                 <p id="userRole">Admin</p>
             </div>
         </div>
+
+        <!-- Navigation links -->
         <ul>
             <li>
-                <a href="../Home_Page/Home_Page.html">
+                <a href="../Home_Page/adminDashboard.html">
                     <i class="bx bxs-grid-alt"></i>
                     <span class="Nav_Item">Dashboard</span>
                 </a>
                 <span class="tooltip">Dashboard</span>
             </li>
             <li>
-                <a href="../Profile/Profile.html">
+                <a href="../Profile/adminProfile.html">
                     <i class="bx bxs-user-circle"></i>
                     <span class="Nav_Item">Profile</span>
                 </a>
@@ -177,10 +62,10 @@
                     <i class="bx bxs-duplicate"></i>
                     <span class="Nav_Item">Modify&#160Programs</span>
                 </a>
-                <span class="tooltip">Modify&#160Programs </span>
+                <span class="tooltip">Modify&#160Programs</span>
             </li>
             <li>
-                <a href="../Notifications/Notifications.html">
+                <a href="../Notifications/TeacherNotifications.html">
                     <i class="bx bxs-bell-ring"></i>
                     <span class="Nav_Item">Notifications</span>
                 </a>
@@ -194,43 +79,46 @@
                 <span class="tooltip">Video&#160Tutorials</span>
             </li>
             <li>
-                <a href="../Settings/Settings.html">
+                <a href="../Settings/adminSettings.html">
                     <i class="bx bxs-cog"></i>
                     <span class="Nav_Item">Settings</span>
                 </a>
                 <span class="tooltip">Settings</span>
             </li>
             <li>
-                <a href="../Help/Help.html">
+                <a href="../Help/adminHelp.html">
                     <i class="bx bxs-help-circle"></i>
                     <span class="Nav_Item">Help</span>
                 </a>
                 <span class="tooltip">Help</span>
             </li>
             <li>
-                <a href="../LandingPage.html">
+                <a id="logoutLink" href="#" onclick="logout()">
                     <i class="bx bxs-log-out"></i>
                     <span class="Nav_Item">Logout</span>
                 </a>
                 <span class="tooltip">Logout</span>
             </li>
-            
         </ul>
     </div>
 
-  <div class="main_content">
+    <!-- Main content area -->
+    <div class="main_content">
         <div class="container" id="container">
-            <h1 id="main-heading">FitBoard</h1>
+            <h1 id="main-headings">FitBoard</h1>
             <h2>Add Student</h2>
-            
         </div>
-            <button type="button" class="back-to-dashboard-button" onclick="redirectToDashboard()">
-        <i class="fas fa-arrow-left"></i> Back to Dashboard
-    </button>
+
+        <!-- Button to navigate back to the dashboard -->
+        <button type="button" class="back-to-dashboard-button" onclick="redirectToDashboard()">
+            <i class="fas fa-arrow-left"></i> Back to Dashboard
+        </button>
+
+         <!-- Form to add a new student + Data Validation -->
         <div class="permission_container">
             <form id="permissionForm">
-               <label for="sbhsId">SBHS ID:</label>
-<input type="text" id="sbhsId" name="sbhsId" pattern="[0-9]{9}" title="Please enter a 9-digit SBHS ID" required>
+                <label for="sbhsId">SBHS ID:</label>
+                <input type="text" id="sbhsId" name="sbhsId" pattern="[0-9]{9}" title="Please enter a 9-digit SBHS ID" required>
                 <br>
                 <label for="firstName">First Name:</label>
                 <input type="text" id="firstName" name="firstName" pattern="[A-Za-zÀ-ÿ '-]+" title="Please enter only letters and special characters" required>
@@ -238,35 +126,34 @@
                 <label for="lastName">Last Name:</label>
                 <input type="text" id="lastName" name="lastName" pattern="[A-Za-zÀ-ÿ '-]+" title="Please enter only letters and special characters" required>
                 <br>
-               <label for="studentYear">Student Year (7-12):</label>
-<input type="number" id="studentYear" name="studentYear" min="7" max="12" inputmode="numeric" title="Please enter a number between 7 and 12" required>
-
+                <label for="studentYear">Student Year (7-12):</label>
+                <input type="number" id="studentYear" name="studentYear" min="7" max="12" inputmode="numeric" title="Please enter a number between 7 and 12" required>
                 <br>
-               <button type="submit">
-                <i class="fas fa-save"></i> Submit
-            </button>
+                <button type="submit">
+                    <i class="fas fa-save"></i> Submit
+                </button>
             </form>
         </div>
     </div>
 
-
-
-
-
+    <!-- Help button and popup -->
     <button class="help-button" onclick="toggleHelpPopup()">?</button>
     <div class="help-popup" id="helpPopup">
         <p>Here you can add a student to the database by filling out their details and clicking submit. Ensure all fields are correctly filled.</p>
     </div>
-    
- <script src="../update_sidebar_role.js"></script>
-    <script src="../Home_Page/Activite_Sidebar.js"></script>
-    <script src="../Settings/darklight_mode.js"></script>
-    <script src="../Profile/Profile_Pic.js"></script>
+
+    <!-- External Javascript Files -->
+    <script src="../adminAccessControl.js"></script> <!-- Ensure only Admin can access this page -->
+    <script src="../update_sidebar_role.js"></script> <!-- Update User Details on Sidebar depending on User -->
+    <script src="../Home_Page/Activite_Sidebar.js"></script> <!-- Allow sidebar to be dynamic -->
+    <script src="../Settings/darklight_mode.js"></script> <!-- Allows darkmode  -->
+    <script src="../Profile/Profile_Pic.js"></script> <!-- Ensures Profile Pic remains constant -->
     <script src="../Profile/Profile_Check.js"></script>
-    <script src="../Settings/colour_slider.js"></script>
-   <script>
-      
-        // Function to toggle the help popup
+    <script src="../Settings/colour_slider.js"></script> <!-- Ensures header matches colour in settings -->
+
+    <!-- Javascript for add_student.html -->
+    <script>
+        // Toggle the display of the help popup
         function toggleHelpPopup() {
             var helpPopup = document.getElementById('helpPopup');
             if (helpPopup.style.display === 'none' || helpPopup.style.display === '') {
@@ -276,30 +163,48 @@
             }
         }
 
-        // Function to handle form submission via AJAX (optional for seamless experience)
-        document.getElementById('permissionForm').addEventListener('submit', function(event) {
+        // Handle form submission with AJAX (Save Student Details to Database)
+        document.getElementById('permissionForm').addEventListener('submit', function (event) {
             event.preventDefault(); // Prevent default form submission
             var formData = new FormData(this);
-            
-            fetch('save_student_data.php', {
+
+            fetch('save_student_data.php', { // PHP to save new student to database
                 method: 'POST',
                 body: formData
             })
-            .then(response => response.text())
-            .then(data => {
-                alert('Student data saved successfully!');
-                // Optionally, you can redirect or clear the form here
-            })
-            .catch(error => {
-                alert('An error occurred while saving student data.');
-                console.error('Error:', error);
-            });
+                .then(response => response.text())
+                .then(data => {
+                    alert('Student data saved successfully!');
+                    // Optionally, you can redirect or clear the form here
+                })
+                .catch(error => {
+                    alert('An error occurred while saving student data.');
+                    console.error('Error:', error);
+                });
         });
 
+        // Redirect to the dashboard page
         function redirectToDashboard() {
-    window.location.href = 'adminDashboard.html';
-}
+            window.location.href = 'adminDashboard.html';
+        }
+
+        // Logout button click event handler
+        document.getElementById("logoutLink").addEventListener("click", function (event) {
+            event.preventDefault(); // Prevent default link behavior (navigation)
+
+            // Call logout function
+            logout();
+        });
+
+        // Function to logout (remove student data from local storage)
+        function logout() {
+            // Clear access data from localStorage
+            localStorage.clear();
+
+            // Redirect to Landing Page
+            window.location.href = "../LandingPage.html";
+        }
     </script>
-        
 </body>
+
 </html>
