@@ -285,6 +285,7 @@ button:disabled {
     opacity: 0;
 }
 
+/* Hides logo when sidebar is pulled out */
 .sidebar.active .top .logo {
     opacity: 1;
 }
