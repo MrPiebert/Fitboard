@@ -2,12 +2,6 @@
 
 // J's Work
 
-/*
-    Current bugs:
-    i forgot to put the delete row button in the new rows
-    loading data into yoga and mobility rows removes the editable boxes.
-*/
-
 // #region Top Logic
 
     // Executes program fetching function on load
