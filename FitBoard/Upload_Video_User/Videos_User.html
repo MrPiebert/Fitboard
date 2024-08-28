@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>FitBoard</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- External Stylesheets -->
+    <link rel="stylesheet" href="Videos_User.css">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
+    <link rel="icon" href="../Landing_Page/favicon.ico">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap" rel="stylesheet">
+    <!-- Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+</head>
+<body onload="onload()">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Top Bar -->
+        <div class="top">
+            <div class="logo"> 
+                <img src="../Images/Logo.png" alt="logo" width="50px" height="50px">
+                <span>FITBOARD</span>
+            </div>
+            <i class='bx bx-menu' id="btn"></i> <!-- Sidebar toggle button -->
+        </div>
+        <!-- User Profile Section -->
+        <div class="user">
+            <img src="../Images/User_Image.jpg" alt="profile picture" class="User_Image" id="userImage">
+            <div>
+                <p class="bold">Default&#160User</p>
+                <p>Admin</p>
+            </div>
+        </div>
+        <!-- Navigation Links -->
+        <ul>
+            <li>
+                <a href="../Home_Page/Home_Page.html">
+                    <i class="bx bxs-grid-alt"></i>
+                    <span class="Nav_Item">Dashboard</span>
+                </a>
+                <span class="tooltip">Dashboard</span>
+            </li>
+            <li>
+                <a href="../Profile/Profile.html">
+                    <i class="bx bxs-user-circle"></i>
+                    <span class="Nav_Item">Profile</span>
+                </a>
+                <span class="tooltip">Profile</span>
+            </li>
+            <li>
+                <a href="../Program Modification/Program Modification.html">
+                    <i class="bx bxs-duplicate"></i>
+                    <span class="Nav_Item">Modify&#160Programs</span>
+                </a>
+                <span class="tooltip">Modify&#160Programs</span>
+            </li>
+            <li>
+                <a href="../Notifications/Notifications.html">
+                    <i class="bx bxs-bell-ring"></i>
+                    <span class="Nav_Item">Notifications</span>
+                </a>
+                <span class="tooltip">Notifications</span>
+            </li>
+            <li>
+                <a href="../Upload_Video/Videos.html">
+                    <i class="bx bxs-video"></i>
+                    <span class="Nav_Item">Video&#160Tutorials</span>
+                </a>
+                <span class="tooltip">Video&#160Tutorials</span>
+            </li>
+            <li>
+                <a href="../Settings/Settings.html">
+                    <i class="bx bxs-cog"></i>
+                    <span class="Nav_Item">Settings</span>
+                </a>
+                <span class="tooltip">Settings</span>
+            </li>
+            <li>
+                <a href="../Help/Help.html">
+                    <i class="bx bxs-help-circle"></i>
+                    <span class="Nav_Item">Help</span>
+                </a>
+                <span class="tooltip">Help</span>
+            </li>
+            <li>
+                <a href="../Landing_Page/LandingPage.html">
+                    <i class="bx bxs-log-out"></i>
+                    <span class="Nav_Item">Logout</span>
+                </a>
+                <span class="tooltip">Logout</span>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main_content">
+        <div class="container" id="container">
+            <h1 id="sub-heading">Videos</h1>
+            <h1 id="main-heading">FitBoard</h1>
+            <h3 id="subscript">&#160&#160Videos</h3>      
+        </div>
+
+        <h3 class="heading">Video Tutorials</h3>
+
+        <div class="content">
+            
+            <div class="main_video">
+                <div style="position: relative; width: 100%; padding-bottom: 56.25%;">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 10px;"></iframe>
+                </div>
+                <div class="title"><h3>01. Example Video</h3></div>
+                <div class="description"><h4>This is an example video</h4></div>
+            </div>
+
+            <div class="black_background">
+
+                <div class="search-container" style="padding: 40px; width: 100%;">
+                    <input type="text" id="searchInput" placeholder="Search videos..." style="border-radius:15px;">
+                    <button onclick="searchVideos()" style="border-radius: 15px;"><i class="fas fa-search"></i></button>
+                </div>
+                
+                <div class="video_list">
+
+                    <div class="vid active">
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen style="width: 100px; height: 56px; border-radius: 5px;"></iframe>
+                        <h3 class="title">01. Example Video</h3>
+                        <div class="desc" style="display:none;">This is an example video</div>
+                        
+                    </div>
+
+                    
+                    <!-- More video items go here, similar to the above -->
+
+                </div>
+            
+                
+            </div>
+        </div>
+
+    <!-- External JavaScript -->
+    <script src="../Settings/darklight_mode.js"></script>
+    <script src="../Home_Page/Activite_Sidebar.js"> </script>
+    <script src="../Profile/Profile_Pic.js"></script>
+    <script src="../Profile/Profile_Check.js"></script>
+    <script src="Videos_User.js"></script>
+    <script src="Upload_Video_User.js"></script>
+    <script src="../Settings/colour_slider.js"></script>
+
+</body>
+</html>
