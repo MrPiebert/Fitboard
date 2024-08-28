@@ -1,86 +1,41 @@
 <?php
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-$program_id = intval($_GET['program_id']); // Always sanitize input
-
-// Prepare the SQL query
-$sql = "SELECT ep.name as program_name, ep.number_of_sessions, ep.tier,
-               pt.table_id, pt.table_number, 
-               pe.exercise_id, pe.name as exercise_name, pe.sets, pe.reps, pe.type
-        FROM exercise_programs ep
-        LEFT JOIN program_tables pt ON ep.program_id = pt.program_id
-        LEFT JOIN program_exercises pe ON pt.table_id = pe.table_id
-        WHERE ep.program_id = ?";
-
-// Prepare and execute the statement
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $program_id);
-$stmt->execute();
-
-// Get the result
-$result = $stmt->get_result();
-
-// Initialize an array to hold the program data
-$programData = [
-    'name' => '',
-    'number_of_sessions' => 0,
-    'tier' => '',
-    'tables' => []
-];
-
-while ($row = $result->fetch_assoc()) {
-    $programName = $row['program_name'];
-    $numberOfSessions = $row['number_of_sessions'];
-    $tier = $row['tier'];
-
-    $tableId = $row['table_id'];
-    $tableNumber = $row['table_number'];
-
-    $exerciseId = $row['exercise_id'];
-    $exerciseName = $row['exercise_name'];
-    $sets = $row['sets'];
-    $reps = $row['reps'];
-    $type = $row['type'];
-
-    // Populate the program data
-    if (empty($programData['name'])) {
-        $programData['name'] = $programName;
-        $programData['number_of_sessions'] = $numberOfSessions;
-        $programData['tier'] = $tier;
-    }
-
-    if ($tableId) {
-        if (!isset($programData['tables'][$tableId])) {
-            $programData['tables'][$tableId] = [
-                'table_id' => $tableId,
-                'table_number' => $tableNumber,
-                'exercises' => []
-            ];
-        }
-
-        if ($exerciseId) {
-            $programData['tables'][$tableId]['exercises'][] = [
-                'exercise_id' => $exerciseId,
-                'name' => $exerciseName,
-                'sets' => $sets,
-                'reps' => $reps,
-                'type' => $type
-            ];
-        }
-    }
-}
-
-// Convert the associative array to a JSON-encoded string
-$jsonData = json_encode($programData);
-
-// Close the statement and connection
-$stmt->close();
-$conn->close();
-
-// Output the JSON data
 header('Content-Type: application/json');
-echo $jsonData;
+
+// Get the program ID from the query string
+$programId = isset($_GET['program_id']) ? (int)$_GET['program_id'] : 0;
+
+// Database credentials
+$dsn = 'mysql:host=sql112.infinityfree.com;dbname=if0_36607942_exercise_programs;charset=utf8';
+$username = 'if0_36607942';
+$password = 'Lf1knlji5fBcBd';
+
+try {
+    // Connect to the database
+    $db = new PDO($dsn, $username, $password);
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Prepare the SQL query
+    $stmt = $db->prepare('
+        SELECT e.name AS exercise_name, e.sets, e.reps, e.type, t.table_number, p.name AS program_name
+        FROM program_exercises e
+        JOIN program_tables t ON e.table_id = t.table_id
+        JOIN exercise_programs p ON t.program_id = p.program_id
+        WHERE p.program_id = :program_id
+    ');
+    $stmt->bindParam(':program_id', $programId, PDO::PARAM_INT);
+
+    // Execute the query
+    $stmt->execute();
+
+    // Fetch the results
+    $exercises = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Return the results as JSON
+    echo json_encode(['success' => true, 'program' => $exercises]);
+
+} catch (PDOException $e) {
+    // Return an error response
+    echo json_encode(['success' => false, 'error' => $e->getMessage()]);
+}
 ?>

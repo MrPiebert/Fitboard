@@ -12,12 +12,16 @@ try {
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Fetch all programs
-    $stmt = $db->query('SELECT program_id, name FROM exercise_programs');
+    $stmt = $db->query('SELECT program_id, name, number_of_sessions, tier FROM exercise_programs');
     $programs = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     // Return programs as JSON
     echo json_encode($programs);
 } catch (PDOException $e) {
-    echo json_encode(['success' => false, 'error' => $e->getMessage()]);
+    // Log the error message
+    error_log('Database Error: ' . $e->getMessage());
+
+    // Return an error response
+    echo json_encode(['error' => $e->getMessage()]);
 }
 ?>

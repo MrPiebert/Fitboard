@@ -16,7 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- External Stylesheets -->
-    <link rel="stylesheet" href="Home_Page.css?v=1.0">
+    <link rel="stylesheet" href="Home_Page.css">
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
@@ -26,12 +26,12 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap" rel="stylesheet">
 
     <!-- Boxicons -->
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css?v=1.0' rel='stylesheet'>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css?v=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
     
-    <link rel="stylesheet" href="Program Modification.css?v=1.0">
+    <link rel="stylesheet" href="Program Modification.css">
 
   </head>
 
@@ -145,106 +145,22 @@
       <option value="ADV">Advanced</option>
     </select>
     
-    <div id ="Table_Container">
+    <div id ="Table_Container" style="display: none;">
     
-    <table>
-
-      <thead>
-        <tr>
-          <th class = "Col_1"><u>Day 1</u></th>
-          <th class = "Col_2"><u>Sets</u></th>
-          <th class = "Col_3"><u>Reps</u></th>
-          <th class = "Col_4"></th>
-        </tr>
-      </thead>
-
-      <tbody>
-
-        <tr class = "Yoga">
-
-          <td><u><span class="Editable" contenteditable="false">Yoga Sequence</span></u></td>
-          <td><span class="Editable" contenteditable="false"></span></td>
-          <td><span class="Editable" contenteditable="false"></span></td>
-          
-          <td>
-            <button class="Edit" onclick="Edit_Row(this)">Edit</button>
-            <button class="Save" onclick="Save_Row(this)" style="display: none;">Save</button>
-          </td>
-
-        </tr>
-
-        <tr class = "Pre_Hab">
-
-          <td><u>Pre-Hab</u></td>
-          <td></td>
-          <td></td>
-
-          <td>
-            <button class="New_Exercise" onclick="Create_Row(this, 'below')">Add&#160Exercise&#160Below</button>
-          </td>
-
-        </tr>
-
-        <tr class = "Main_Workout">
-
-          <td><u>Main Workout</u></td>
-          <td></td>
-          <td></td>
-
-          <td>
-            <button class= "New_Exercise" onclick="Create_Row(this, 'above')">Add&#160Exercise&#160Above</button>
-            <button class= "New_Exercise" onclick="Create_Row(this, 'below')">Add&#160Exercise&#160Below</button>
-          </td>
-
-        
-        </tr>
-
-        <tr class = "Mobility">
-
-          <td><u><span class="Editable" contenteditable="false">Mobility</span></u></td>
-          <td><span class="Editable" contenteditable="false"></span></td>
-          <td><span class="Editable" contenteditable="false"></span></td>
-          
-          <td>
-            <button class = "New_Exercise" onclick="Create_Row(this, 'above')">Add&#160Exercise&#160Above</button>
-            <button class="Edit" onclick="Edit_Row(this)">Edit</button>
-            <button class="Save" onclick="Save_Row(this)" style="display: none;">Save</button>
-          </td>
-
-        </tr>
-
-        <tr class = "Bottom_Row">
-
-          <td></td>
-          <td></td>
-          <td></td>
-
-          <td>
-                 <button class="New_Day" onclick="Add_Day(this, 'above')">Add Day Above</button>
-                 <button class="New_Day" onclick="Add_Day(this, 'below')">Add Day Below</button>
-                 <button class="Delete_Day" onclick="Delete_Day(this)" disabled>Delete Day</button>
-          </td>
-          
-        </tr>
-
-      </tbody>
-
-    </table>
-
     </div>
 
-    <button class="Save_Program" onclick="Save_Program(this)">Save&#160Program</button>
-    <button class="Discard_Changes" onclick="Discard_Changes(this)">Discard&#160All&#160Changes</button>
+    <button class="Save_Program" style="display: none;" onclick="Save_Program(this)">Save&#160Program</button>
+    <button class="Discard_Changes" style="display: none;" onclick="Discard_Changes(this)">Discard&#160All&#160Changes</button>
   </div>
 
     
     <!--#region External JavaScript -->
-    <script src="../Settings/darklight_mode.js?v=1.0"></script>
-    <script src="Activite_Sidebar.js?v=1.0"></script>
-    <script src="../Profile/Profile_Pic.js?v=1.0"></script>
-    <script src="../Profile/Profile_Check.js?v=1.0"></script>
-    <script src="../Settings/colour_slider.js?v=1.0"></script>
-    <script src="Program Modification.js?v=1.2"></script>
+    <script src="../Settings/darklight_mode.js"></script>
+    <script src="Activite_Sidebar.js"></script>
+    <script src="../Profile/Profile_Pic.js"></script>
+    <script src="../Profile/Profile_Check.js"></script>
+    <script src="../Settings/colour_slider.js"></script>
+    <script src="Program Modification.js"></script>
 
     <script>
         function onload() {
