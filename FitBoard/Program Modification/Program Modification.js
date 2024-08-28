@@ -2,18 +2,21 @@
 
 // J's Work
 
+
 // #region Top Logic
 
     // Executes program fetching function on load
     document.addEventListener('DOMContentLoaded', () => {
-        console.log("DOM fully loaded and parsed");
+
+        //console.log("DOM fully loaded and parsed");
         Fetch_Programs(); 
+
     });
 
     // Loads program names from the database into the dropdown 
     function Fetch_Programs() {
 
-        console.log("Fetching programs");
+        //console.log("Fetching programs");
 
         fetch('Program Fetching.php')
         .then(response => response.json())
@@ -25,50 +28,31 @@
             data.sort((a, b) => a.name.localeCompare(b.name));
 
             data.forEach(program => {
+
                 const option = document.createElement('option');
                 option.value = program.program_id;
                 option.textContent = program.name;
                 option.dataset.sessions = program.number_of_sessions;
                 option.dataset.tier = program.tier
                 programSelect.appendChild(option);
+
             });
 
         })
+
         .catch(error => console.error('Error fetching programs:', error));
+
     }   
 
-    /*
-
-        function Load_Database_Program(programData) {
-
-            console.log("Loading Program Onto Page");
-
-            console.log("Program Name: ", programData.name);
-            console.log("Number of Sessions: ", programData.number_of_sessions);
-            console.log("Tier: ", programData.tier);
-            console.log("Tables and Exercises: ", programData.tables);
-
-            // Example: Loop through the tables and log details
-            for (let tableId in programData.tables) {
-
-                let table = programData.tables[tableId];
-                console.log(`Table ${table.table_number} (ID: ${table.table_id}):`);
-
-                table.exercises.forEach(exercise => {
-                    console.log(`  Exercise: ${exercise.name}, Sets: ${exercise.sets}, Reps: ${exercise.reps}, Type: ${exercise.type}`);
-                });
-
-            }
-        }
-    */
-
+    // Loads program contents into the file
     function Fetch_Program_Details() {
-        console.log("Fetching program details");
+
+        //console.log("Fetching program details");
 
         const Program_Selector = document.getElementById('Select_Program')
 
         const programId = Program_Selector.value;
-        console.log(programId)
+        //console.log(programId)
         
         let Program_Name = document.getElementById("Program_Name");
         let Program_Sessions = document.getElementById("Program_Sessions");
@@ -105,20 +89,21 @@
             fetch(`Program Exercise Fetching.php?program_id=${programId}`)
             .then(response => response.json())  // Parse the JSON from the response
             .then(data => {
-                console.log(data);  // Log the data for debugging
+                // console.log(data);
 
                 Load_Database_Program(data, Program_Selector, Program_Name, Program_Sessions, Program_Tier, Table_Container, Empty_Table);
 
-                // Add a function called "Edit_Choice" that alerts the user to ask if they want to edit, rename or delete the program, calling 3 other functions to do so.
                 Request_Modification_Type()
             })
             .catch(error => console.error('Error fetching program details:', error));
+
         }
+        
     }
 
     function Load_Database_Program(programData, Program_Selector, Program_Name, Program_Sessions, Program_Tier, Table_Container, Empty_Table) {
         
-        console.log("Loading Program Onto Page");
+        // console.log("Loading Program Onto Page");
 
         Program_Name.value = Program_Selector.selectedOptions[0].textContent;
         Program_Sessions.value = Program_Selector.selectedOptions[0].dataset.sessions;
@@ -148,23 +133,22 @@
 
             const dayExercises = exercisesByDay[day];
 
-        // #region Customise_Table_Template
                 
             // Change the heading for the day
 
             let tableTemplate = `
-            <table>
+                <table>
 
-            <thead>
-                <tr>
-                <th class = "Col_1"><u>Day ${day}</u></th>
-                <th class = "Col_2"><u>Sets</u></th>
-                <th class = "Col_3"><u>Reps</u></th>
-                <th class = "Col_4"></th>
-                </tr>
-            </thead>
+                <thead>
+                    <tr>
+                    <th class = "Col_1"><u>Day ${day}</u></th>
+                    <th class = "Col_2"><u>Sets</u></th>
+                    <th class = "Col_3"><u>Reps</u></th>
+                    <th class = "Col_4"></th>
+                    </tr>
+                </thead>
 
-            <tbody>
+                <tbody>
 
                 <tr class = "Yoga">
 
@@ -233,9 +217,9 @@
                 
                 </tr>
 
-            </tbody>
+                </tbody>
 
-            </table>
+                </table>
             `;
 
             let tableTemplateElement = document.createElement('div');
@@ -254,15 +238,14 @@
                 const Exercise_Sets = exercise.sets;
                 const Exercise_Reps = exercise.reps;
 
-                console.log(Exercise_Category);
-                console.log(Exercise_Name);
-                console.log(Exercise_Sets);
-                console.log(Exercise_Reps);
+                //console.log(Exercise_Category);
+                //console.log(Exercise_Name);
+                //console.log(Exercise_Sets);
+                //console.log(Exercise_Reps);
             
-                // Create a new row and populate it with the correct exercise data (change where this is put (put it in the casewhere) )
+                // Create a new row and populate it with the correct exercise data
                 let New_Row = document.createElement('tr');
                 
-
                 let rowTemplate = `
                     <td>
                         <span class="Editable" contenteditable="false">${Exercise_Name}</span>
@@ -303,11 +286,11 @@
                 tables.forEach(table => {
                     // Find the first cell in the table
                     Checked_Text = table.querySelector('th.Col_1').innerText;
-                    console.log(Checked_Text);
+                    //console.log(Checked_Text);
                     // Check if the first cell exists and its text matches the search text
                     if (Checked_Text == Search_Text) {
                         Target_Table = table;
-                        console.log(`'TABLE WITH VALUE ${day} FOUND'`)
+                        //console.log(`'TABLE WITH VALUE ${day} FOUND'`)
                         Target_Table_Body = Target_Table.querySelector('tbody')
                     }
                 });
@@ -319,10 +302,10 @@
 
                     case "yoga":
 
-                        console.log("TARGET VALUE IS YOGA");
+                        //console.log("TARGET VALUE IS YOGA");
 
                         Target_Row = Target_Table.getElementsByClassName("Yoga")[0];
-                        console.log(Target_Row);
+                        //console.log(Target_Row);
 
                         // Access the <span> elements within each <td> in the row
                         Target_Row_Spans = Target_Row.getElementsByClassName('Editable');
@@ -336,11 +319,11 @@
 
                     case "pre_hab":
 
-                        console.log("TARGET VALUE IS PREHAB");
+                        //console.log("TARGET VALUE IS PREHAB");
 
                         Target_Row = Target_Table.getElementsByClassName("Main_Workout")[0];
-                        console.log(Target_Table.body)
-                        console.log(Target_Row);
+                        //console.log(Target_Table.body)
+                        //console.log(Target_Row);
 
                         Target_Table_Body.insertBefore(New_Row, Target_Row);
 
@@ -348,11 +331,11 @@
 
                     case "main_workout":
 
-                        console.log("TARGET VALUE IS MAIN WORKOUT");
+                        //console.log("TARGET VALUE IS MAIN WORKOUT");
 
                         Target_Row = Target_Table.getElementsByClassName("Mobility")[0];
-                        console.log(Target_Table.body)
-                        console.log(Target_Row);
+                        //console.log(Target_Table.body)
+                        //console.log(Target_Row);
 
                         Target_Table_Body.insertBefore(New_Row, Target_Row);
                         
@@ -360,15 +343,13 @@
 
                     case "mobility":
 
-                        console.log("TARGET VALUE IS MOBILITY");
+                        //console.log("TARGET VALUE IS MOBILITY");
 
                         Target_Row = Target_Table.getElementsByClassName("Mobility")[0];
-                        console.log(Target_Row);
+                        //console.log(Target_Row);
 
-                        // Access the <span> elements within each <td> in the row
                         Target_Row_Spans = Target_Row.getElementsByClassName('Editable');
 
-                        // Update the content of the <span> elements
                         Target_Row_Spans[0].innerHTML = Exercise_Name;
                         Target_Row_Spans[1].innerHTML = Exercise_Sets;
                         Target_Row_Spans[2].innerHTML = Exercise_Reps;
@@ -377,15 +358,12 @@
                     
                     default:
 
-                        console.log("TARGET VALUE IS NONE")
+                        //console.log("TARGET VALUE IS NONE")
 
                         break;
                 }
 
-
             });
-
-            // #endregion
 
         });
 
@@ -659,14 +637,14 @@ function Check_Delete_Buttons(){
     let deleteButtons = document.getElementsByClassName('Delete_Day');
     
     if (tables.length === 1) {
-      console.log("One Table")
+      //console.log("One Table")
         // If there is only one table, disable the Delete_Button in that table
         for (let i = 0; i < deleteButtons.length; i++) {
             deleteButtons[i].disabled = true;
             
         }
     } else if (tables.length > 1) {
-      console.log("Multiple Tables")
+      //console.log("Multiple Tables")
         // If there are multiple tables, enable all Delete_Buttons
         for (let i = 0; i < deleteButtons.length; i++) {
             deleteButtons[i].disabled = false;
@@ -729,9 +707,9 @@ function Check_Delete_Buttons(){
 
         // Check if the converted value is an integer and greater than 0
         if (!isNaN(Sessions_Test) && Number.isInteger(Sessions_Test) && Sessions_Test > 0) {
-            console.log("Program_Sessions is a valid integer greater than 0.");
+            //console.log("Program_Sessions is a valid integer greater than 0.");
         } else {
-            console.log("Program_Sessions is not a valid integer greater than 0.");
+            //console.log("Program_Sessions is not a valid integer greater than 0.");
             alert("Program sessions must be an integer greater than 0.");
             return;
         }
@@ -904,7 +882,7 @@ function Check_Delete_Buttons(){
         const Program_Selector = document.getElementById('Select_Program')
 
         const programId = Program_Selector.value;
-        console.log(programId)
+        //console.log(programId)
 
         if (!programId) {
             alert("Please select a program to delete.");
