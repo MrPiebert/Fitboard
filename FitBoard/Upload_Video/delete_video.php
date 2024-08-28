@@ -7,11 +7,13 @@ try {
     $db = new PDO($dsn, $username, $password);
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $stmt = $db->query('SELECT * FROM videos');
-    $videos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $id = $_POST['id'];
 
-    echo json_encode($videos);
+    $stmt = $db->prepare('DELETE FROM videos WHERE id = ?');
+    $stmt->execute([$id]);
+
+    echo 'Video deleted successfully';
 } catch (PDOException $e) {
-    echo json_encode(['error' => $e->getMessage()]);
+    echo 'Error: ' . $e->getMessage();
 }
 ?>

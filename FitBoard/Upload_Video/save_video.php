@@ -11,7 +11,7 @@ try {
     $description = $_POST['description'];
     $youtubeLink = $_POST['youtube_link'];
 
-    $stmt = $pdo->prepare('INSERT INTO videos (title, description, youtube_link) VALUES (?, ?, ?)');
+    $stmt = $pdo->prepare('INSERT INTO videos (title, description, link) VALUES (?, ?, ?)');
     $stmt->execute([$title, $description, $youtubeLink]);
 
     echo "Video data saved successfully.";
