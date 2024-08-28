@@ -147,7 +147,6 @@
 		.help-popup p {
 			margin: 0;
 		}
-        
 	</style>
 </head>
 
@@ -188,15 +187,9 @@
                     </a>
                     <span class="tooltip">Profile</span>
                 </li>
+                
                 <li>
-                    <a href="../Program Modification/Program Modification.html">
-                        <i class="bx bxs-duplicate"></i>
-                        <span class="Nav_Item">Modify&#160Programs</span>
-                    </a>
-                    <span class="tooltip">Modify&#160Programs </span>
-                </li>
-                <li>
-                    <a href="../Notifications/Notifications.html">
+                    <a href="StudentNotifications.html">
                         <i class="bx bxs-bell-ring"></i>
                         <span class="Nav_Item">Notifications</span>
                     </a>
@@ -224,12 +217,12 @@
                     <span class="tooltip">Help</span>
                 </li>
                 <li>
-                    <a href="../LandingPage.html">
-                        <i class="bx bxs-log-out"></i>
-                        <span class="Nav_Item">Logout</span>
-                    </a>
-                    <span class="tooltip">Logout</span>
-                </li>
+        <a id="logoutLink" href="#" onclick="logout()">
+            <i class="bx bxs-log-out"></i>
+            <span class="Nav_Item">Logout</span>
+        </a>
+        <span class="tooltip">Logout</span>
+    </li>
             </ul>
         </div>
 
@@ -272,7 +265,7 @@
     } else if (accessLevel === "0") {
         var studentData = JSON.parse(localStorage.getItem("studentData"));
         if (studentData && studentData.givenName && studentData.surname) {
-            userNameElement.textContent = studentData.givenName + '\u00A0' + studentData.surname;
+           userNameElement.textContent = studentData.givenName + '\u00A0' + studentData.surname;
             userRoleElement.textContent = "Student";
             studentID = studentData.studentId; // Assign the studentID from studentData
         }
@@ -303,16 +296,31 @@
         });
 };
 
-        function searchNotifications() {
-            const input = document.getElementById("searchInput").value.toLowerCase();
-            const filteredNotifications = window.allNotifications.filter(notification => {
-                const message = notification.message.toLowerCase();
-                const header = "From: Kurt Rich".toLowerCase(); // Adjust if using dynamic sender info
-                return message.includes(input) || header.includes(input);
-            });
+      function searchNotifications() {
+    // Get the search input value and convert it to lowercase for case-insensitive comparison
+    const input = document.getElementById("searchInput").value.toLowerCase();
+    const dateInput = document.getElementById("dateInput").value;
 
-            updateNotificationList(filteredNotifications);
-        }
+    // Filter notifications based on message, subject, sender, or date
+    const filteredNotifications = window.allNotifications.filter(notification => {
+        const message = notification.message.toLowerCase();
+        const subject = notification.subject.toLowerCase(); // Assuming there's a 'subject' property
+        const header = "From: Kurt Rich".toLowerCase(); // Adjust if using dynamic sender info
+
+        // Convert notification created_at to YYYY-MM-DD format
+        const createdAt = new Date(notification.created_at).toISOString().split('T')[0];
+        
+        // Check if input matches message, subject, header, and date
+        const matchesText = message.includes(input) || subject.includes(input) || header.includes(input);
+        const matchesDate = !dateInput || createdAt === dateInput;
+
+        return matchesText && matchesDate;
+    });
+
+    // Update the notification list with filtered results
+    updateNotificationList(filteredNotifications);
+}
+
 
           function updateNotificationList(notifications) {
         const notificationsDiv = document.getElementById("notifications");
@@ -362,8 +370,38 @@
             const helpPopup = document.getElementById("helpPopup");
             helpPopup.style.display = (helpPopup.style.display === "block") ? "none" : "block";
         }
+
+// Logout button click event handler
+document.getElementById("logoutLink").addEventListener("click", function (event) {
+    event.preventDefault(); // Prevent default link behavior (navigation)
+
+    // Call logout function
+    logout();
+
+    // Optional: Redirect to logout page
+    window.location.href = this.href; // Redirect to the logout page
+});
+
+
+// Function to logout (remove student data from local storage)
+ function logout() {
+        // Clear access data from localStorage
+        localStorage.clear();
+        
+        // Redirect to the PHP logout handler
+        window.location.href = "../LandingPage.html";
+
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        checkAccessLevel();
+    });
+
+
     
     </script>
+     <script src="../accessControl.js"></script>
+    
     <script src="../Home_Page/Activite_Sidebar.js"></script>
     <script src="../Settings/darklight_mode.js"></script>
     <script src="../Profile/Profile_Pic.js"></script>
