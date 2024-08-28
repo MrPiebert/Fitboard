@@ -4,14 +4,14 @@ $username = 'if0_36607942';
 $password = 'Lf1knlji5fBcBd';
 
 try {
-    $pdo = new PDO($dsn, $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $db = new PDO($dsn, $username, $password);
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $stmt = $pdo->query('SELECT id, title, description, youtube_link FROM videos');
+    $stmt = $db->query('SELECT * FROM videos');
     $videos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     echo json_encode($videos);
 } catch (PDOException $e) {
-    echo 'Connection failed: ' . $e->getMessage();
+    echo json_encode(['error' => $e->getMessage()]);
 }
 ?>
